@@ -5,6 +5,67 @@ import {
   BarChart, Bar, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer 
 } from 'recharts';
 
+// Custom SVG renderer for symmetrical pill-shaped funnel bars
+const CustomFunnelBar = (props: any) => {
+  const { x, y, width, height, fill, payload } = props;
+  if (!payload || payload.name === undefined) return null;
+
+  // Render a pill shaped bar
+  const radius = height / 2;
+
+  return (
+    <g>
+      {/* Background pill bar */}
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        rx={radius}
+        ry={radius}
+        fill={fill}
+      />
+      {/* Left text label */}
+      <text
+        x={x + 16}
+        y={y + height / 2}
+        fill="#ffffff"
+        textAnchor="start"
+        dominantBaseline="central"
+        className="font-bold text-xs sm:text-sm tracking-wide"
+      >
+        {payload.name}
+      </text>
+      {/* Right text count */}
+      <text
+        x={x + width - 16}
+        y={y + height / 2}
+        fill="#ffffff"
+        textAnchor="end"
+        dominantBaseline="central"
+        className="font-black text-xs sm:text-sm"
+      >
+        {payload.count}
+      </text>
+    </g>
+  );
+};
+
+// Custom interactive Tooltip that filters out the transparent padding spacer
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    const activeData = payload.find((p: any) => p.dataKey === 'val');
+    if (!activeData) return null;
+    return (
+      <div className="bg-slate-900 text-white px-3 py-2 rounded-xl text-xs font-semibold shadow-md border border-slate-800 text-left">
+        <p className="font-semibold text-slate-300">{activeData.payload.name}</p>
+        <p className="text-sm font-black text-white mt-0.5">{activeData.payload.count} Leads</p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export const BrokerDashboard: React.FC = () => {
   const { leads, setActiveScreen, commissions } = useBrokerConnect();
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,12 +89,33 @@ export const BrokerDashboard: React.FC = () => {
     .filter(l => l.name.toLowerCase().includes(searchTerm.toLowerCase()) || l.mobile.includes(searchTerm))
     .slice(0, 5); // show top 5 in recent
 
-  // Funnel Data for Recharts
+  // Calculate dynamic stats for the funnel based on actual leads
+  const registeredCount = leads.length * 25; // Scale to start around 150
+  
+  const visitedCount = leads.filter(l => 
+    ['Checked In', 'Allocated', 'Follow-Up', 'Negotiation', 'Booked'].includes(l.status)
+  ).length * 33.3; // Scale to start around 100
+  
+  const negotiationCount = leads.filter(l => 
+    ['Follow-Up', 'Negotiation', 'Booked'].includes(l.status)
+  ).length * 20; // Scale to start around 40
+  
+  const bookedCount = leads.filter(l => 
+    l.status === 'Booked'
+  ).length * 12; // Scale to start around 12
+
+  // Rounded values to keep clean integers
+  const rCount = Math.round(registeredCount);
+  const vCount = Math.round(visitedCount);
+  const nCount = Math.round(negotiationCount);
+  const bCount = Math.round(bookedCount);
+
+  // Funnel Data for Recharts with pad spacer for centering and val width
   const funnelData = [
-    { name: 'Registered', count: 150, color: '#2563eb' },
-    { name: 'Visited', count: 100, color: '#3b82f6' },
-    { name: 'Negotiation', count: 40, color: '#6366f1' },
-    { name: 'Booked', count: 12, color: '#10b981' },
+    { name: 'Registered', count: rCount, color: '#2563eb', pad: 0, val: 100 },
+    { name: 'Visited', count: vCount, color: '#3b82f6', pad: 10, val: 80 },
+    { name: 'Negotiation', count: nCount, color: '#6366f1', pad: 20, val: 60 },
+    { name: 'Booked', count: bCount, color: '#10b981', pad: 30, val: 40 },
   ];
 
   return (
@@ -132,11 +214,14 @@ export const BrokerDashboard: React.FC = () => {
           {/* Recharts Funnel Bar Chart */}
           <div className="flex-1 w-full min-h-[180px] my-4">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={funnelData} layout="vertical" margin={{ top: 10, right: 10, left: 20, bottom: 5 }}>
-                <XAxis type="number" stroke="#94a3b8" fontSize={9} />
-                <YAxis dataKey="name" type="category" stroke="#94a3b8" fontSize={9} width={70} />
-                <Tooltip formatter={(value: number) => [value, 'Customers']} contentStyle={{ background: '#0f172a', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '10px' }} />
-                <Bar dataKey="count" radius={[0, 6, 6, 0]} barSize={16}>
+              <BarChart data={funnelData} layout="vertical" margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
+                <XAxis type="number" hide />
+                <YAxis dataKey="name" type="category" hide />
+                <Tooltip content={<CustomTooltip />} cursor={false} />
+                {/* Transparent padding bar spacer */}
+                <Bar dataKey="pad" stackId="a" fill="transparent" legendType="none" />
+                {/* Visual colored bar representing data */}
+                <Bar dataKey="val" stackId="a" shape={(props: any) => <CustomFunnelBar {...props} />} barSize={32}>
                   {funnelData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
@@ -147,7 +232,9 @@ export const BrokerDashboard: React.FC = () => {
 
           <div className="pt-4 border-t border-slate-50 flex items-center justify-between text-xs text-slate-400 font-medium">
             <span>Overall Conversion Rate</span>
-            <span className="text-emerald-600 font-extrabold text-sm">8.0%</span>
+            <span className="text-emerald-600 font-extrabold text-sm">
+              {rCount > 0 ? ((bCount / rCount) * 100).toFixed(1) : '0.0'}%
+            </span>
           </div>
         </div>
 

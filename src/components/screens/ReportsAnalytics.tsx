@@ -202,7 +202,7 @@ export const ReportsAnalytics: React.FC = () => {
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f5f9" />
                 <XAxis type="number" domain={[0, 100]} stroke="#94a3b8" fontSize={9} />
                 <YAxis dataKey="name" type="category" stroke="#94a3b8" fontSize={9} width={90} />
-                <Tooltip formatter={(value: number) => [`${value}%`, 'Ratio']} contentStyle={{ background: '#0f172a', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '10px' }} />
+                <Tooltip formatter={(value: any) => [`${value}%`, 'Ratio']} contentStyle={{ background: '#0f172a', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '10px' }} />
                 <Bar dataKey="ratio" radius={[0, 6, 6, 0]} barSize={14}>
                   {funnelData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
