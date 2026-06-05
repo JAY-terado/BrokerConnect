@@ -1,6 +1,6 @@
 import React from 'react';
 import { useBrokerConnect } from '../../context/BrokerConnectContext';
-import { ArrowLeft, Landmark, DollarSign, Calendar, ShieldCheck, Check } from 'lucide-react';
+import { ArrowLeft, Landmark, IndianRupee, Calendar, ShieldCheck, Check } from 'lucide-react';
 
 export const CommissionManagement: React.FC = () => {
   const { commissions, approveCommission, payCommission, setActiveScreen } = useBrokerConnect();
@@ -155,7 +155,7 @@ export const CommissionManagement: React.FC = () => {
                 onClick={handlePay}
                 className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition cursor-pointer"
               >
-                <DollarSign className="w-4 h-4" />
+                <IndianRupee className="w-4 h-4" />
                 <span>Mark as Paid (Disburse)</span>
               </button>
             )}

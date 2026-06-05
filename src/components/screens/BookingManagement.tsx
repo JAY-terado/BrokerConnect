@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useBrokerConnect } from '../../context/BrokerConnectContext';
-import { ArrowLeft, Landmark, CheckCircle, Percent, DollarSign, Building } from 'lucide-react';
+import { ArrowLeft, Landmark, CheckCircle, Percent, Building } from 'lucide-react';
 
 export const BookingManagement: React.FC = () => {
   const { leads, createBooking, setActiveScreen } = useBrokerConnect();

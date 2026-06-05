@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useBrokerConnect } from '../context/BrokerConnectContext';
 import { LayoutDashboard, Users, Eye, Landmark, Menu } from 'lucide-react';
 
 export const MobileNav: React.FC = () => {
   const { currentRole, activeScreen, setActiveScreen } = useBrokerConnect();
+  const navigate = useNavigate();
 
   // Highlight button statuses
   const isSelected = (screenIds: number[]) => screenIds.includes(activeScreen);
@@ -76,8 +78,12 @@ export const MobileNav: React.FC = () => {
       {/* Tab 5: More options menu */}
       <button
         onClick={() => {
-          if (currentRole === 'broker') setActiveScreen(12);
-          else setActiveScreen(1); // Sign out
+          if (currentRole === 'broker') {
+            setActiveScreen(12);
+          } else {
+            setActiveScreen(2); // Reset to default screen
+            navigate('/login');
+          }
         }}
         className={`flex flex-col items-center gap-1 text-[9px] font-bold uppercase transition cursor-pointer ${
           isSelected([12, 1]) ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'

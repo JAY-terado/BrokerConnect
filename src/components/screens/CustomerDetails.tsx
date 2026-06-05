@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useBrokerConnect } from '../../context/BrokerConnectContext';
 import { ArrowLeft, Edit2, Calendar, Phone, Mail, MapPin, CheckSquare, Clock, Sliders, ChevronDown, Landmark } from 'lucide-react';
+import { CustomSelect } from '../CustomSelect';
 
 export const CustomerDetails: React.FC = () => {
   const { leads, updateLeadStage, setActiveScreen } = useBrokerConnect();
@@ -54,18 +55,31 @@ export const CustomerDetails: React.FC = () => {
         <div className="flex gap-2 w-full sm:w-auto">
           {/* Stage advance selector */}
           <div className="relative flex-1 sm:w-44">
-            <select
-              value={activeLead.status}
-              onChange={handleStageChange}
-              className="w-full bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 py-2.5 pl-3 pr-8 rounded-xl focus:outline-none focus:ring-1 focus:ring-blue-600 appearance-none cursor-pointer"
-            >
-              <option value="OTP Verified">Registered</option>
-              <option value="Checked In">Visited</option>
-              <option value="Allocated">Follow-Up</option>
-              <option value="Negotiation">Negotiation</option>
-              <option value="Booked">Booked</option>
-            </select>
-            <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
+            <CustomSelect
+              value={
+                activeLead.status === 'OTP Verified' ? 'Registered' :
+                activeLead.status === 'Checked In' ? 'Visited' :
+                activeLead.status === 'Allocated' ? 'Follow-Up' :
+                activeLead.status === 'Negotiation' ? 'Negotiation' :
+                activeLead.status === 'Booked' ? 'Booked' : activeLead.status
+              }
+              onChange={(displayName) => {
+                const stageMap: Record<string, string> = {
+                  'Registered': 'OTP Verified',
+                  'Visited': 'Checked In',
+                  'Follow-Up': 'Allocated',
+                  'Negotiation': 'Negotiation',
+                  'Booked': 'Booked',
+                };
+                const val = stageMap[displayName];
+                if (val) {
+                  updateLeadStage(activeLead.id, val as any);
+                }
+              }}
+              options={['Registered', 'Visited', 'Follow-Up', 'Negotiation', 'Booked']}
+              placeholder="Select Stage"
+              icon={Sliders}
+            />
           </div>
 
           <button

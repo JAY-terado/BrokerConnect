@@ -5,6 +5,7 @@ import {
   Building2, ArrowLeft, ChevronRight, ChevronLeft, MapPin, 
   Smartphone, FileText, CheckCircle, Shield, Award, Mail, Info 
 } from 'lucide-react';
+import { CustomSelect } from '../components/CustomSelect';
 
 export const Register: React.FC = () => {
   const { addBroker } = useBrokerConnect();
@@ -370,32 +371,24 @@ export const Register: React.FC = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">City *</label>
-                  <select
+                  <CustomSelect
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800 font-semibold cursor-pointer"
-                  >
-                    <option>Mumbai</option>
-                    <option>Pune</option>
-                    <option>Goa</option>
-                    <option>Bangalore</option>
-                    <option>Ahmedabad</option>
-                  </select>
+                    onChange={(val) => setCity(val)}
+                    options={['Mumbai', 'Pune', 'Goa', 'Bangalore', 'Ahmedabad']}
+                    placeholder="Select City"
+                    icon={MapPin}
+                  />
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">State *</label>
-                  <select
+                  <CustomSelect
                     value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800 font-semibold cursor-pointer"
-                  >
-                    <option>Maharashtra</option>
-                    <option>Goa</option>
-                    <option>Karnataka</option>
-                    <option>Gujarat</option>
-                    <option>Delhi</option>
-                  </select>
+                    onChange={(val) => setState(val)}
+                    options={['Maharashtra', 'Goa', 'Karnataka', 'Gujarat', 'Delhi']}
+                    placeholder="Select State"
+                    icon={MapPin}
+                  />
                 </div>
               </div>
 

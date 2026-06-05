@@ -1,7 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useBrokerConnect } from '../context/BrokerConnectContext';
 import { 
-  LayoutDashboard, Users, Eye, Landmark, DollarSign, 
+  LayoutDashboard, Users, Eye, Landmark, IndianRupee, 
   AlertTriangle, BarChart3, Building2, UserCheck, ShieldCheck, LogOut 
 } from 'lucide-react';
 
@@ -13,13 +14,14 @@ interface SidebarItem {
 
 export const Sidebar: React.FC = () => {
   const { currentRole, activeScreen, setActiveScreen } = useBrokerConnect();
+  const navigate = useNavigate();
 
   // Define navigations based on selected role
   const brokerItems: SidebarItem[] = [
     { name: 'Dashboard', screenId: 2, icon: LayoutDashboard },
     { name: 'Register Lead', screenId: 3, icon: UserCheck },
     { name: 'Visit Pass', screenId: 5, icon: ShieldCheck },
-    { name: 'Commission', screenId: 12, icon: DollarSign },
+    { name: 'Commission', screenId: 12, icon: IndianRupee },
   ];
 
   const receptionistItems: SidebarItem[] = [
@@ -32,7 +34,7 @@ export const Sidebar: React.FC = () => {
     { name: 'Sales Pipeline', screenId: 9, icon: LayoutDashboard },
     { name: 'Customer File', screenId: 10, icon: Users },
     { name: 'Bookings', screenId: 11, icon: Landmark },
-    { name: 'Commissions', screenId: 12, icon: DollarSign },
+    { name: 'Commissions', screenId: 12, icon: IndianRupee },
   ];
 
   const adminItems: SidebarItem[] = [
@@ -54,7 +56,7 @@ export const Sidebar: React.FC = () => {
   const navItems = getActiveItems();
 
   return (
-    <aside className="w-64 bg-slate-900 text-slate-400 p-6 flex flex-col justify-between shrink-0 h-full border-r border-slate-800 relative z-20">
+    <aside className="w-64 bg-slate-900 text-slate-400 p-6 flex flex-col justify-between shrink-0 h-screen border-r border-slate-800 relative z-20">
       <div className="space-y-8">
         {/* Branding Logo */}
         <div className="flex items-center gap-2.5 pb-4 border-b border-slate-800">
@@ -97,7 +99,10 @@ export const Sidebar: React.FC = () => {
 
       {/* Log Out */}
       <button
-        onClick={() => setActiveScreen(1)} // Redirect to Login Screen
+        onClick={() => {
+          setActiveScreen(2); // Reset to default screen for next login
+          navigate('/login');
+        }}
         className="w-full flex items-center gap-3 py-3 px-4 hover:bg-slate-800 hover:text-slate-200 text-slate-400 rounded-xl text-xs font-bold transition cursor-pointer"
       >
         <LogOut className="w-4.5 h-4.5 text-slate-400" />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useBrokerConnect } from '../context/BrokerConnectContext';
 import { Smartphone, Laptop, Sparkles, RefreshCw, Layers } from 'lucide-react';
+import { CustomSelect } from './CustomSelect';
 
 interface DeviceSimulatorProps {
   children: React.ReactNode;
@@ -26,16 +27,27 @@ export const DeviceSimulator: React.FC<DeviceSimulatorProps> = ({ children }) =>
           {/* Role selector dropdown */}
           <div className="flex items-center gap-2 bg-slate-800/80 border border-slate-700/50 rounded-xl px-3 py-1.5">
             <span className="text-slate-400">View as Role:</span>
-            <select
-              value={currentRole}
-              onChange={(e) => setCurrentRole(e.target.value as any)}
-              className="bg-transparent text-white font-extrabold focus:outline-none cursor-pointer"
-            >
-              <option value="broker" className="bg-slate-950 text-white">Broker (Amit Patel)</option>
-              <option value="receptionist" className="bg-slate-950 text-white">Receptionist Portal</option>
-              <option value="sales" className="bg-slate-950 text-white">Sales CRM Pipeline</option>
-              <option value="admin" className="bg-slate-950 text-white">Admin / Auditor View</option>
-            </select>
+            <div className="w-48 text-slate-800">
+              <CustomSelect
+                value={
+                  currentRole === 'broker' ? 'Broker CP Portal' :
+                  currentRole === 'receptionist' ? 'Receptionist Desk' :
+                  currentRole === 'sales' ? 'Sales CRM' : 'Admin Panel'
+                }
+                onChange={(name) => {
+                  const roleMap: Record<string, string> = {
+                    'Broker CP Portal': 'broker',
+                    'Receptionist Desk': 'receptionist',
+                    'Sales CRM': 'sales',
+                    'Admin Panel': 'admin',
+                  };
+                  const val = roleMap[name];
+                  if (val) setCurrentRole(val as any);
+                }}
+                options={['Broker CP Portal', 'Receptionist Desk', 'Sales CRM', 'Admin Panel']}
+                placeholder="View as Role"
+              />
+            </div>
           </div>
 
           {/* Device toggle controls */}

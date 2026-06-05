@@ -1,74 +1,11 @@
 import React, { useState } from 'react';
 import { useBrokerConnect } from '../../context/BrokerConnectContext';
-import { Users, Eye, TrendingUp, DollarSign, Plus, ArrowUpRight, Search, ChevronRight } from 'lucide-react';
-import { 
-  BarChart, Bar, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer 
-} from 'recharts';
-
-// Custom SVG renderer for symmetrical pill-shaped funnel bars
-const CustomFunnelBar = (props: any) => {
-  const { x, y, width, height, fill, payload } = props;
-  if (!payload || payload.name === undefined) return null;
-
-  // Render a pill shaped bar
-  const radius = height / 2;
-
-  return (
-    <g>
-      {/* Background pill bar */}
-      <rect
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-        rx={radius}
-        ry={radius}
-        fill={fill}
-      />
-      {/* Left text label */}
-      <text
-        x={x + 16}
-        y={y + height / 2}
-        fill="#ffffff"
-        textAnchor="start"
-        dominantBaseline="central"
-        className="font-bold text-xs sm:text-sm tracking-wide"
-      >
-        {payload.name}
-      </text>
-      {/* Right text count */}
-      <text
-        x={x + width - 16}
-        y={y + height / 2}
-        fill="#ffffff"
-        textAnchor="end"
-        dominantBaseline="central"
-        className="font-black text-xs sm:text-sm"
-      >
-        {payload.count}
-      </text>
-    </g>
-  );
-};
-
-// Custom interactive Tooltip that filters out the transparent padding spacer
-const CustomTooltip = ({ active, payload }: any) => {
-  if (active && payload && payload.length) {
-    const activeData = payload.find((p: any) => p.dataKey === 'val');
-    if (!activeData) return null;
-    return (
-      <div className="bg-slate-900 text-white px-3 py-2 rounded-xl text-xs font-semibold shadow-md border border-slate-800 text-left">
-        <p className="font-semibold text-slate-300">{activeData.payload.name}</p>
-        <p className="text-sm font-black text-white mt-0.5">{activeData.payload.count} Leads</p>
-      </div>
-    );
-  }
-  return null;
-};
+import { Users, Eye, TrendingUp, IndianRupee, Plus, ArrowUpRight, Search, ChevronRight } from 'lucide-react';
 
 export const BrokerDashboard: React.FC = () => {
   const { leads, setActiveScreen, commissions } = useBrokerConnect();
   const [searchTerm, setSearchTerm] = useState('');
+  const [hoveredStage, setHoveredStage] = useState<number | null>(null);
 
   // Calculate actual statistics from our global state
   const totalLeads = leads.length;
@@ -110,12 +47,47 @@ export const BrokerDashboard: React.FC = () => {
   const nCount = Math.round(negotiationCount);
   const bCount = Math.round(bookedCount);
 
-  // Funnel Data for Recharts with pad spacer for centering and val width
-  const funnelData = [
-    { name: 'Registered', count: rCount, color: '#2563eb', pad: 0, val: 100 },
-    { name: 'Visited', count: vCount, color: '#3b82f6', pad: 10, val: 80 },
-    { name: 'Negotiation', count: nCount, color: '#6366f1', pad: 20, val: 60 },
-    { name: 'Booked', count: bCount, color: '#10b981', pad: 30, val: 40 },
+  const funnelStages = [
+    {
+      index: 0,
+      name: 'Registered',
+      count: rCount,
+      color: '#3b82f6',
+      badgeColor: 'bg-blue-50 text-blue-700 border-blue-200/50',
+      barColor: 'bg-blue-500',
+      label: 'Initial Leads',
+      conversion: '100% Source',
+    },
+    {
+      index: 1,
+      name: 'Visited',
+      count: vCount,
+      color: '#0ea5e9',
+      badgeColor: 'bg-sky-50 text-sky-700 border-sky-200/50',
+      barColor: 'bg-sky-500',
+      label: 'Site Visits',
+      conversion: rCount > 0 ? `${((vCount / rCount) * 100).toFixed(0)}% Conv.` : '0% Conv.',
+    },
+    {
+      index: 2,
+      name: 'Negotiation',
+      count: nCount,
+      color: '#6366f1',
+      badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200/50',
+      barColor: 'bg-indigo-500',
+      label: 'Active Offers',
+      conversion: vCount > 0 ? `${((nCount / vCount) * 100).toFixed(0)}% Conv.` : '0% Conv.',
+    },
+    {
+      index: 3,
+      name: 'Booked',
+      count: bCount,
+      color: '#10b981',
+      badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200/50',
+      barColor: 'bg-emerald-500',
+      label: 'Sales Closed',
+      conversion: nCount > 0 ? `${((bCount / nCount) * 100).toFixed(0)}% Conv.` : '0% Conv.',
+    },
   ];
 
   return (
@@ -197,7 +169,7 @@ export const BrokerDashboard: React.FC = () => {
             </span>
           </div>
           <div className="p-3 bg-amber-50 rounded-2xl text-amber-600 group-hover:scale-110 transition duration-300">
-            <DollarSign className="w-6 h-6" />
+            <IndianRupee className="w-6 h-6" />
           </div>
         </div>
       </div>
@@ -205,32 +177,169 @@ export const BrokerDashboard: React.FC = () => {
       {/* Main Content Layout: Funnel & Recent Leads */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 text-left">
         {/* Lead Funnel Chart (Desktop 5 cols, Mobile full) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-5 flex flex-col justify-between min-h-[300px]">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-5 flex flex-col justify-between min-h-[360px] text-left">
           <div className="space-y-1">
             <h3 className="text-lg font-bold text-slate-800">Lead Funnel</h3>
             <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Conversion Pipeline Analysis</p>
           </div>
 
-          {/* Recharts Funnel Bar Chart */}
-          <div className="flex-1 w-full min-h-[180px] my-4">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={funnelData} layout="vertical" margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
-                <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" hide />
-                <Tooltip content={<CustomTooltip />} cursor={false} />
-                {/* Transparent padding bar spacer */}
-                <Bar dataKey="pad" stackId="a" fill="transparent" legendType="none" />
-                {/* Visual colored bar representing data */}
-                <Bar dataKey="val" stackId="a" shape={(props: any) => <CustomFunnelBar {...props} />} barSize={32}>
-                  {funnelData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+          {/* Symmetrical Sloped SVG Funnel & Metrics List Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center my-4">
+            {/* Interactive SVG Funnel (Left) */}
+            <div className="sm:col-span-5 flex justify-center items-center">
+              <svg viewBox="0 0 200 220" className="w-full max-w-[160px] h-auto select-none">
+                <defs>
+                  <linearGradient id="grad-0" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#3b82f6" />
+                    <stop offset="100%" stopColor="#1d4ed8" />
+                  </linearGradient>
+                  <linearGradient id="grad-1" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#0ea5e9" />
+                    <stop offset="100%" stopColor="#0284c7" />
+                  </linearGradient>
+                  <linearGradient id="grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#6366f1" />
+                    <stop offset="100%" stopColor="#4f46e5" />
+                  </linearGradient>
+                  <linearGradient id="grad-3" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#10b981" />
+                    <stop offset="100%" stopColor="#059669" />
+                  </linearGradient>
+                </defs>
+
+                {/* Stage 0 (Registered) */}
+                <polygon
+                  points="15,10 185,10 160,55 40,55"
+                  fill="url(#grad-0)"
+                  className={`transition-all duration-300 cursor-pointer origin-center ${
+                    hoveredStage === 0 ? 'brightness-110 saturate-[1.15] scale-[1.04] filter drop-shadow-[0_4px_8px_rgba(59,130,246,0.4)]' : 
+                    hoveredStage !== null ? 'opacity-40' : 'opacity-100'
+                  }`}
+                  onMouseEnter={() => setHoveredStage(0)}
+                  onMouseLeave={() => setHoveredStage(null)}
+                />
+                <text
+                  x="100"
+                  y="36"
+                  textAnchor="middle"
+                  fill="#ffffff"
+                  className="text-[10px] font-black pointer-events-none select-none transition-all duration-300"
+                >
+                  {rCount}
+                </text>
+
+                {/* Stage 1 (Visited) */}
+                <polygon
+                  points="42,61 158,61 138,106 62,106"
+                  fill="url(#grad-1)"
+                  className={`transition-all duration-300 cursor-pointer origin-center ${
+                    hoveredStage === 1 ? 'brightness-110 saturate-[1.15] scale-[1.04] filter drop-shadow-[0_4px_8px_rgba(14,165,233,0.4)]' : 
+                    hoveredStage !== null ? 'opacity-40' : 'opacity-100'
+                  }`}
+                  onMouseEnter={() => setHoveredStage(1)}
+                  onMouseLeave={() => setHoveredStage(null)}
+                />
+                <text
+                  x="100"
+                  y="87"
+                  textAnchor="middle"
+                  fill="#ffffff"
+                  className="text-[10px] font-black pointer-events-none select-none transition-all duration-300"
+                >
+                  {vCount}
+                </text>
+
+                {/* Stage 2 (Negotiation) */}
+                <polygon
+                  points="64,112 136,112 120,157 80,157"
+                  fill="url(#grad-2)"
+                  className={`transition-all duration-300 cursor-pointer origin-center ${
+                    hoveredStage === 2 ? 'brightness-110 saturate-[1.15] scale-[1.04] filter drop-shadow-[0_4px_8px_rgba(99,102,241,0.4)]' : 
+                    hoveredStage !== null ? 'opacity-40' : 'opacity-100'
+                  }`}
+                  onMouseEnter={() => setHoveredStage(2)}
+                  onMouseLeave={() => setHoveredStage(null)}
+                />
+                <text
+                  x="100"
+                  y="138"
+                  textAnchor="middle"
+                  fill="#ffffff"
+                  className="text-[10px] font-black pointer-events-none select-none transition-all duration-300"
+                >
+                  {nCount}
+                </text>
+
+                {/* Stage 3 (Booked) */}
+                <polygon
+                  points="82,163 118,163 108,208 92,208"
+                  fill="url(#grad-3)"
+                  className={`transition-all duration-300 cursor-pointer origin-center ${
+                    hoveredStage === 3 ? 'brightness-110 saturate-[1.15] scale-[1.04] filter drop-shadow-[0_4px_8px_rgba(16,185,129,0.4)]' : 
+                    hoveredStage !== null ? 'opacity-40' : 'opacity-100'
+                  }`}
+                  onMouseEnter={() => setHoveredStage(3)}
+                  onMouseLeave={() => setHoveredStage(null)}
+                />
+                <text
+                  x="100"
+                  y="189"
+                  textAnchor="middle"
+                  fill="#ffffff"
+                  className="text-[10px] font-black pointer-events-none select-none transition-all duration-300"
+                >
+                  {bCount}
+                </text>
+              </svg>
+            </div>
+
+            {/* Stage Metrics Breakdown Card List (Right) */}
+            <div className="sm:col-span-7 space-y-2">
+              {funnelStages.map((stage) => {
+                const isHovered = hoveredStage === stage.index;
+                const isAnyHovered = hoveredStage !== null;
+                const opacityClass = isAnyHovered && !isHovered ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100';
+
+                return (
+                  <div
+                    key={stage.name}
+                    onMouseEnter={() => setHoveredStage(stage.index)}
+                    onMouseLeave={() => setHoveredStage(null)}
+                    className={`p-2 rounded-xl border border-slate-100 bg-slate-50/20 transition-all duration-200 cursor-pointer select-none ${
+                      isHovered ? 'bg-white border-blue-200 shadow-md translate-x-1.5' : ''
+                    } ${opacityClass}`}
+                  >
+                    <div className="flex items-center justify-between gap-1.5">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: stage.color }}></span>
+                        <span className="text-[11px] font-bold text-slate-800">{stage.name}</span>
+                      </div>
+                      <span className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded-md border ${stage.badgeColor}`}>
+                        {stage.conversion}
+                      </span>
+                    </div>
+                    <div className="mt-1 flex items-baseline justify-between">
+                      <span className="text-xs font-black text-slate-900">
+                        {stage.count} <span className="text-[9px] font-bold text-slate-400">Leads</span>
+                      </span>
+                      <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">
+                        {stage.label}
+                      </span>
+                    </div>
+                    {/* Progress Bar inside breakdown */}
+                    <div className="w-full bg-slate-100/80 h-1 rounded-full mt-1.5 overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${stage.barColor}`}
+                        style={{ width: `${rCount > 0 ? (stage.count / rCount) * 100 : 0}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="pt-4 border-t border-slate-50 flex items-center justify-between text-xs text-slate-400 font-medium">
+          <div className="pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-semibold">
             <span>Overall Conversion Rate</span>
             <span className="text-emerald-600 font-extrabold text-sm">
               {rCount > 0 ? ((bCount / rCount) * 100).toFixed(1) : '0.0'}%
@@ -295,8 +404,10 @@ export const BrokerDashboard: React.FC = () => {
                           if (lead.status === 'OTP Pending') {
                             setActiveScreen(4); // OTP Verification screen
                           } else if (lead.status === 'OTP Verified') {
+                            localStorage.setItem('selectedLeadId', lead.id);
                             setActiveScreen(5); // Visit Pass
                           } else {
+                            localStorage.setItem('selectedLeadId', lead.id);
                             setActiveScreen(10); // Lead Details
                           }
                         }}

@@ -60,6 +60,7 @@ export const OTPVerification: React.FC = () => {
     const isValid = verifyLeadOTP(latestPendingLead.id, fullOtp);
     
     if (isValid) {
+      localStorage.setItem('selectedLeadId', latestPendingLead.id);
       setSuccess(true);
       setTimeout(() => {
         setActiveScreen(5); // Go to Visit Pass

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useBrokerConnect } from '../../context/BrokerConnectContext';
 import { ArrowLeft, User, Phone, Mail, MapPin, Building, Home, CreditCard, Calendar, Clock, AlertTriangle } from 'lucide-react';
+import { CustomSelect } from '../CustomSelect';
 
 export const RegisterCustomer: React.FC = () => {
   const { registerLead, setActiveScreen, projects, brokers } = useBrokerConnect();
@@ -146,22 +147,13 @@ export const RegisterCustomer: React.FC = () => {
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-600 uppercase">City</label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <MapPin className="w-4.5 h-4.5" />
-                  </span>
-                  <select
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 appearance-none"
-                  >
-                    <option>Mumbai</option>
-                    <option>Pune</option>
-                    <option>Goa</option>
-                    <option>Bangalore</option>
-                    <option>Ahmedabad</option>
-                  </select>
-                </div>
+                <CustomSelect
+                  value={city}
+                  onChange={(val) => setCity(val)}
+                  options={['Mumbai', 'Pune', 'Goa', 'Bangalore', 'Ahmedabad']}
+                  placeholder="Select City"
+                  icon={MapPin}
+                />
               </div>
             </div>
           </div>
@@ -175,63 +167,35 @@ export const RegisterCustomer: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-600 uppercase">Project</label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <Building className="w-4.5 h-4.5" />
-                  </span>
-                  <select
-                    value={project}
-                    onChange={(e) => setProject(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 appearance-none"
-                  >
-                    {projects.map((p) => (
-                      <option key={p.name} value={p.name}>{p.name}</option>
-                    ))}
-                  </select>
-                </div>
+                <CustomSelect
+                  value={project}
+                  onChange={(val) => setProject(val)}
+                  options={projects.map((p) => p.name)}
+                  placeholder="Select Project"
+                  icon={Building}
+                />
               </div>
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-600 uppercase">Unit Type</label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <Home className="w-4.5 h-4.5" />
-                  </span>
-                  <select
-                    value={unitType}
-                    onChange={(e) => setUnitType(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 appearance-none"
-                  >
-                    <option>1 BHK</option>
-                    <option>2 BHK</option>
-                    <option>3 BHK</option>
-                    <option>4 BHK</option>
-                    <option>Penthouse</option>
-                  </select>
-                </div>
+                <CustomSelect
+                  value={unitType}
+                  onChange={(val) => setUnitType(val)}
+                  options={['1 BHK', '2 BHK', '3 BHK', '4 BHK', 'Penthouse']}
+                  placeholder="Select Unit Type"
+                  icon={Home}
+                />
               </div>
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-600 uppercase">Budget</label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <CreditCard className="w-4.5 h-4.5" />
-                  </span>
-                  <select
-                    value={budget}
-                    onChange={(e) => setBudget(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 appearance-none"
-                  >
-                    <option>₹50L - ₹60L</option>
-                    <option>₹60L - ₹80L</option>
-                    <option>₹80L - ₹1Cr</option>
-                    <option>₹1Cr - ₹1.2Cr</option>
-                    <option>₹1.2Cr - ₹1.5Cr</option>
-                    <option>₹1.5Cr - ₹2Cr</option>
-                    <option>₹2Cr - ₹2.5Cr</option>
-                    <option>₹2.5Cr+</option>
-                  </select>
-                </div>
+                <CustomSelect
+                  value={budget}
+                  onChange={(val) => setBudget(val)}
+                  options={['₹50L - ₹60L', '₹60L - ₹80L', '₹80L - ₹1Cr', '₹1Cr - ₹1.2Cr', '₹1.2Cr - ₹1.5Cr', '₹1.5Cr - ₹2Cr', '₹2Cr - ₹2.5Cr', '₹2.5Cr+']}
+                  placeholder="Select Budget"
+                  icon={CreditCard}
+                />
               </div>
             </div>
           </div>
@@ -260,26 +224,13 @@ export const RegisterCustomer: React.FC = () => {
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-600 uppercase">Expected Visit Time</label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <Clock className="w-4.5 h-4.5" />
-                  </span>
-                  <select
-                    value={expectedTime}
-                    onChange={(e) => setExpectedTime(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 appearance-none"
-                  >
-                    <option>10:00 AM</option>
-                    <option>11:00 AM</option>
-                    <option>12:00 PM</option>
-                    <option>01:00 PM</option>
-                    <option>02:00 PM</option>
-                    <option>03:00 PM</option>
-                    <option>04:00 PM</option>
-                    <option>05:00 PM</option>
-                    <option>06:00 PM</option>
-                  </select>
-                </div>
+                <CustomSelect
+                  value={expectedTime}
+                  onChange={(val) => setExpectedTime(val)}
+                  options={['10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM']}
+                  placeholder="Select Visit Time"
+                  icon={Clock}
+                />
               </div>
             </div>
           </div>

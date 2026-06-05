@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useBrokerConnect } from '../../context/BrokerConnectContext';
 import { Award, BarChart4, Calendar } from 'lucide-react';
 import { 
@@ -9,6 +9,28 @@ import {
 
 export const ReportsAnalytics: React.FC = () => {
   const { leads } = useBrokerConnect();
+  const [hoveredBar, setHoveredBar] = useState<number | null>(null);
+
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      const descriptions: Record<string, string> = {
+        'Reg ➜ Visit': 'Percentage of registered CP leads who completed front desk check-in.',
+        'Visit ➜ Discuss': 'Percentage of checked-in visitors assigned to active sales executives.',
+        'Discuss ➜ Book': 'Percentage of sales allocations successfully closed as final bookings.',
+      };
+      return (
+        <div className="bg-slate-900 border border-slate-800 text-white p-3 rounded-xl shadow-xl max-w-[200px] text-left space-y-1">
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{data.name}</p>
+          <p className="text-sm font-black text-blue-400">{data.ratio}% <span className="text-[10px] text-slate-400 font-bold">Conversion</span></p>
+          <p className="text-[9px] text-slate-400 leading-normal font-semibold mt-1">
+            {descriptions[data.name] || 'Pipeline stage conversion.'}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   // 1. Trend Line Chart Data
   const trendData = [
@@ -198,15 +220,26 @@ export const ReportsAnalytics: React.FC = () => {
 
           <div className="flex-1 w-full min-h-[180px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={funnelData} layout="vertical" margin={{ top: 10, right: 10, left: 20, bottom: 5 }}>
+              <BarChart data={funnelData} layout="vertical" margin={{ top: 10, right: 15, left: 15, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f5f9" />
                 <XAxis type="number" domain={[0, 100]} stroke="#94a3b8" fontSize={9} />
                 <YAxis dataKey="name" type="category" stroke="#94a3b8" fontSize={9} width={90} />
-                <Tooltip formatter={(value: any) => [`${value}%`, 'Ratio']} contentStyle={{ background: '#0f172a', color: '#fff', border: 'none', borderRadius: '12px', fontSize: '10px' }} />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(241, 245, 249, 0.4)', radius: 6 }} />
                 <Bar dataKey="ratio" radius={[0, 6, 6, 0]} barSize={14}>
-                  {funnelData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
+                  {funnelData.map((entry, index) => {
+                    const isHovered = hoveredBar === index;
+                    const isAnyHovered = hoveredBar !== null;
+                    return (
+                      <Cell 
+                        key={`cell-${index}`} 
+                        fill={entry.color} 
+                        opacity={isAnyHovered && !isHovered ? 0.45 : 1}
+                        className="transition-all duration-150 cursor-pointer"
+                        onMouseEnter={() => setHoveredBar(index)}
+                        onMouseLeave={() => setHoveredBar(null)}
+                      />
+                    );
+                  })}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>

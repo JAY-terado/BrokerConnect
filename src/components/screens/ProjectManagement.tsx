@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useBrokerConnect } from '../../context/BrokerConnectContext';
 import { Search, Plus, Building2, MapPin, Grid, Layers } from 'lucide-react';
+import { CustomSelect } from '../CustomSelect';
 
 export const ProjectManagement: React.FC = () => {
   const { projects, addProject, setActiveScreen } = useBrokerConnect();
@@ -193,14 +194,13 @@ export const ProjectManagement: React.FC = () => {
 
               <div className="space-y-1">
                 <label className="text-xs font-bold text-slate-600 uppercase">Status</label>
-                <select
+                <CustomSelect
                   value={status}
-                  onChange={(e) => setStatus(e.target.value as any)}
-                  className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800 cursor-pointer"
-                >
-                  <option value="Active">Active</option>
-                  <option value="Upcoming">Upcoming</option>
-                </select>
+                  onChange={(val) => setStatus(val as any)}
+                  options={['Active', 'Upcoming']}
+                  placeholder="Select Status"
+                  icon={Layers}
+                />
               </div>
             </div>
 
