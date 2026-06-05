@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useBrokerConnect } from '../context/BrokerConnectContext';
 import { Mail, Building2, ShieldCheck, ArrowRight, UserPlus, CheckCircle, Smartphone, KeyRound, ChevronLeft } from 'lucide-react';
+import { PinCode } from 'rizzui/pin-code';
 
 export const Login: React.FC = () => {
   const { setCurrentRole, setActiveScreen } = useBrokerConnect();
@@ -15,11 +16,21 @@ export const Login: React.FC = () => {
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [otpStep, setOtpStep] = useState(false); // Toggle Step 1 vs Step 2
-  const [otpCode, setOtpCode] = useState('');
-  
+  const [pin, setPin] = useState('');
+  const [pinKey, setPinKey] = useState(0);
+
   const [loginError, setLoginError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(redirectSuccess);
   const [loading, setLoading] = useState(false);
+
+  React.useEffect(() => {
+    if (otpStep) {
+      setTimeout(() => {
+        const firstInput = document.querySelector('.rizzui-pin-code-root input') as HTMLInputElement;
+        firstInput?.focus();
+      }, 150);
+    }
+  }, [otpStep, pinKey]);
 
   const handleSendOtp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,13 +48,14 @@ export const Login: React.FC = () => {
     }, 600);
   };
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!otpCode) {
+  const handleLoginSubmit = (e?: React.FormEvent, codeOverride?: string) => {
+    if (e) e.preventDefault();
+    const finalCode = codeOverride || pin;
+    if (!finalCode || finalCode.length < 4) {
       setLoginError('Please enter the 4-digit OTP code');
       return;
     }
-    if (otpCode !== '1234') {
+    if (finalCode !== '1234') {
       setLoginError('Invalid OTP code. Please enter 1234 to verify.');
       return;
     }
@@ -71,16 +83,31 @@ export const Login: React.FC = () => {
     }, 800);
   };
 
+  const handlePinChange = (val: string) => {
+    setPin(val);
+    if (val.length === 4) {
+      if (val === '1234') {
+        handleLoginSubmit(undefined, val);
+      } else {
+        setLoginError('Invalid OTP code. Please enter 1234 to verify.');
+      }
+    } else {
+      setLoginError('');
+    }
+  };
+
   const handleBackToEmail = () => {
     setOtpStep(false);
-    setOtpCode('');
+    setPin('');
+    setPinKey(prev => prev + 1);
     setLoginError('');
   };
 
   const triggerQuickShortcut = (value: string) => {
     setEmailOrPhone(value);
     setOtpStep(false);
-    setOtpCode('');
+    setPin('');
+    setPinKey(prev => prev + 1);
     setLoginError('');
   };
 
@@ -90,7 +117,7 @@ export const Login: React.FC = () => {
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-700 via-indigo-800 to-blue-900 text-white p-16 flex-col justify-between relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-500 rounded-full blur-[100px] opacity-40"></div>
-        
+
         <div className="relative z-10 flex items-center gap-2">
           <div className="p-2.5 bg-white/10 rounded-xl backdrop-blur-md border border-white/20">
             <Building2 className="w-6 h-6 text-white" />
@@ -128,7 +155,7 @@ export const Login: React.FC = () => {
       {/* Right side: Forms Canvas */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 md:p-16">
         <div className="w-full max-w-[420px] space-y-8 animate-in fade-in zoom-in-95 duration-200">
-          
+
           {/* Mobile Branding Logo */}
           <div className="flex lg:hidden items-center gap-2 mb-4">
             <div className="p-2 bg-blue-600 rounded-lg text-white">
@@ -211,8 +238,8 @@ export const Login: React.FC = () => {
               </form>
             ) : (
               /* STEP 2: VERIFY OTP CODE */
-              <form onSubmit={handleLoginSubmit} className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-200">
-                <div className="space-y-1.5">
+              <form onSubmit={(e) => handleLoginSubmit(e)} className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-200">
+                <div className="space-y-2.5">
                   <div className="flex justify-between items-center">
                     <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">
                       OTP Security PIN *
@@ -226,18 +253,17 @@ export const Login: React.FC = () => {
                       <span>Change Email/Phone</span>
                     </button>
                   </div>
-                  <div className="relative">
-                    <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                      <Smartphone className="w-4.5 h-4.5" />
-                    </span>
-                    <input
-                      type="text"
-                      maxLength={4}
-                      placeholder="Enter 4-digit verification code (1234)"
-                      value={otpCode}
-                      onChange={(e) => setOtpCode(e.target.value.replace(/[^0-9]/g, ''))}
-                      className="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800 font-semibold tracking-widest"
-                      required
+
+                  {/* RizzUI PinCode Component */}
+                  <div className="py-2.5">
+                    <PinCode
+                      key={pinKey}
+                      length={4}
+                      setValue={handlePinChange as any}
+                      size="lg"
+                      placeholder="o"
+                      center={true}
+                      inputClassName="!w-14 !h-14 text-center text-xl font-extrabold !bg-slate-50 !border !border-slate-200 !rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white text-slate-800 transition-all duration-150 !shadow-sm !mr-2 placeholder:!text-slate-300 placeholder:!font-normal"
                     />
                   </div>
                 </div>

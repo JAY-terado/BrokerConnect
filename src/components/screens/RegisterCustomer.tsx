@@ -316,24 +316,6 @@ export const RegisterCustomer: React.FC = () => {
             </ul>
           </div>
 
-          <div className="bg-blue-50/60 p-6 rounded-2xl border border-blue-100 shadow-sm space-y-4">
-            {/* Broker Sim Selection */}
-            <h4 className="text-xs font-bold tracking-wider uppercase text-blue-800">Simulate Logging as</h4>
-            <div className="space-y-2">
-              {brokers.map((broker) => (
-                <label key={broker.id} className="flex items-center gap-2.5 p-2 bg-white rounded-xl border border-slate-100 hover:bg-blue-50 cursor-pointer text-xs font-semibold text-slate-700 transition">
-                  <input
-                    type="radio"
-                    name="sim-broker"
-                    checked={selectedBroker === broker.id}
-                    onChange={() => setSelectedBroker(broker.id)}
-                    className="text-blue-600"
-                  />
-                  <span>{broker.name} ({broker.id})</span>
-                </label>
-              ))}
-            </div>
-          </div>
         </div>
       </form>
 

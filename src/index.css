@@ -1,1 +1,16 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@source "../node_modules/rizzui/dist";
+
+@theme {
+  --color-border: #cbd5e1; /* slate-300 */
+  --color-muted: #f8fafc;  /* slate-50 */
+  --color-primary: #2563eb; /* blue-600 */
+}
+
+:root {
+  --border-radius: 12px;
+  --border-width: 1px;
+}
+
