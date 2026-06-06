@@ -11,7 +11,7 @@ export const MobileNav: React.FC = () => {
   const isSelected = (screenIds: number[]) => screenIds.includes(activeScreen);
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 lg:hidden border-t border-slate-100 bg-white/95 backdrop-blur-md flex items-center justify-around py-3 select-none shadow-2xl z-50">
+    <nav className="fixed bottom-0 inset-x-0 lg:hidden bg-[#0A1628] border-t border-white/8 backdrop-blur-xl shadow-[0_-4px_24px_rgba(10,22,40,0.3)] flex items-center justify-around h-16 pb-safe select-none z-50">
       
       {/* Tab 1: Dashboard */}
       <button
@@ -21,11 +21,16 @@ export const MobileNav: React.FC = () => {
           else if (currentRole === 'sales') setActiveScreen(9);
           else setActiveScreen(14);
         }}
-        className={`flex flex-col items-center gap-1 text-[9px] font-bold uppercase transition cursor-pointer ${
-          isSelected([2, 6, 9, 14]) ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+        className={`relative flex flex-col items-center gap-0.5 px-3 py-1 text-[9px] uppercase tracking-widest transition-all duration-150 cursor-pointer ${
+          isSelected([2, 6, 9, 14])
+            ? 'text-white font-bold'
+            : 'text-white/35 hover:text-white/70 font-medium'
         }`}
       >
-        <LayoutDashboard className="w-5 h-5" />
+        {isSelected([2, 6, 9, 14]) && (
+          <span className="absolute top-0 inset-x-0 h-0.5 bg-sky-400 rounded-b" />
+        )}
+        <LayoutDashboard className={`w-5 h-5 ${isSelected([2, 6, 9, 14]) ? 'text-sky-400' : ''}`} />
         <span>Dashboard</span>
       </button>
 
@@ -37,11 +42,16 @@ export const MobileNav: React.FC = () => {
           else if (currentRole === 'sales') setActiveScreen(9);
           else setActiveScreen(15);
         }}
-        className={`flex flex-col items-center gap-1 text-[9px] font-bold uppercase transition cursor-pointer ${
-          isSelected([3, 7, 15]) ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+        className={`relative flex flex-col items-center gap-0.5 px-3 py-1 text-[9px] uppercase tracking-widest transition-all duration-150 cursor-pointer ${
+          isSelected([3, 7, 15])
+            ? 'text-white font-bold'
+            : 'text-white/35 hover:text-white/70 font-medium'
         }`}
       >
-        <Users className="w-5 h-5" />
+        {isSelected([3, 7, 15]) && (
+          <span className="absolute top-0 inset-x-0 h-0.5 bg-sky-400 rounded-b" />
+        )}
+        <Users className={`w-5 h-5 ${isSelected([3, 7, 15]) ? 'text-sky-400' : ''}`} />
         <span>{currentRole === 'receptionist' ? 'Check-In' : 'Leads'}</span>
       </button>
 
@@ -53,11 +63,16 @@ export const MobileNav: React.FC = () => {
           else if (currentRole === 'sales') setActiveScreen(10);
           else setActiveScreen(13);
         }}
-        className={`flex flex-col items-center gap-1 text-[9px] font-bold uppercase transition cursor-pointer ${
-          isSelected([5, 8, 10, 13]) ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+        className={`relative flex flex-col items-center gap-0.5 px-3 py-1 text-[9px] uppercase tracking-widest transition-all duration-150 cursor-pointer ${
+          isSelected([5, 8, 10, 13])
+            ? 'text-white font-bold'
+            : 'text-white/35 hover:text-white/70 font-medium'
         }`}
       >
-        <Eye className="w-5 h-5" />
+        {isSelected([5, 8, 10, 13]) && (
+          <span className="absolute top-0 inset-x-0 h-0.5 bg-sky-400 rounded-b" />
+        )}
+        <Eye className={`w-5 h-5 ${isSelected([5, 8, 10, 13]) ? 'text-sky-400' : ''}`} />
         <span>{currentRole === 'broker' ? 'Pass' : currentRole === 'receptionist' ? 'Alloc' : 'Disputes'}</span>
       </button>
 
@@ -67,11 +82,16 @@ export const MobileNav: React.FC = () => {
           if (currentRole === 'admin') setActiveScreen(16);
           else setActiveScreen(11);
         }}
-        className={`flex flex-col items-center gap-1 text-[9px] font-bold uppercase transition cursor-pointer ${
-          isSelected([11, 16]) ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+        className={`relative flex flex-col items-center gap-0.5 px-3 py-1 text-[9px] uppercase tracking-widest transition-all duration-150 cursor-pointer ${
+          isSelected([11, 16])
+            ? 'text-white font-bold'
+            : 'text-white/35 hover:text-white/70 font-medium'
         }`}
       >
-        <Landmark className="w-5 h-5" />
+        {isSelected([11, 16]) && (
+          <span className="absolute top-0 inset-x-0 h-0.5 bg-sky-400 rounded-b" />
+        )}
+        <Landmark className={`w-5 h-5 ${isSelected([11, 16]) ? 'text-sky-400' : ''}`} />
         <span>{currentRole === 'admin' ? 'Projects' : 'Bookings'}</span>
       </button>
 
@@ -85,11 +105,16 @@ export const MobileNav: React.FC = () => {
             navigate('/login');
           }
         }}
-        className={`flex flex-col items-center gap-1 text-[9px] font-bold uppercase transition cursor-pointer ${
-          isSelected([12, 1]) ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+        className={`relative flex flex-col items-center gap-0.5 px-3 py-1 text-[9px] uppercase tracking-widest transition-all duration-150 cursor-pointer ${
+          isSelected([12, 1])
+            ? 'text-white font-bold'
+            : 'text-white/35 hover:text-white/70 font-medium'
         }`}
       >
-        <Menu className="w-5 h-5" />
+        {isSelected([12, 1]) && (
+          <span className="absolute top-0 inset-x-0 h-0.5 bg-sky-400 rounded-b" />
+        )}
+        <Menu className={`w-5 h-5 ${isSelected([12, 1]) ? 'text-sky-400' : ''}`} />
         <span>{currentRole === 'broker' ? 'Payouts' : 'Logout'}</span>
       </button>
     </nav>

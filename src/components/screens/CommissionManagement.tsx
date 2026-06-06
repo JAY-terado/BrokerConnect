@@ -37,7 +37,7 @@ export const CommissionManagement: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(9)}
@@ -46,8 +46,8 @@ export const CommissionManagement: React.FC = () => {
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h2 className="text-xl font-bold text-slate-800">Commission details</h2>
-            <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+            <h2 className="text-lg font-bold text-[#0F172A]">Commission details</h2>
+            <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
               Finance Desk &gt; Channel Partner Payout Ledger
             </p>
           </div>
@@ -61,11 +61,11 @@ export const CommissionManagement: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Panel: Commission Details (Desktop 8 columns) */}
-        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6">
           
           {/* Booking details summary */}
           <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+            <h3 className="text-sm font-bold text-[#0F172A] border-b border-slate-100 pb-2">
               Booking details
             </h3>
 
@@ -87,7 +87,7 @@ export const CommissionManagement: React.FC = () => {
 
           {/* Calculations worksheet */}
           <div className="space-y-4 pt-2">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+            <h3 className="text-sm font-bold text-[#0F172A] border-b border-slate-100 pb-2">
               Commission Calculation
             </h3>
 
@@ -109,7 +109,7 @@ export const CommissionManagement: React.FC = () => {
 
           {/* Payout details */}
           <div className="space-y-4 pt-2">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+            <h3 className="text-sm font-bold text-[#0F172A] border-b border-slate-100 pb-2">
               Payout Details
             </h3>
 
@@ -123,10 +123,10 @@ export const CommissionManagement: React.FC = () => {
               </div>
               <div className="space-y-1">
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Payout Status</span>
-                <span className={`inline-flex px-2 py-0.5 rounded font-extrabold text-[10px] uppercase ${
-                  activeCommission.status === 'Paid' ? 'bg-emerald-500 text-white' :
-                  activeCommission.status === 'Approved' ? 'bg-blue-600 text-white' :
-                  'bg-amber-500 text-white'
+                <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                  activeCommission.status === 'Paid' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
+                  activeCommission.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
+                  'bg-amber-50 text-amber-700 border border-amber-100'
                 }`}>
                   {activeCommission.status}
                 </span>
@@ -136,14 +136,14 @@ export const CommissionManagement: React.FC = () => {
         </div>
 
         {/* Payout actions sidebar (Desktop 4 columns) */}
-        <div className="lg:col-span-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6 h-fit text-center">
+        <div className="lg:col-span-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6 h-fit text-center">
           <h4 className="text-xs font-bold text-slate-400 block uppercase tracking-wider">Accounting Controls</h4>
           
           <div className="space-y-3">
             {activeCommission.status === 'Pending' && (
               <button
                 onClick={handleApprove}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
               >
                 <Check className="w-4 h-4" />
                 <span>Approve Commission Payout</span>
@@ -153,7 +153,7 @@ export const CommissionManagement: React.FC = () => {
             {activeCommission.status === 'Approved' && (
               <button
                 onClick={handlePay}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(16,185,129,0.25)] hover:shadow-[0_6px_20px_rgba(16,185,129,0.35)] cursor-pointer"
               >
                 <IndianRupee className="w-4 h-4" />
                 <span>Mark as Paid (Disburse)</span>
@@ -169,7 +169,7 @@ export const CommissionManagement: React.FC = () => {
 
             <button
               onClick={() => alert('Simulation: Generating bank invoice statement...')}
-              className="w-full py-3 border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer"
+              className="w-full py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer"
             >
               View Invoice Statement
             </button>

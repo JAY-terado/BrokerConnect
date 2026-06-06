@@ -37,16 +37,16 @@ export const BrokerManagement: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">Broker Management</h2>
-          <p className="text-sm text-slate-500 font-medium">
+          <h2 className="text-lg font-bold text-[#0F172A]">Broker Management</h2>
+          <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
             Manage channel partner verification status, commission percentages, and account states
           </p>
         </div>
         <button
           onClick={() => setShowAddForm(true)}
-          className="flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-sm transition-all shadow-md shadow-blue-500/10 cursor-pointer w-full sm:w-auto justify-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer w-full sm:w-auto justify-center"
         >
           <Plus className="w-5 h-5" />
           <span>Add Broker</span>
@@ -54,7 +54,7 @@ export const BrokerManagement: React.FC = () => {
       </div>
 
       {/* Tabs Selector & Search */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+      <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
           {/* Tabs */}
           <div className="flex border-b border-slate-100 overflow-x-auto gap-4 text-xs font-bold text-slate-400 uppercase tracking-wider pb-2 w-full md:w-auto">
@@ -94,7 +94,7 @@ export const BrokerManagement: React.FC = () => {
               placeholder="Search brokers..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-700"
+              className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-700"
             />
           </div>
         </div>
@@ -103,30 +103,30 @@ export const BrokerManagement: React.FC = () => {
         <div className="overflow-x-auto -mx-6">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-y border-slate-100">
-                <th className="py-3 px-6">Broker ID</th>
-                <th className="py-3 px-6">Broker Name</th>
-                <th className="py-3 px-6">Mobile Number</th>
-                <th className="py-3 px-6 text-center">Status</th>
-                <th className="py-3 px-6 text-center">Action Actions</th>
+              <tr className="bg-slate-50 text-[11px] font-semibold text-slate-500 uppercase tracking-wide border-b border-slate-100">
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4">Broker ID</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4">Broker Name</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4">Mobile Number</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4 text-center">Status</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4 text-center">Action Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-xs">
               {filteredBrokers.map((broker) => (
-                <tr key={broker.id} className="hover:bg-slate-50 transition duration-150">
-                  <td className="py-4 px-6 font-extrabold text-blue-600">{broker.id}</td>
-                  <td className="py-4 px-6 font-bold text-slate-800">{broker.name}</td>
-                  <td className="py-4 px-6 text-slate-500 font-medium">{broker.mobile}</td>
-                  <td className="py-4 px-6 text-center">
-                    <span className={`inline-flex px-2.5 py-0.5 rounded font-extrabold text-[10px] uppercase ${
-                      broker.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border border-emerald-200/50' :
-                      broker.status === 'Suspended' ? 'bg-rose-50 text-rose-600 border border-rose-200/50' :
-                      'bg-amber-50 text-amber-600 border border-amber-200/50'
+                <tr key={broker.id} className="hover:bg-slate-50/60 transition-colors cursor-pointer even:bg-slate-50/30">
+                  <td className="py-4 px-4 font-extrabold text-blue-600">{broker.id}</td>
+                  <td className="py-4 px-4 text-sm font-semibold text-slate-800">{broker.name}</td>
+                  <td className="py-4 px-4 text-xs text-slate-500 font-medium">{broker.mobile}</td>
+                  <td className="py-4 px-4 text-center">
+                    <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                      broker.status === 'Active' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
+                      broker.status === 'Suspended' ? 'bg-red-50 text-red-700 border border-red-100' :
+                      'bg-amber-50 text-amber-700 border border-amber-100'
                     }`}>
                       {broker.status}
                     </span>
                   </td>
-                  <td className="py-4 px-6 text-center">
+                  <td className="py-4 px-4 text-center">
                     <div className="flex gap-2 justify-center">
                       {broker.status === 'Pending Approval' && (
                         <button
@@ -154,8 +154,11 @@ export const BrokerManagement: React.FC = () => {
 
               {filteredBrokers.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-slate-400 font-semibold">
-                    No brokers matching selection.
+                  <td colSpan={5} className="py-8">
+                    <div className="flex flex-col items-center justify-center bg-slate-50 border border-dashed border-slate-200 rounded-2xl p-12 text-center">
+                      <Search className="w-8 h-8 text-slate-400 mb-2" />
+                      <span className="text-slate-400 text-sm font-medium">No brokers matching selection.</span>
+                    </div>
                   </td>
                 </tr>
               )}
@@ -169,7 +172,7 @@ export const BrokerManagement: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
           <form onSubmit={handleAddBrokerSubmit} className="bg-white p-6 sm:p-8 rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 space-y-5 animate-in fade-in zoom-in-95 duration-200 text-left">
             <div className="flex justify-between items-center pb-2 border-b">
-              <h3 className="text-lg font-bold text-slate-800 flex items-center gap-1.5">
+              <h3 className="text-lg font-bold text-[#0F172A] flex items-center gap-1.5">
                 <UserPlus className="w-5 h-5 text-blue-600" />
                 <span>Onboard New Broker</span>
               </h3>
@@ -184,25 +187,25 @@ export const BrokerManagement: React.FC = () => {
 
             <div className="space-y-4">
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-600 uppercase">Broker Name *</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Broker Name *</label>
                 <input
                   type="text"
                   placeholder="Enter full agency name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                   required
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-600 uppercase">Mobile Number *</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Mobile Number *</label>
                 <input
                   type="text"
                   placeholder="e.g. 98765 00000"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                   required
                 />
               </div>
@@ -212,13 +215,13 @@ export const BrokerManagement: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowAddForm(false)}
-                className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs transition"
+                className="flex-1 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition shadow-md"
+                className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
               >
                 Submit Broker
               </button>

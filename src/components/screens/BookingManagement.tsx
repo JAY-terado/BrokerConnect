@@ -53,7 +53,7 @@ export const BookingManagement: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <button
           onClick={() => setActiveScreen(10)}
           className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-xl transition cursor-pointer"
@@ -61,8 +61,8 @@ export const BookingManagement: React.FC = () => {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h2 className="text-xl font-bold text-slate-800">Booking Management</h2>
-          <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+          <h2 className="text-lg font-bold text-[#0F172A]">Booking Management</h2>
+          <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
             Sales Desk &gt; Allocate Inventory &amp; Finalize Sale
           </p>
         </div>
@@ -71,7 +71,7 @@ export const BookingManagement: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Main Details Panel (Desktop 8 columns) */}
-        <form onSubmit={handleCreateBooking} className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+        <form onSubmit={handleCreateBooking} className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6">
           
           {error && (
             <div className="p-3 bg-red-50 border border-red-200 text-red-600 rounded-xl text-xs font-semibold animate-pulse">
@@ -92,47 +92,47 @@ export const BookingManagement: React.FC = () => {
             </div>
             <div>
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Customer &amp; Project choice</span>
-              <span className="text-sm font-extrabold text-slate-800">{customerName} &middot; {projectName}</span>
+              <span className="text-sm font-semibold text-slate-800">{customerName} &middot; {projectName}</span>
             </div>
           </div>
 
           {/* Unit details */}
           <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+            <h3 className="text-sm font-bold text-[#0F172A] border-b border-slate-100 pb-2">
               Unit details
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Tower</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Tower</label>
                 <input
                   type="text"
                   placeholder="e.g. Tower A"
                   value={tower}
                   onChange={(e) => setTower(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Floor</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Floor</label>
                 <input
                   type="text"
                   placeholder="e.g. Floor 12"
                   value={floor}
                   onChange={(e) => setFloor(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Unit No.</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Unit No.</label>
                 <input
                   type="text"
                   placeholder="e.g. 1203"
                   value={unitNo}
                   onChange={(e) => setUnitNo(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                 />
               </div>
             </div>
@@ -140,30 +140,30 @@ export const BookingManagement: React.FC = () => {
 
           {/* Financial details */}
           <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+            <h3 className="text-sm font-bold text-[#0F172A] border-b border-slate-100 pb-2">
               Financial details
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Booking token Amount (₹)</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Booking token Amount (₹)</label>
                 <input
                   type="number"
                   placeholder="e.g. 500000"
                   value={bookingAmount}
                   onChange={(e) => setBookingAmount(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Total Agreement Value (₹)</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Total Agreement Value (₹)</label>
                 <input
                   type="number"
                   placeholder="e.g. 8500000"
                   value={agreementValue}
                   onChange={(e) => setAgreementValue(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                 />
               </div>
             </div>
@@ -173,13 +173,13 @@ export const BookingManagement: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveScreen(10)}
-              className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs transition text-center"
+              className="flex-1 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all text-center"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition shadow-md shadow-blue-500/10 cursor-pointer text-center"
+              className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center"
             >
               Submit Booking
             </button>

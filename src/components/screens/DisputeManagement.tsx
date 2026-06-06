@@ -24,7 +24,7 @@ export const DisputeManagement: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(14)} // Go to reports/analytics dashboard
@@ -33,8 +33,8 @@ export const DisputeManagement: React.FC = () => {
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h2 className="text-xl font-bold text-slate-800 font-sans">Dispute Management</h2>
-            <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+            <h2 className="text-lg font-bold text-[#0F172A] font-sans">Dispute Management</h2>
+            <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
               Admin Panel &gt; Channel Partner Conflict Auditing
             </p>
           </div>
@@ -44,9 +44,9 @@ export const DisputeManagement: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         {/* Left List Pane: All disputes (Desktop 4 columns) */}
-        <div className="lg:col-span-4 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4 flex flex-col justify-between">
           <div className="space-y-3">
-            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Active Disputes</h3>
+            <h3 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider">Active Disputes</h3>
             <div className="space-y-2">
               {disputes.map((disp) => (
                 <button
@@ -60,16 +60,16 @@ export const DisputeManagement: React.FC = () => {
                 >
                   <div className="flex justify-between items-start mb-1">
                     <span className="text-[10px] font-extrabold text-blue-600 uppercase tracking-wider">{disp.id}</span>
-                    <span className={`px-2 py-0.5 rounded text-[8px] font-bold uppercase ${
-                      disp.status.includes('Resolved') ? 'bg-emerald-500 text-white' :
-                      disp.status === 'Rejected' ? 'bg-rose-500 text-white' :
-                      'bg-amber-500 text-white'
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                      disp.status.includes('Resolved') ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
+                      disp.status === 'Rejected' ? 'bg-red-50 text-red-700 border border-red-100' :
+                      'bg-amber-50 text-amber-700 border border-amber-100'
                     }`}>
                       {disp.status}
                     </span>
                   </div>
                   <span className="text-xs font-bold text-slate-800 block">{disp.customerName}</span>
-                  <span className="text-[10px] text-slate-400 font-medium block mt-0.5">Mobile: {disp.mobile}</span>
+                  <span className="text-xs text-slate-500 font-medium block mt-0.5">Mobile: {disp.mobile}</span>
                 </button>
               ))}
 
@@ -84,11 +84,11 @@ export const DisputeManagement: React.FC = () => {
 
         {/* Right Detail Pane: Active Dispute verification sheet */}
         {activeDispute ? (
-          <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+          <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6">
             <div className="flex justify-between items-start border-b border-slate-100 pb-4">
               <div className="space-y-0.5">
-                <span className="text-xs font-bold text-slate-400 block uppercase">Dispute Audit Worksheet</span>
-                <h3 className="text-base font-extrabold text-slate-800">Duplicate customer: {activeDispute.customerName}</h3>
+                <span className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5 block">Dispute Audit Worksheet</span>
+                <h3 className="text-base font-bold text-[#0F172A]">Duplicate customer: {activeDispute.customerName}</h3>
               </div>
               <span className="text-xs font-extrabold text-slate-700 bg-slate-50 border px-2.5 py-1 rounded">
                 Raised: {activeDispute.raisedOn}
@@ -99,14 +99,14 @@ export const DisputeManagement: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-4 bg-slate-50 border border-slate-200/60 rounded-xl space-y-2 text-xs">
                 <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Broker A (Primary Claim)</span>
-                <span className="text-sm font-extrabold text-slate-800 block">{activeDispute.brokerAName}</span>
-                <span className="text-[10px] text-slate-400 font-medium block">ID: {activeDispute.brokerAId}</span>
+                <span className="text-sm font-semibold text-slate-800 block">{activeDispute.brokerAName}</span>
+                <span className="text-xs text-slate-500 font-medium block">ID: {activeDispute.brokerAId}</span>
               </div>
 
               <div className="p-4 bg-slate-50 border border-slate-200/60 rounded-xl space-y-2 text-xs">
                 <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Broker B (Secondary Claim)</span>
-                <span className="text-sm font-extrabold text-slate-800 block">{activeDispute.brokerBName}</span>
-                <span className="text-[10px] text-slate-400 font-medium block">ID: {activeDispute.brokerBId}</span>
+                <span className="text-sm font-semibold text-slate-800 block">{activeDispute.brokerBName}</span>
+                <span className="text-xs text-slate-500 font-medium block">ID: {activeDispute.brokerBId}</span>
               </div>
             </div>
 
@@ -142,19 +142,19 @@ export const DisputeManagement: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-100">
                 <button
                   onClick={() => handleResolve('brokerA')}
-                  className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition shadow-md shadow-blue-500/10 cursor-pointer text-center"
+                  className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center"
                 >
                   Approve Broker A
                 </button>
                 <button
                   onClick={() => handleResolve('brokerB')}
-                  className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shadow-md shadow-indigo-500/10 cursor-pointer text-center"
+                  className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(99,102,241,0.25)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.35)] cursor-pointer text-center"
                 >
                   Approve Broker B
                 </button>
                 <button
                   onClick={() => handleResolve('reject')}
-                  className="flex-1 py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs transition cursor-pointer text-center"
+                  className="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(244,63,94,0.25)] hover:shadow-[0_6px_20px_rgba(244,63,94,0.35)] cursor-pointer text-center"
                 >
                   Reject Both
                 </button>
@@ -166,8 +166,9 @@ export const DisputeManagement: React.FC = () => {
             )}
           </div>
         ) : (
-          <div className="lg:col-span-8 flex items-center justify-center p-8 bg-white border border-slate-100 rounded-2xl shadow-sm text-slate-400 font-semibold text-xs text-center">
-            Select an active dispute to inspect evidence.
+          <div className="lg:col-span-8 flex flex-col items-center justify-center bg-slate-50 border border-dashed border-slate-200 rounded-2xl p-12 text-slate-400 font-semibold text-xs text-center">
+            <ShieldAlert className="w-8 h-8 text-slate-400 mb-2" />
+            <span>Select an active dispute to inspect evidence.</span>
           </div>
         )}
 

@@ -21,7 +21,7 @@ export const ReportsAnalytics: React.FC = () => {
       };
       return (
         <div className="bg-slate-900 border border-slate-800 text-white p-3 rounded-xl shadow-xl max-w-[200px] text-left space-y-1">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{data.name}</p>
+          <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">{data.name}</p>
           <p className="text-sm font-black text-blue-400">{data.ratio}% <span className="text-[10px] text-slate-400 font-bold">Conversion</span></p>
           <p className="text-[9px] text-slate-400 leading-normal font-semibold mt-1">
             {descriptions[data.name] || 'Pipeline stage conversion.'}
@@ -66,14 +66,14 @@ export const ReportsAnalytics: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800 font-sans">Reports &amp; Analytics</h2>
-          <p className="text-sm text-slate-500 font-medium">
+          <h2 className="text-lg font-bold text-[#0F172A] font-sans">Reports &amp; Analytics</h2>
+          <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
             Analyze platform conversion ratios, inventory values, and channel partner productivity
           </p>
         </div>
-        <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/60 px-4 py-2.5 rounded-xl text-xs font-bold text-slate-700">
+        <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-600">
           <Calendar className="w-4 h-4 text-slate-400" />
           <span>01 May 2026 - 31 May 2026</span>
         </div>
@@ -81,31 +81,31 @@ export const ReportsAnalytics: React.FC = () => {
 
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total Leads</span>
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Total Leads</span>
           <div className="flex items-baseline justify-center gap-1.5 mt-2">
-            <span className="text-3xl font-extrabold text-slate-800">150</span>
+            <span className="text-3xl font-semibold text-slate-800">150</span>
             <span className="text-xs text-emerald-600 font-bold flex items-center">+12%</span>
           </div>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total Visits</span>
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Total Visits</span>
           <div className="flex items-baseline justify-center gap-1.5 mt-2">
-            <span className="text-3xl font-extrabold text-slate-800">100</span>
+            <span className="text-3xl font-semibold text-slate-800">100</span>
             <span className="text-xs text-emerald-600 font-bold flex items-center">+8%</span>
           </div>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total Bookings</span>
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Total Bookings</span>
           <div className="flex items-baseline justify-center gap-1.5 mt-2">
-            <span className="text-3xl font-extrabold text-slate-800">12</span>
+            <span className="text-3xl font-semibold text-slate-800">12</span>
             <span className="text-xs text-emerald-600 font-bold flex items-center">+20%</span>
           </div>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Agreement Value</span>
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Agreement Value</span>
           <div className="flex items-baseline justify-center gap-1.5 mt-2">
-            <span className="text-2xl font-extrabold text-slate-800">₹10.20 Cr</span>
+            <span className="text-2xl font-semibold text-slate-800">₹10.20 Cr</span>
             <span className="text-xs text-emerald-600 font-bold flex items-center">+15%</span>
           </div>
         </div>
@@ -115,10 +115,10 @@ export const ReportsAnalytics: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Line Chart: Leads Over Time (Desktop 8 columns) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-8 flex flex-col justify-between min-h-[360px]">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-8 flex flex-col justify-between min-h-[360px]">
           <div className="space-y-1 mb-4">
-            <h3 className="text-lg font-bold text-slate-800">Leads Registration Trend</h3>
-            <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Daily Lead Registrations Volume</p>
+            <h3 className="text-lg font-bold text-[#0F172A]">Leads Registration Trend</h3>
+            <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">Daily Lead Registrations Volume</p>
           </div>
 
           {/* Recharts AreaChart */}
@@ -142,10 +142,10 @@ export const ReportsAnalytics: React.FC = () => {
         </div>
 
         {/* Donut Chart: Bookings by Project (Desktop 4 columns) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-4 flex flex-col justify-between min-h-[360px]">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-4 flex flex-col justify-between min-h-[360px]">
           <div className="space-y-1 mb-4">
-            <h3 className="text-lg font-bold text-slate-800">Project Bookings</h3>
-            <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Booking ratios by location</p>
+            <h3 className="text-lg font-bold text-[#0F172A]">Project Bookings</h3>
+            <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">Booking ratios by location</p>
           </div>
 
           {/* Recharts PieChart */}
@@ -185,8 +185,8 @@ export const ReportsAnalytics: React.FC = () => {
         </div>
 
         {/* Top Brokers Leaderboard (Desktop 6 columns) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-6">
-          <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-6">
+          <h3 className="text-lg font-bold text-[#0F172A] mb-4 flex items-center gap-2">
             <Award className="w-5 h-5 text-amber-500" />
             <span>Top Brokers</span>
           </h3>
@@ -212,9 +212,9 @@ export const ReportsAnalytics: React.FC = () => {
         </div>
 
         {/* Funnel Ratios: Recharts BarChart (Desktop 6 columns) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-6 flex flex-col justify-between min-h-[300px]">
-          <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-            <BarChart4 className="w-5 h-5 text-blue-600" />
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-6 flex flex-col justify-between min-h-[300px]">
+          <h3 className="text-lg font-bold text-[#0F172A] mb-4 flex items-center gap-2">
+            <BarChart4 className="w-5 h-5 text-[#1A56DB]" />
             <span>Conversion Ratios</span>
           </h3>
 

@@ -45,31 +45,31 @@ export const SalesAllocation: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(6)}
-            className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-xl transition cursor-pointer"
+            className="p-2 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl transition-all cursor-pointer"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h2 className="text-xl font-bold text-slate-800">Sales Allocation</h2>
-            <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+            <h2 className="text-lg font-bold text-[#0F172A]">Sales Allocation</h2>
+            <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
               Reception Desk &gt; Automated Agent Assignment
             </p>
           </div>
         </div>
-        <span className="text-xs font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100 uppercase tracking-widest">
+        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-100 uppercase tracking-wider">
           {visitCode}
         </span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Left Side: Circular Status Display */}
-        <div className="lg:col-span-6 bg-white p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col items-center justify-center space-y-6 text-center">
+        <div className="lg:col-span-6 bg-white p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col items-center justify-center space-y-6 text-center">
           
           <div className="relative">
             {/* Spinning/pulsing aura */}
@@ -77,7 +77,7 @@ export const SalesAllocation: React.FC = () => {
             
             {/* Big avatar ring */}
             <div className="relative w-44 h-44 rounded-full border-4 border-slate-100 flex items-center justify-center p-2 bg-slate-50 shadow-inner">
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-600 to-indigo-700 flex flex-col items-center justify-center text-white p-4 shadow-lg">
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-[#1A56DB] to-indigo-700 flex flex-col items-center justify-center text-white p-4 shadow-lg">
                 <UserCheck className={`w-12 h-12 mb-1.5 ${isAllocating ? 'animate-spin' : ''}`} />
                 <span className="text-[10px] text-blue-200 font-bold uppercase tracking-wider block">Allocated to</span>
                 <span className="text-sm font-extrabold tracking-tight">{currentAllocated}</span>
@@ -86,24 +86,24 @@ export const SalesAllocation: React.FC = () => {
           </div>
 
           <div className="space-y-2">
-            <span className="px-2.5 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded border border-blue-100 uppercase tracking-widest">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-100 uppercase tracking-wider">
               Round Robin Order Rule
             </span>
-            <h3 className="text-lg font-black text-slate-800">
+            <h3 className="text-lg font-bold text-[#0F172A]">
               {isAllocating ? 'Allocating Sales Representative...' : `Allocated to ${currentAllocated}`}
             </h3>
-            <p className="text-xs text-slate-500 font-semibold max-w-xs mx-auto leading-relaxed">
+            <p className="text-xs text-slate-500 font-medium max-w-xs mx-auto leading-relaxed">
               Customer <strong className="text-slate-700">{latestAllocatedLead?.name || 'Rahul Shah'}</strong> is automatically assigned based on sales queue availability.
             </p>
           </div>
         </div>
 
         {/* Right Side: Round Robin Queue Order */}
-        <div className="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between space-y-6">
           <div className="space-y-4">
             <div className="space-y-1 text-left">
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Sales Queue Lineup</h3>
-              <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Round Robin Order Sequence</p>
+              <h3 className="text-lg font-bold text-[#0F172A]">Sales Queue Lineup</h3>
+              <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">Round Robin Order Sequence</p>
             </div>
 
             <div className="space-y-2.5">
@@ -114,13 +114,13 @@ export const SalesAllocation: React.FC = () => {
                     key={exec}
                     className={`flex items-center justify-between p-3.5 rounded-xl border transition-all duration-300 ${
                       isSelected
-                        ? 'bg-blue-50/70 border-blue-600 shadow-sm'
+                        ? 'bg-blue-50/70 border-blue-100 text-blue-700 shadow-sm'
                         : 'bg-slate-50 border-slate-200/60 opacity-60'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black ${
-                        isSelected ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-600'
+                        isSelected ? 'bg-[#1A56DB] text-white' : 'bg-slate-200 text-slate-600'
                       }`}>
                         {idx + 1}
                       </span>
@@ -130,7 +130,7 @@ export const SalesAllocation: React.FC = () => {
                     </div>
 
                     {isSelected && (
-                      <span className="text-[10px] text-blue-600 font-bold bg-blue-100 px-2 py-0.5 rounded uppercase tracking-wider">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-100 uppercase tracking-wider">
                         Assigned
                       </span>
                     )}
@@ -153,7 +153,7 @@ export const SalesAllocation: React.FC = () => {
                 type="button"
                 onClick={handleReallocate}
                 disabled={isAllocating}
-                className="flex-1 flex items-center justify-center gap-1.5 py-3 border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold rounded-xl text-xs transition cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 <span>Reallocate Agent</span>
@@ -163,7 +163,7 @@ export const SalesAllocation: React.FC = () => {
                 type="button"
                 onClick={handleProceed}
                 disabled={isAllocating}
-                className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition shadow-md shadow-blue-500/10 cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
               >
                 <CheckCircle className="w-3.5 h-3.5" />
                 <span>Proceed to Meeting</span>

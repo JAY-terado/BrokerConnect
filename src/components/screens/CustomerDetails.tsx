@@ -36,7 +36,7 @@ export const CustomerDetails: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(9)}
@@ -45,8 +45,8 @@ export const CustomerDetails: React.FC = () => {
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h2 className="text-xl font-bold text-slate-800">Customer Details</h2>
-            <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+            <h2 className="text-lg font-bold text-[#0F172A]">Customer Details</h2>
+            <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
               Sales Desk &gt; Client Profile &amp; Timeline
             </p>
           </div>
@@ -84,7 +84,7 @@ export const CustomerDetails: React.FC = () => {
 
           <button
             onClick={() => setActiveScreen(11)} // Navigate to booking management form
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition shadow-md cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
           >
             <Landmark className="w-4 h-4" />
             <span>Create Booking</span>
@@ -96,15 +96,21 @@ export const CustomerDetails: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Card: Customer Profile Summary */}
-        <div className="lg:col-span-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6 self-start">
+        <div className="lg:col-span-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6 self-start">
           <div className="text-center space-y-3 pb-6 border-b border-slate-50">
             <div className="mx-auto w-16 h-16 bg-blue-50 text-blue-600 border border-blue-100 rounded-full flex items-center justify-center text-2xl font-black shadow-inner">
               {activeLead.name.charAt(0)}
             </div>
             
             <div className="space-y-0.5">
-              <h3 className="text-lg font-black text-slate-800">{activeLead.name}</h3>
-              <span className="text-[10px] text-blue-600 font-extrabold bg-blue-50 border border-blue-100 px-2.5 py-0.5 rounded-full uppercase tracking-widest inline-block">
+              <h3 className="text-lg font-bold text-[#0F172A]">{activeLead.name}</h3>
+              <span className={`inline-block border px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${
+                activeLead.status === 'Booked' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' :
+                activeLead.status === 'Negotiation' ? 'bg-purple-50 text-purple-700 border-purple-100' :
+                ['OTP Verified', 'Checked In', 'Allocated'].includes(activeLead.status) ? 'bg-blue-50 text-blue-700 border-blue-100' :
+                ['OTP Pending', 'Pending'].includes(activeLead.status) ? 'bg-amber-50 text-amber-700 border-amber-100' :
+                'bg-slate-50 text-slate-700 border-slate-200'
+              }`}>
                 {activeLead.status}
               </span>
             </div>
@@ -135,7 +141,7 @@ export const CustomerDetails: React.FC = () => {
         </div>
 
         {/* Right Card: Tabs & Details Panel */}
-        <div className="lg:col-span-8 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+        <div className="lg:col-span-8 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
           <div>
             {/* Tabs Selector */}
             <div className="flex border-b border-slate-100 -mx-6 px-6 overflow-x-auto gap-4 text-xs font-bold text-slate-400 uppercase tracking-wider pb-3.5">
@@ -171,23 +177,23 @@ export const CustomerDetails: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-1">
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Project Choice</span>
-                    <span className="text-sm font-extrabold text-slate-800">{activeLead.project}</span>
+                    <span className="text-sm font-semibold text-slate-800">{activeLead.project}</span>
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Unit Type</span>
-                    <span className="text-sm font-extrabold text-slate-800">{activeLead.unitType}</span>
+                    <span className="text-sm font-semibold text-slate-800">{activeLead.unitType}</span>
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Budget Range</span>
-                    <span className="text-sm font-extrabold text-slate-800">{activeLead.budget}</span>
+                    <span className="text-sm font-semibold text-slate-800">{activeLead.budget}</span>
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Sales Agent</span>
-                    <span className="text-sm font-extrabold text-slate-800">{activeLead.assignedExecutive || 'Unassigned'}</span>
+                    <span className="text-sm font-semibold text-slate-800">{activeLead.assignedExecutive || 'Unassigned'}</span>
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Accompanying Family</span>
-                    <span className="text-sm font-extrabold text-slate-800">Rahul Shah (Self), Priya Shah (Wife)</span>
+                    <span className="text-sm font-semibold text-slate-800">Rahul Shah (Self), Priya Shah (Wife)</span>
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Broker Account</span>
@@ -204,23 +210,23 @@ export const CustomerDetails: React.FC = () => {
                   <div className="relative">
                     <div className="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"></div>
                     <div className="text-xs space-y-0.5">
-                      <span className="font-extrabold text-slate-800">Customer registered by channel partner</span>
-                      <span className="text-[10px] text-slate-400 font-bold block">{activeLead.registeredOn}</span>
+                      <span className="font-semibold text-slate-800">Customer registered by channel partner</span>
+                      <span className="text-xs text-slate-500 font-medium block">{activeLead.registeredOn}</span>
                     </div>
                   </div>
                   <div className="relative">
                     <div className="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"></div>
                     <div className="text-xs space-y-0.5">
-                      <span className="font-extrabold text-slate-800">SMS Verification OTP lock verified</span>
-                      <span className="text-[10px] text-slate-400 font-bold block">{activeLead.registeredOn}</span>
+                      <span className="font-semibold text-slate-800">SMS Verification OTP lock verified</span>
+                      <span className="text-xs text-slate-500 font-medium block">{activeLead.registeredOn}</span>
                     </div>
                   </div>
                   {['Checked In', 'Allocated', 'Follow-Up', 'Negotiation', 'Booked'].includes(activeLead.status) && (
                     <div className="relative">
                       <div className="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"></div>
                       <div className="text-xs space-y-0.5">
-                        <span className="font-extrabold text-slate-800">Checked-in at reception desk</span>
-                        <span className="text-[10px] text-slate-400 font-bold block">05 June 2026, 11:00 AM</span>
+                        <span className="font-semibold text-slate-800">Checked-in at reception desk</span>
+                        <span className="text-xs text-slate-500 font-medium block">05 June 2026, 11:00 AM</span>
                       </div>
                     </div>
                   )}
@@ -228,8 +234,8 @@ export const CustomerDetails: React.FC = () => {
                     <div className="relative">
                       <div className="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-blue-500 border border-white"></div>
                       <div className="text-xs space-y-0.5">
-                        <span className="font-extrabold text-slate-800">Sales Executive assigned via Round Robin queue</span>
-                        <span className="text-[10px] text-slate-400 font-bold block">{activeLead.allocationTime}</span>
+                        <span className="font-semibold text-slate-800">Sales Executive assigned via Round Robin queue</span>
+                        <span className="text-xs text-slate-500 font-medium block">{activeLead.allocationTime}</span>
                       </div>
                     </div>
                   )}
@@ -242,13 +248,13 @@ export const CustomerDetails: React.FC = () => {
               <div className="pt-6 space-y-4 text-xs font-semibold">
                 <div className="flex items-center justify-between p-3 bg-slate-50 border border-slate-200/60 rounded-xl">
                   <span>PAN Card Registration Proof</span>
-                  <span className="text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded font-extrabold text-[10px] uppercase border border-emerald-100">
+                  <span className="bg-emerald-50 text-emerald-700 border border-emerald-100 px-2.5 py-0.5 rounded-full text-[10px] font-bold">
                     Uploaded
                   </span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-slate-50 border border-slate-200/60 rounded-xl">
                   <span>Aadhaar Identity Verification</span>
-                  <span className="text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded font-extrabold text-[10px] uppercase border border-emerald-100">
+                  <span className="bg-emerald-50 text-emerald-700 border border-emerald-100 px-2.5 py-0.5 rounded-full text-[10px] font-bold">
                     Uploaded
                   </span>
                 </div>
@@ -272,11 +278,11 @@ export const CustomerDetails: React.FC = () => {
                     placeholder="Enter discussion logs..."
                     value={newNote}
                     onChange={(e) => setNewNote(e.target.value)}
-                    className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800"
+                    className="flex-1 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                   />
                   <button
                     type="submit"
-                    className="px-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs transition cursor-pointer"
+                    className="px-4 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer"
                   >
                     Add Log
                   </button>

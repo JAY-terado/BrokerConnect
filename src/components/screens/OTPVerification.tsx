@@ -84,7 +84,7 @@ export const OTPVerification: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header Panel */}
-      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <button
           onClick={() => setActiveScreen(3)}
           className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-xl transition cursor-pointer"
@@ -92,8 +92,8 @@ export const OTPVerification: React.FC = () => {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h2 className="text-xl font-bold text-slate-800">OTP Verification</h2>
-          <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+          <h2 className="text-lg font-bold text-[#0F172A]">OTP Verification</h2>
+          <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
             Broker Portal &gt; Customer Identity Verification
           </p>
         </div>
@@ -101,10 +101,10 @@ export const OTPVerification: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Verification Card (Desktop 7 columns, Mobile full) */}
-        <div className="lg:col-span-7 bg-white p-6 sm:p-10 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+        <div className="lg:col-span-7 bg-white p-6 sm:p-10 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
           <div className="space-y-6">
             <div className="space-y-2">
-              <h3 className="text-2xl font-extrabold text-slate-800 tracking-tight">Verify OTP</h3>
+              <h3 className="text-lg font-bold text-[#0F172A]">Verify OTP</h3>
               <p className="text-xs font-semibold text-slate-400 leading-relaxed max-w-sm">
                 OTP has been simulated and sent to the customer's mobile number:
               </p>
@@ -138,7 +138,7 @@ export const OTPVerification: React.FC = () => {
                     value={digit}
                     onChange={(e) => handleDigitChange(idx, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(idx, e)}
-                    className="w-14 h-14 bg-slate-50 border border-slate-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 text-center font-extrabold text-xl text-slate-800 rounded-xl transition shadow-inner"
+                    className="w-14 h-14 bg-white border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 text-center font-extrabold text-xl text-slate-800 rounded-xl transition duration-200"
                   />
                 ))}
               </div>
@@ -164,7 +164,7 @@ export const OTPVerification: React.FC = () => {
                 <button
                   type="submit"
                   disabled={success}
-                  className="w-full max-w-[280px] py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-emerald-600 text-white font-semibold rounded-xl text-sm transition shadow-md shadow-blue-500/10 cursor-pointer"
+                  className="w-full max-w-[280px] py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] disabled:bg-emerald-600 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
                 >
                   Verify OTP
                 </button>

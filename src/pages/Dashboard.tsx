@@ -112,10 +112,10 @@ export const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50 text-slate-800 w-full overflow-x-hidden text-left">
+    <div className="flex min-h-screen bg-[#F1F5F9] text-slate-800 w-full overflow-x-hidden text-left">
       {/* Desktop Sidebar (automatically hidden on mobile widths) */}
-      <div className="hidden lg:block w-64 shrink-0">
-        <div className="fixed top-0 bottom-0 left-0 w-64 h-screen z-20">
+      <div className="hidden lg:block w-60 shrink-0">
+        <div className="fixed top-0 bottom-0 left-0 w-60 h-screen z-20">
           <Sidebar />
         </div>
       </div>
@@ -124,24 +124,25 @@ export const Dashboard: React.FC = () => {
       <div className="flex-1 flex flex-col min-w-0 min-h-screen relative pb-20 lg:pb-0">
         
         {/* Dashboard Header Bar */}
-        <header className="bg-white border-b border-slate-100 px-6 py-4 flex justify-between items-center shrink-0 relative z-10 select-none shadow-sm">
+        <header className="bg-[#0A1628] lg:bg-white border-b border-white/5 lg:border-slate-100 px-6 h-16 flex justify-between items-center shrink-0 relative z-10 select-none shadow-[0_1px_0_rgba(15,23,42,0.06)]">
           {/* Left side info / Logo */}
           <div className="flex items-center gap-3">
             {/* Mobile Branding Logo */}
-            <div className="flex lg:hidden items-center gap-2">
-              <div className="p-1.5 bg-blue-600 rounded-lg text-white">
-                <Building2 className="w-4 h-4" />
-              </div>
-              <span className="text-sm font-black text-slate-900 tracking-tight">BrokerConnect</span>
+            <div className="flex lg:hidden items-center">
+              <img 
+                src="/logo.png" 
+                alt="Logo" 
+                className="h-7.5 w-auto object-contain" 
+              />
             </div>
 
             {/* Elegant Status Pill Badge */}
-            <div className={`hidden lg:flex items-center gap-2.5 text-xs font-bold px-3.5 py-2 border rounded-xl shadow-xs transition-all duration-300 ${roleStyles[currentRole].bg}`}>
+            <div className="hidden lg:flex items-center gap-2.5 bg-slate-100 text-slate-600 border border-slate-200/80 rounded-full px-3 py-1 text-xs font-semibold shadow-xs transition-all duration-300">
               <span className="relative flex h-2 w-2">
                 <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${roleStyles[currentRole].dot}`}></span>
                 <span className={`relative inline-flex rounded-full h-2 w-2 ${roleStyles[currentRole].dot}`}></span>
               </span>
-              <span>Role Context: <strong className="font-extrabold">{roleStyles[currentRole].label}</strong></span>
+              <span>Role Context: <strong className="font-semibold">{roleStyles[currentRole].label}</strong></span>
             </div>
           </div>
 
@@ -152,52 +153,52 @@ export const Dashboard: React.FC = () => {
             <div ref={dropdownRef} className="relative select-none">
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 px-3.5 py-2 rounded-xl text-[11px] sm:text-xs font-bold text-slate-700 transition cursor-pointer shadow-xs active:scale-[0.98]"
+                className="flex items-center gap-2 bg-blue-900/40 hover:bg-blue-800/60 border border-blue-800/40 lg:bg-slate-50 lg:hover:bg-slate-100 lg:border-slate-200/80 px-3.5 py-2 rounded-xl text-[11px] sm:text-xs font-bold text-blue-100 lg:text-slate-700 transition cursor-pointer shadow-xs active:scale-[0.98]"
               >
                 <span className={`w-1.5 h-1.5 rounded-full ${roleStyles[currentRole].dot} animate-pulse`}></span>
                 <span className="hidden sm:inline">Demo Role:</span>
-                <span className="font-black text-slate-900 capitalize">{currentRole === 'sales' ? 'Sales CRM' : currentRole === 'receptionist' ? 'Receptionist' : currentRole === 'admin' ? 'Admin' : 'Broker'}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                <span className="font-black text-white lg:text-slate-900 capitalize">{currentRole === 'sales' ? 'Sales CRM' : currentRole === 'receptionist' ? 'Receptionist' : currentRole === 'admin' ? 'Admin' : 'Broker'}</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-blue-300 lg:text-slate-400 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-100/80 rounded-2xl shadow-xl z-50 py-1.5 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-100 rounded-2xl shadow-[0_8px_32px_rgba(15,23,42,0.12)] z-50 py-1.5 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="px-4 py-2 border-b border-slate-50">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Switch Dashboard View</span>
                   </div>
                   <div className="p-1 space-y-0.5">
                     {roles.map((r) => {
-                      const IconComponent = r.icon;
-                      const isSelected = currentRole === r.id;
-                      const activeStyles = isSelected 
-                        ? 'bg-blue-50/50 text-blue-600 border border-blue-100/50' 
-                        : 'hover:bg-slate-50/80 border border-transparent text-slate-600 hover:text-slate-900';
-                      const iconColor = isSelected ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600';
-                      return (
-                        <button
-                          key={r.id}
-                          onClick={() => {
-                            setCurrentRole(r.id);
-                            setIsDropdownOpen(false);
-                          }}
-                          className={`w-full flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 cursor-pointer text-left ${activeStyles}`}
-                        >
-                          <div className={`p-1.5 bg-slate-50 rounded-lg shrink-0 ${iconColor}`}>
-                            <IconComponent className="w-4 h-4" />
-                          </div>
-                          <div className="flex-1 space-y-0.5 min-w-0">
-                            <div className="flex items-center justify-between">
-                              <span className={`text-xs font-bold block ${isSelected ? 'text-blue-700 font-extrabold' : 'text-slate-800'}`}>
-                                {r.name}
-                              </span>
-                              {isSelected && <Check className="w-3.5 h-3.5 text-blue-600 stroke-[3]" />}
-                            </div>
-                            <p className="text-[10px] text-slate-400 leading-normal font-semibold">
-                              {r.description}
-                            </p>
-                          </div>
-                        </button>
-                      );
+                       const IconComponent = r.icon;
+                       const isSelected = currentRole === r.id;
+                       const activeStyles = isSelected 
+                         ? 'bg-blue-50/50 text-blue-600 border border-blue-100/50' 
+                         : 'hover:bg-slate-50/80 border border-transparent text-slate-600 hover:text-slate-900';
+                       const iconColor = isSelected ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600';
+                       return (
+                         <button
+                           key={r.id}
+                           onClick={() => {
+                             setCurrentRole(r.id);
+                             setIsDropdownOpen(false);
+                           }}
+                           className={`w-full flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 cursor-pointer text-left ${activeStyles}`}
+                         >
+                           <div className={`p-1.5 bg-slate-50 rounded-lg shrink-0 ${iconColor}`}>
+                             <IconComponent className="w-4 h-4" />
+                           </div>
+                           <div className="flex-1 space-y-0.5 min-w-0">
+                             <div className="flex items-center justify-between">
+                               <span className={`text-xs font-bold block ${isSelected ? 'text-blue-700 font-extrabold' : 'text-slate-800'}`}>
+                                 {r.name}
+                               </span>
+                               {isSelected && <Check className="w-3.5 h-3.5 text-blue-600 stroke-[3]" />}
+                             </div>
+                             <p className="text-[10px] text-slate-400 leading-normal font-semibold">
+                               {r.description}
+                             </p>
+                           </div>
+                         </button>
+                       );
                     })}
                   </div>
                 </div>
@@ -207,7 +208,7 @@ export const Dashboard: React.FC = () => {
             {/* Notification icon */}
             <button 
               onClick={() => alert('Simulation: Open Notification Center')}
-              className="p-2 bg-slate-50 hover:bg-slate-100 rounded-xl text-slate-400 hover:text-slate-600 border border-slate-200/50 transition cursor-pointer relative"
+              className="p-2 bg-blue-900/50 hover:bg-blue-800/60 border border-blue-800/40 lg:bg-slate-50 lg:hover:bg-slate-100 lg:border-slate-200/50 transition cursor-pointer relative rounded-xl text-blue-200 lg:text-slate-400 hover:text-white lg:hover:text-slate-600"
             >
               <Bell className="w-4.5 h-4.5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-blue-600 rounded-full"></span>
@@ -225,7 +226,7 @@ export const Dashboard: React.FC = () => {
                   {currentRole} Account
                 </span>
               </div>
-              <div className="w-8.5 h-8.5 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm select-none">
+              <div className="w-9 h-9 rounded-xl bg-[#1A56DB] text-white font-bold text-sm flex items-center justify-center shadow-sm select-none">
                 {currentRole.charAt(0).toUpperCase()}
               </div>
             </div>
@@ -233,7 +234,7 @@ export const Dashboard: React.FC = () => {
         </header>
 
         {/* Screen Content Body */}
-        <div className="flex-1 p-4 sm:p-6 pb-24 lg:pb-6">
+        <div className="flex-1 p-6 pb-24 lg:pb-6 bg-[#F1F5F9]">
           {renderScreen()}
         </div>
 

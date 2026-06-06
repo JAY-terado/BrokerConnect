@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/forms";
 
@@ -6,11 +7,90 @@
 @theme {
   --color-border: #cbd5e1; /* slate-300 */
   --color-muted: #f8fafc;  /* slate-50 */
-  --color-primary: #2563eb; /* blue-600 */
+  --color-primary: #2c6cb5; /* brand blue */
+  
+  /* Brand-specific blue scale matching favicon gradient */
+  --color-blue-50: #f0fbfd;
+  --color-blue-100: #d0f1f2;
+  --color-blue-200: #a7e3e7;
+  --color-blue-300: #60c0db;
+  --color-blue-400: #3c9cd2;
+  --color-blue-500: #348ac7;
+  --color-blue-600: #2c6cb5;
+  --color-blue-700: #1e5390;
+  --color-blue-800: #143d6c;
+  --color-blue-900: #0d284a;
 }
 
 :root {
   --border-radius: 12px;
   --border-width: 1px;
+
+  /* Brand */
+  --brand-navy: #0A1628;
+  --brand-navy-mid: #0F2040;
+  --brand-blue: #1A56DB;
+  --brand-blue-light: #3B82F6;
+  --brand-accent: #0EA5E9;
+
+  /* Surfaces */
+  --surface-0: #FFFFFF;
+  --surface-1: #F8FAFC;
+  --surface-2: #F1F5F9;
+  --surface-border: #E2E8F0;
+  --surface-border-subtle: #F1F5F9;
+
+  /* Text */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --text-inverse: #FFFFFF;
+
+  /* Semantic */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --info: #0EA5E9;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(15,23,42,0.06), 0 4px 16px rgba(15,23,42,0.04);
+  --shadow-elevated: 0 4px 24px rgba(15,23,42,0.10), 0 1px 4px rgba(15,23,42,0.06);
+  --shadow-brand: 0 8px 24px rgba(26,86,219,0.18);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
 }
 
+body {
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text-primary);
+  background: var(--surface-1);
+}
+
+/* Premium scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* Smooth focus rings */
+*:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* iPhone notch / home indicator safe area */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* border-white/8 utility — semi-transparent white border */
+.border-white\/8 {
+  border-color: rgba(255, 255, 255, 0.08);
+}

@@ -67,7 +67,7 @@ export const RegisterCustomer: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header Panel */}
-      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <button
           onClick={() => setActiveScreen(2)}
           className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-xl transition cursor-pointer"
@@ -75,15 +75,15 @@ export const RegisterCustomer: React.FC = () => {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h2 className="text-xl font-bold text-slate-800">Register Customer</h2>
-          <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+          <h2 className="text-lg font-bold text-[#0F172A]">Register Customer</h2>
+          <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
             Broker Portal &gt; Lead Protection Registration
           </p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm space-y-8">
+        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-8">
           {error && (
             <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm font-medium animate-pulse">
               {error}
@@ -92,13 +92,13 @@ export const RegisterCustomer: React.FC = () => {
 
           {/* Section 1: Basic Info */}
           <div className="space-y-5">
-            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+            <h3 className="text-sm font-bold text-[#0F172A] border-b border-slate-100 pb-2">
               Basic Information
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Customer Name *</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Customer Name *</label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <User className="w-4.5 h-4.5" />
@@ -108,13 +108,13 @@ export const RegisterCustomer: React.FC = () => {
                     placeholder="Enter full name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                    className="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800 font-semibold"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Mobile Number *</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Mobile Number *</label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <Phone className="w-4.5 h-4.5" />
@@ -124,13 +124,13 @@ export const RegisterCustomer: React.FC = () => {
                     placeholder="Enter mobile number"
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                    className="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800 font-semibold"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Email *</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Email *</label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <Mail className="w-4.5 h-4.5" />
@@ -140,13 +140,13 @@ export const RegisterCustomer: React.FC = () => {
                     placeholder="Enter email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                    className="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800 font-semibold"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">City</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">City</label>
                 <CustomSelect
                   value={city}
                   onChange={(val) => setCity(val)}
@@ -160,13 +160,13 @@ export const RegisterCustomer: React.FC = () => {
 
           {/* Section 2: Requirements */}
           <div className="space-y-5">
-            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+            <h3 className="text-sm font-bold text-[#0F172A] border-b border-slate-100 pb-2">
               Requirements
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Project</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Project</label>
                 <CustomSelect
                   value={project}
                   onChange={(val) => setProject(val)}
@@ -177,7 +177,7 @@ export const RegisterCustomer: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Unit Type</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Unit Type</label>
                 <CustomSelect
                   value={unitType}
                   onChange={(val) => setUnitType(val)}
@@ -188,7 +188,7 @@ export const RegisterCustomer: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Budget</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Budget</label>
                 <CustomSelect
                   value={budget}
                   onChange={(val) => setBudget(val)}
@@ -202,13 +202,13 @@ export const RegisterCustomer: React.FC = () => {
 
           {/* Section 3: Visit Schedule */}
           <div className="space-y-5">
-            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">
+            <h3 className="text-sm font-bold text-[#0F172A] border-b border-slate-100 pb-2">
               Scheduled Visit details
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Expected Visit Date *</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Expected Visit Date *</label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <Calendar className="w-4.5 h-4.5" />
@@ -217,13 +217,13 @@ export const RegisterCustomer: React.FC = () => {
                     type="date"
                     value={expectedDate}
                     onChange={(e) => setExpectedDate(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                    className="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800 font-semibold"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Expected Visit Time</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Expected Visit Time</label>
                 <CustomSelect
                   value={expectedTime}
                   onChange={(val) => setExpectedTime(val)}
@@ -240,13 +240,13 @@ export const RegisterCustomer: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveScreen(2)}
-              className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition cursor-pointer text-center"
+              className="flex-1 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all text-center"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm transition shadow-md shadow-blue-500/10 cursor-pointer text-center"
+              className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center"
             >
               Send OTP Verification
             </button>

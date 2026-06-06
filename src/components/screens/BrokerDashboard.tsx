@@ -93,16 +93,16 @@ export const BrokerDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner with Action */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-left">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] text-left">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">Broker Dashboard</h2>
-          <p className="text-sm text-slate-500 font-medium">
+          <h2 className="text-xl font-bold text-[#0F172A]">Broker Dashboard</h2>
+          <p className="text-sm text-slate-500 font-medium mt-0.5">
             Monitor lead protection status, commissions, and upcoming customer visits
           </p>
         </div>
         <button
           onClick={() => setActiveScreen(3)} // Go to Register Customer Screen
-          className="flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-sm transition-all shadow-md shadow-blue-500/10 cursor-pointer w-full sm:w-auto justify-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.30)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.40)] cursor-pointer w-full sm:w-auto justify-center"
         >
           <Plus className="w-5 h-5" />
           <span>Register Customer</span>
@@ -112,63 +112,63 @@ export const BrokerDashboard: React.FC = () => {
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-left">
         {/* KPI 1 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between group hover:border-blue-500/30 transition-all duration-300">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 group">
           <div className="space-y-1">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Total Leads</span>
-            <span className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">{totalLeads * 10}</span>
-            <span className="text-[10px] sm:text-xs text-emerald-600 font-bold flex items-center gap-0.5 mt-1">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Total Leads</span>
+            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block">{totalLeads * 10}</span>
+            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+12% this month</span>
             </span>
           </div>
-          <div className="p-3 bg-blue-50 rounded-2xl text-blue-600 group-hover:scale-110 transition duration-300">
+          <div className="p-3 bg-blue-50 ring-1 ring-blue-100 group-hover:ring-blue-200 rounded-2xl text-blue-600 group-hover:scale-110 transition duration-300">
             <Users className="w-6 h-6" />
           </div>
         </div>
 
         {/* KPI 2 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between group hover:border-emerald-500/30 transition-all duration-300">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 group">
           <div className="space-y-1">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Total Visits</span>
-            <span className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">{totalVisits * 10}</span>
-            <span className="text-[10px] sm:text-xs text-emerald-600 font-bold flex items-center gap-0.5 mt-1">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Total Visits</span>
+            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block">{totalVisits * 10}</span>
+            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+8% this month</span>
             </span>
           </div>
-          <div className="p-3 bg-emerald-50 rounded-2xl text-emerald-600 group-hover:scale-110 transition duration-300">
+          <div className="p-3 bg-emerald-50 ring-1 ring-emerald-100 group-hover:ring-emerald-200 rounded-2xl text-emerald-600 group-hover:scale-110 transition duration-300">
             <Eye className="w-6 h-6" />
           </div>
         </div>
 
         {/* KPI 3 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between group hover:border-indigo-500/30 transition-all duration-300">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 group">
           <div className="space-y-1">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Total Bookings</span>
-            <span className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">{totalBookings * 5}</span>
-            <span className="text-[10px] sm:text-xs text-emerald-600 font-bold flex items-center gap-0.5 mt-1">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Total Bookings</span>
+            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block">{totalBookings * 5}</span>
+            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+20% this month</span>
             </span>
           </div>
-          <div className="p-3 bg-indigo-50 rounded-2xl text-indigo-600 group-hover:scale-110 transition duration-300">
+          <div className="p-3 bg-indigo-50 ring-1 ring-indigo-100 group-hover:ring-indigo-200 rounded-2xl text-indigo-600 group-hover:scale-110 transition duration-300">
             <ArrowUpRight className="w-6 h-6" />
           </div>
         </div>
 
         {/* KPI 4 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between group hover:border-amber-500/30 transition-all duration-300">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 group">
           <div className="space-y-1">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Commission</span>
-            <span className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Commission</span>
+            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block">
               {formatCurrency(totalCommissions > 0 ? totalCommissions : 245000)}
             </span>
-            <span className="text-[10px] sm:text-xs text-emerald-600 font-bold flex items-center gap-0.5 mt-1">
+            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+15% payout cycle</span>
             </span>
           </div>
-          <div className="p-3 bg-amber-50 rounded-2xl text-amber-600 group-hover:scale-110 transition duration-300">
+          <div className="p-3 bg-amber-50 ring-1 ring-amber-100 group-hover:ring-amber-200 rounded-2xl text-amber-600 group-hover:scale-110 transition duration-300">
             <IndianRupee className="w-6 h-6" />
           </div>
         </div>
@@ -177,10 +177,10 @@ export const BrokerDashboard: React.FC = () => {
       {/* Main Content Layout: Funnel & Recent Leads */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 text-left">
         {/* Lead Funnel Chart (Desktop 5 cols, Mobile full) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-5 flex flex-col justify-between min-h-[360px] text-left">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 lg:col-span-5 flex flex-col justify-between min-h-[360px] text-left">
           <div className="space-y-1">
-            <h3 className="text-lg font-bold text-slate-800">Lead Funnel</h3>
-            <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Conversion Pipeline Analysis</p>
+            <h3 className="text-base font-bold text-[#0F172A]">Lead Funnel</h3>
+            <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Conversion Pipeline Analysis</p>
           </div>
 
           {/* Symmetrical Sloped SVG Funnel & Metrics List Grid */}
@@ -341,18 +341,18 @@ export const BrokerDashboard: React.FC = () => {
 
           <div className="pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-semibold">
             <span>Overall Conversion Rate</span>
-            <span className="text-emerald-600 font-extrabold text-sm">
+            <span className="bg-emerald-50 text-emerald-700 font-black text-lg px-3 py-1 rounded-xl">
               {rCount > 0 ? ((bCount / rCount) * 100).toFixed(1) : '0.0'}%
             </span>
           </div>
         </div>
 
         {/* Recent Customers list (Desktop 7 cols, Mobile full) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-7 flex flex-col justify-between">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 lg:col-span-7 flex flex-col justify-between">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
             <div>
-              <h3 className="text-lg font-bold text-slate-800">Recent Customers</h3>
-              <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Real-time Lead Protection Status</p>
+              <h3 className="text-base font-bold text-[#0F172A]">Recent Customers</h3>
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Real-time Lead Protection Status</p>
             </div>
             
             {/* Lead Search bar */}
@@ -373,32 +373,33 @@ export const BrokerDashboard: React.FC = () => {
           <div className="overflow-x-auto -mx-6">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-y border-slate-100">
-                  <th className="py-3 px-6">Customer</th>
-                  <th className="py-3 px-6">Mobile</th>
-                  <th className="py-3 px-6">Project</th>
-                  <th className="py-3 px-6">Status</th>
-                  <th className="py-3 px-6 text-center">Action</th>
+                <tr className="bg-slate-50/50 text-[11px] font-semibold text-slate-500 uppercase tracking-wide border-y border-slate-100">
+                  <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide py-3 px-4">Customer</th>
+                  <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide py-3 px-4">Mobile</th>
+                  <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide py-3 px-4">Project</th>
+                  <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide py-3 px-4">Status</th>
+                  <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide py-3 px-4 text-center">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-xs">
                 {filteredLeads.map((lead) => (
-                  <tr key={lead.id} className="hover:bg-slate-50 transition duration-150">
-                    <td className="py-3.5 px-6 font-bold text-slate-800">{lead.name}</td>
-                    <td className="py-3.5 px-6 text-slate-500 font-semibold">{lead.mobile}</td>
-                    <td className="py-3.5 px-6 text-slate-600 font-semibold">{lead.project}</td>
-                    <td className="py-3.5 px-6">
-                      <span className={`inline-flex px-2 py-1 rounded-full text-[10px] font-bold ${
-                        lead.status === 'Booked' ? 'bg-emerald-50 text-emerald-600 border border-emerald-200/50' :
-                        lead.status === 'Negotiation' ? 'bg-indigo-50 text-indigo-600 border border-indigo-200/50' :
-                        lead.status === 'OTP Verified' ? 'bg-blue-50 text-blue-600 border border-blue-200/50' :
-                        lead.status === 'OTP Pending' ? 'bg-amber-50 text-amber-600 border border-amber-200/50' :
+                  <tr key={lead.id} className="hover:bg-slate-50/70 transition-colors cursor-pointer">
+                    <td className="py-3.5 px-4 font-bold text-slate-800">{lead.name}</td>
+                    <td className="py-3.5 px-4 text-slate-500 font-semibold">{lead.mobile}</td>
+                    <td className="py-3.5 px-4 text-slate-600 font-semibold">{lead.project}</td>
+                    <td className="py-3.5 px-4">
+                      <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold ${
+                        lead.status === 'Booked' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
+                        lead.status === 'Negotiation' ? 'bg-purple-50 text-purple-700 border border-purple-100' :
+                        lead.status === 'OTP Verified' ? 'bg-blue-50 text-blue-700 border border-blue-100' :
+                        lead.status === 'OTP Pending' ? 'bg-amber-50 text-amber-700 border border-amber-100' :
+                        lead.status === 'Checked In' ? 'bg-sky-50 text-sky-700 border border-sky-100' :
                         'bg-slate-50 text-slate-600 border border-slate-200/50'
                       }`}>
                         {lead.status}
                       </span>
                     </td>
-                    <td className="py-3.5 px-6 text-center">
+                    <td className="py-3.5 px-4 text-center">
                       <button
                         onClick={() => {
                           if (lead.status === 'OTP Pending') {
@@ -424,7 +425,7 @@ export const BrokerDashboard: React.FC = () => {
 
           <div className="pt-4 border-t border-slate-50 flex items-center justify-between text-xs text-slate-400 font-semibold">
             <span>Showing {filteredLeads.length} of {leads.length} records</span>
-            <button className="text-blue-600 hover:text-blue-700 transition" onClick={() => { setActiveScreen(9); }}>
+            <button className="text-[#1A56DB] hover:underline font-semibold text-xs flex items-center gap-1 cursor-pointer" onClick={() => { setActiveScreen(9); }}>
               View All Pipeline Leads
             </button>
           </div>

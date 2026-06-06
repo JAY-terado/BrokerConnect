@@ -40,16 +40,16 @@ export const ReceptionDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800 font-sans">Reception Dashboard</h2>
-          <p className="text-sm text-slate-500 font-medium">
+          <h2 className="text-lg font-bold text-[#0F172A] font-sans">Reception Dashboard</h2>
+          <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
             Manage visitor validation, document uploads, and sales executive allocation on arrival
           </p>
         </div>
         <button
           onClick={handleScanQR}
-          className="flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-sm transition-all shadow-md shadow-blue-500/10 cursor-pointer w-full sm:w-auto justify-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer w-full sm:w-auto justify-center"
         >
           <QrCode className="w-5 h-5" />
           <span>Scan QR Code</span>
@@ -58,30 +58,30 @@ export const ReceptionDashboard: React.FC = () => {
 
       {/* Stats Board */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Today's Visits</span>
-          <span className="text-3xl font-extrabold text-slate-800 block mt-1">35</span>
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200">
+          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Today's Visits</span>
+          <span className="text-3xl font-extrabold text-[#0F172A] block mt-1">35</span>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Checked In</span>
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200">
+          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Checked In</span>
           <span className="text-3xl font-extrabold text-emerald-600 block mt-1">{checkedInVisitors.length + 20}</span>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Expected</span>
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200">
+          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Expected</span>
           <span className="text-3xl font-extrabold text-blue-600 block mt-1">{expectedVisitors.length + 5}</span>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Cancelled</span>
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200">
+          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Cancelled</span>
           <span className="text-3xl font-extrabold text-rose-600 block mt-1">0</span>
         </div>
       </div>
 
       {/* Lists Layout */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-5">
+      <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-5">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
-            <h3 className="text-lg font-bold text-slate-800">Expected Visitors Today</h3>
-            <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Validate visitor passes on entry</p>
+            <h3 className="text-base font-bold text-[#0F172A]">Expected Visitors Today</h3>
+            <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Validate visitor passes on entry</p>
           </div>
           
           <div className="relative w-full sm:w-64">
@@ -93,7 +93,7 @@ export const ReceptionDashboard: React.FC = () => {
               placeholder="Search by Pass ID, Name or Mobile..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-700"
+              className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-700"
             />
           </div>
         </div>
@@ -102,45 +102,48 @@ export const ReceptionDashboard: React.FC = () => {
         <div className="overflow-x-auto -mx-6">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-y border-slate-100">
-                <th className="py-3 px-6">Visit ID</th>
-                <th className="py-3 px-6">Customer Name</th>
-                <th className="py-3 px-6">Broker Name</th>
-                <th className="py-3 px-6">Project</th>
-                <th className="py-3 px-6">Scheduled Time</th>
-                <th className="py-3 px-6 text-center">Status</th>
-                <th className="py-3 px-6 text-center">Action</th>
+              <tr className="bg-slate-50 text-[11px] font-semibold text-slate-500 uppercase tracking-wide border-b border-slate-100">
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4">Visit ID</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4">Customer Name</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4">Broker Name</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4">Project</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4">Scheduled Time</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4 text-center">Status</th>
+                <th className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide bg-slate-50/70 py-3 px-4 text-center">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-xs">
               {expectedVisitors.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-slate-400 font-semibold">
-                    No matching expected visitors found. (Register a customer in Broker view to see them here!)
+                  <td colSpan={7} className="py-8">
+                    <div className="flex flex-col items-center justify-center bg-slate-50 border border-dashed border-slate-200 rounded-2xl p-12 text-center">
+                      <Search className="w-8 h-8 text-slate-400 mb-2" />
+                      <span className="text-slate-400 text-sm font-medium">No matching expected visitors found. (Register a customer in Broker view to see them here!)</span>
+                    </div>
                   </td>
                 </tr>
               ) : (
                 expectedVisitors.map((visitor) => (
-                  <tr key={visitor.id} className="hover:bg-slate-50 transition duration-150">
-                    <td className="py-4 px-6 font-extrabold text-blue-600">{visitor.visitCode}</td>
-                    <td className="py-4 px-6 font-bold text-slate-800">{visitor.name}</td>
-                    <td className="py-4 px-6 text-slate-500 font-medium">{visitor.brokerName}</td>
-                    <td className="py-4 px-6 text-slate-600 font-bold">{visitor.project}</td>
-                    <td className="py-4 px-6 text-slate-500 font-medium">
+                  <tr key={visitor.id} className="hover:bg-slate-50/60 transition-colors cursor-pointer even:bg-slate-50/30">
+                    <td className="py-4 px-4 font-extrabold text-blue-600">{visitor.visitCode}</td>
+                    <td className="py-4 px-4 text-sm font-semibold text-slate-800">{visitor.name}</td>
+                    <td className="py-4 px-4 text-xs text-slate-500 font-medium">{visitor.brokerName}</td>
+                    <td className="py-4 px-4 text-slate-600 font-bold">{visitor.project}</td>
+                    <td className="py-4 px-4 text-xs text-slate-500 font-medium">
                       <div className="flex items-center gap-1">
                         <Clock className="w-3.5 h-3.5 text-slate-400" />
                         <span>{visitor.expectedTime}</span>
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-center">
-                      <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 border border-emerald-200/50 rounded-full font-bold text-[10px]">
+                    <td className="py-4 px-4 text-center">
+                      <span className="px-2.5 py-0.5 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-[10px] font-bold">
                         Expected
                       </span>
                     </td>
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-4 px-4 text-center">
                       <button
                         onClick={() => handleStartCheckIn(visitor.id)}
-                        className="flex items-center gap-1.5 px-3.5 py-2 bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-600 rounded-xl text-xs font-bold transition cursor-pointer mx-auto shadow-sm"
+                        className="flex items-center gap-1.5 px-4 py-2 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-xs transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer mx-auto shadow-sm"
                       >
                         <LogIn className="w-3.5 h-3.5" />
                         <span>Check In</span>

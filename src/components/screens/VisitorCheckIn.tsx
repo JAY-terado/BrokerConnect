@@ -29,6 +29,7 @@ export const VisitorCheckIn: React.FC = () => {
   const handleAddFamily = () => {
     if (familyInput.trim()) {
       setFamilyMembers(prev => [...prev, familyInput.trim()]);
+      familyInput.trim();
       setFamilyInput('');
     }
   };
@@ -58,24 +59,24 @@ export const VisitorCheckIn: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(6)}
-            className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-xl transition cursor-pointer"
+            className="p-2 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl transition-all cursor-pointer"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h2 className="text-xl font-bold text-slate-800">Visitor Check-In</h2>
-            <p className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+            <h2 className="text-lg font-bold text-[#0F172A]">Visitor Check-In</h2>
+            <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
               Reception Desk &gt; Customer Details Validation
             </p>
           </div>
         </div>
-        <span className="text-xs font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100 uppercase tracking-widest">
+        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-100 uppercase tracking-wider">
           {visitCode}
         </span>
       </div>
@@ -83,16 +84,16 @@ export const VisitorCheckIn: React.FC = () => {
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Main Details Panel (Desktop 8 columns) */}
-        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm space-y-8">
+        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-8">
           
           {/* Customer Greeting */}
-          <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200/60">
-            <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-lg font-black shadow-md">
+          <div className="flex items-center gap-4 bg-slate-50/70 p-4 rounded-xl border border-slate-100">
+            <div className="w-12 h-12 bg-[#1A56DB] text-white rounded-full flex items-center justify-center text-lg font-black shadow-md">
               {customerName.charAt(0)}
             </div>
             <div>
-              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Currently Checking In</span>
-              <h3 className="text-base font-extrabold text-slate-800">{customerName}</h3>
+              <h3 className="text-lg font-bold text-[#0F172A]">{customerName}</h3>
+              <span className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5 block">Currently Checking In</span>
             </div>
           </div>
 
@@ -104,7 +105,7 @@ export const VisitorCheckIn: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="space-y-2 md:col-span-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Residential Address</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Residential Address</label>
                 <div className="relative">
                   <span className="absolute top-3 left-3.5 text-slate-400">
                     <MapPin className="w-4.5 h-4.5" />
@@ -113,13 +114,13 @@ export const VisitorCheckIn: React.FC = () => {
                     placeholder="Enter resident address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 min-h-[70px] resize-none"
+                    className="block w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 min-h-[70px] resize-none text-slate-800"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Occupation</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Occupation</label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <Briefcase className="w-4.5 h-4.5" />
@@ -129,13 +130,13 @@ export const VisitorCheckIn: React.FC = () => {
                     placeholder="Enter occupation"
                     value={occupation}
                     onChange={(e) => setOccupation(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                    className="block w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Company Name</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Company Name</label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <Building className="w-4.5 h-4.5" />
@@ -145,7 +146,7 @@ export const VisitorCheckIn: React.FC = () => {
                     placeholder="Enter company name"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                    className="block w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                   />
                 </div>
               </div>
@@ -159,20 +160,20 @@ export const VisitorCheckIn: React.FC = () => {
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Budget Range</label>
-                <div className="py-2.5 px-4 bg-slate-50 border border-slate-200 rounded-xl text-xs font-extrabold text-slate-700">
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Budget Range</label>
+                <div className="py-2.5 px-4 bg-slate-50/70 border border-slate-100 rounded-xl text-xs font-extrabold text-slate-700">
                   {pendingVisitor?.budget || '₹80L - ₹1Cr'}
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-600 uppercase">Purpose of Visit</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Purpose of Visit</label>
                 <div className="flex gap-3">
-                  <label className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 border rounded-xl text-xs font-bold transition cursor-pointer ${purpose === 'End User' ? 'bg-blue-50 border-blue-600 text-blue-600' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                  <label className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 border rounded-xl text-sm transition-all cursor-pointer ${purpose === 'End User' ? 'bg-blue-50 text-blue-700 border-blue-100 font-semibold' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 font-medium'}`}>
                     <input type="radio" className="hidden" checked={purpose === 'End User'} onChange={() => setPurpose('End User')} />
                     <span>End User</span>
                   </label>
-                  <label className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 border rounded-xl text-xs font-bold transition cursor-pointer ${purpose === 'Investor' ? 'bg-blue-50 border-blue-600 text-blue-600' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                  <label className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 border rounded-xl text-sm transition-all cursor-pointer ${purpose === 'Investor' ? 'bg-blue-50 text-blue-700 border-blue-100 font-semibold' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 font-medium'}`}>
                     <input type="radio" className="hidden" checked={purpose === 'Investor'} onChange={() => setPurpose('Investor')} />
                     <span>Investor</span>
                   </label>
@@ -193,12 +194,12 @@ export const VisitorCheckIn: React.FC = () => {
                 placeholder="Enter family member name & relation"
                 value={familyInput}
                 onChange={(e) => setFamilyInput(e.target.value)}
-                className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800"
+                className="flex-1 bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
               />
               <button
                 type="button"
                 onClick={handleAddFamily}
-                className="flex items-center gap-1.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition cursor-pointer"
+                className="flex items-center gap-1.5 px-4 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add</span>
@@ -224,19 +225,19 @@ export const VisitorCheckIn: React.FC = () => {
         <div className="lg:col-span-4 space-y-6">
           
           {/* Document Upload Status */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-5">
+          <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-5">
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Documents & KYC</h4>
             
             {/* PAN card */}
             <div className="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-200/60 rounded-xl">
               <div className="text-left space-y-0.5">
                 <span className="text-xs font-bold text-slate-800">PAN Card</span>
-                <span className="text-[10px] text-slate-400 font-semibold block">Required for KYC</span>
+                <span className="text-xs text-slate-500 font-medium block">Required for KYC</span>
               </div>
               <button
                 type="button"
                 onClick={() => setPanUploaded(p => !p)}
-                className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${panUploaded ? 'bg-emerald-500 text-white' : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${panUploaded ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm' : 'border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'}`}
               >
                 {panUploaded ? <Check className="w-3.5 h-3.5" /> : <Upload className="w-3.5 h-3.5" />}
                 <span>{panUploaded ? 'Uploaded' : 'Upload'}</span>
@@ -247,12 +248,12 @@ export const VisitorCheckIn: React.FC = () => {
             <div className="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-200/60 rounded-xl">
               <div className="text-left space-y-0.5">
                 <span className="text-xs font-bold text-slate-800">Aadhaar Card</span>
-                <span className="text-[10px] text-slate-400 font-semibold block">Required for registration</span>
+                <span className="text-xs text-slate-500 font-medium block">Required for registration</span>
               </div>
               <button
                 type="button"
                 onClick={() => setAadhaarUploaded(a => !a)}
-                className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${aadhaarUploaded ? 'bg-emerald-500 text-white' : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${aadhaarUploaded ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm' : 'border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'}`}
               >
                 {aadhaarUploaded ? <Check className="w-3.5 h-3.5" /> : <Upload className="w-3.5 h-3.5" />}
                 <span>{aadhaarUploaded ? 'Uploaded' : 'Upload'}</span>
@@ -260,14 +261,14 @@ export const VisitorCheckIn: React.FC = () => {
             </div>
 
             {/* Selfie Capture */}
-            <div className="space-y-3 pt-2">
+            <div className="space-y-3 pt-2 font-sans">
               <span className="text-xs font-bold text-slate-400 block uppercase tracking-wider">Selfie Capture</span>
-              <div className="w-full h-36 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center p-4 text-center relative overflow-hidden group">
+              <div className="w-full h-36 bg-slate-50 border border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center p-4 text-center relative overflow-hidden group">
                 {selfieCaptured ? (
                   <>
                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" alt="Selfie" className="absolute inset-0 w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
-                      <button type="button" onClick={() => setSelfieCaptured(false)} className="px-3 py-1.5 bg-rose-600 text-white rounded-lg text-xs font-bold transition cursor-pointer">
+                      <button type="button" onClick={() => setSelfieCaptured(false)} className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold text-xs transition-all shadow-[0_4px_14px_rgba(220,38,38,0.25)] cursor-pointer">
                         Retake
                       </button>
                     </div>
@@ -278,7 +279,7 @@ export const VisitorCheckIn: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setSelfieCaptured(true)}
-                      className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition cursor-pointer shadow-sm"
+                      className="px-3.5 py-1.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-xs transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
                     >
                       Capture Photo
                     </button>
@@ -291,7 +292,7 @@ export const VisitorCheckIn: React.FC = () => {
           {/* Submits */}
           <button
             type="submit"
-            className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-2xl text-sm transition-all shadow-md shadow-blue-500/10 cursor-pointer text-center block"
+            className="w-full py-4 bg-[#1A56DB] hover:bg-[#1648C0] text-white font-semibold rounded-xl text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center block"
           >
             Check-In Visitor & Allocate
           </button>

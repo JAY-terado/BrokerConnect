@@ -56,25 +56,31 @@ export const Sidebar: React.FC = () => {
   const navItems = getActiveItems();
 
   return (
-    <aside className="w-64 bg-slate-900 text-slate-400 p-6 flex flex-col justify-between shrink-0 h-screen border-r border-slate-800 relative z-20">
+    <aside className="w-60 bg-[#0A1628] text-blue-200 p-6 flex flex-col justify-between gap-2 shrink-0 h-screen border-r border-white/5 relative z-20 shadow-lg">
       <div className="space-y-8">
         {/* Branding Logo */}
-        <div className="flex items-center gap-2.5 pb-4 border-b border-slate-800">
-          <div className="p-2 bg-blue-600 rounded-xl text-white">
-            <Building2 className="w-5 h-5" />
-          </div>
-          <span className="text-white text-base font-bold tracking-tight">BrokerConnect</span>
+        <div className="mb-2 flex items-center justify-start pl-1">
+          <img 
+            src="/logo.png" 
+            alt="Logo" 
+            className="h-8.5 w-auto object-contain" 
+          />
         </div>
-
+ 
         {/* Role identifier badge */}
-        <div className="px-3.5 py-2 bg-slate-800/60 border border-slate-700/50 rounded-xl">
-          <span className="text-[9px] text-slate-500 font-bold block uppercase tracking-wider">Signed in as</span>
-          <span className="text-xs text-white font-extrabold capitalize block mt-0.5">{currentRole} Portal</span>
+        <div className="mx-1 px-3 py-2.5 bg-white/5 border border-white/8 rounded-xl flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-blue-600/30 border border-blue-500/20 flex items-center justify-center text-blue-300 text-[10px] font-black uppercase">
+            {currentRole[0]}
+          </div>
+          <div>
+            <span className="text-[9px] text-blue-400/80 font-bold block uppercase tracking-wider">Signed in as</span>
+            <span className="text-xs text-white font-bold capitalize block">{currentRole} Portal</span>
+          </div>
         </div>
-
+ 
         {/* Navigation links */}
-        <nav className="space-y-1.5">
-          <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-3 pl-2">Navigation</span>
+        <nav className="space-y-0.5">
+          <span className="text-[9px] text-white/25 font-bold uppercase tracking-[0.12em] block mb-2 px-3">Navigation</span>
           
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -83,31 +89,39 @@ export const Sidebar: React.FC = () => {
               <button
                 key={item.screenId}
                 onClick={() => setActiveScreen(item.screenId)}
-                className={`w-full flex items-center gap-3.5 py-3 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                className={`w-full flex items-center py-2.5 px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                   isSelected 
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/10' 
-                    : 'hover:bg-slate-800 hover:text-slate-200'
+                    ? 'bg-white/10 text-white border-white/10 shadow-none' 
+                    : 'text-white/50 hover:text-white/90 hover:bg-white/6 border-transparent rounded-xl transition-all duration-150'
                 }`}
               >
-                <Icon className={`w-4.5 h-4.5 ${isSelected ? 'text-white' : 'text-slate-400'}`} />
-                <span>{item.name}</span>
+                <span className="relative flex items-center gap-3 w-full pl-3">
+                  {isSelected && (
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-blue-400 rounded-r-full"></span>
+                  )}
+                  <Icon className={`w-4.5 h-4.5 ${isSelected ? 'text-blue-400' : 'text-white/35'}`} />
+                  <span>{item.name}</span>
+                </span>
               </button>
             );
           })}
         </nav>
       </div>
-
+ 
       {/* Log Out */}
-      <button
-        onClick={() => {
-          setActiveScreen(2); // Reset to default screen for next login
-          navigate('/login');
-        }}
-        className="w-full flex items-center gap-3 py-3 px-4 hover:bg-slate-800 hover:text-slate-200 text-slate-400 rounded-xl text-xs font-bold transition cursor-pointer"
-      >
-        <LogOut className="w-4.5 h-4.5 text-slate-400" />
-        <span>Logout Session</span>
-      </button>
+      <div>
+        <div className="border-t border-white/6 mx-1 mb-2"></div>
+        <button
+          onClick={() => {
+            setActiveScreen(2); // Reset to default screen for next login
+            navigate('/login');
+          }}
+          className="w-full flex items-center gap-3 py-2.5 px-3 text-white/30 hover:text-red-400 hover:bg-red-500/8 rounded-xl text-xs font-semibold transition-all duration-150 cursor-pointer border border-transparent hover:border-red-500/10"
+        >
+          <LogOut className="w-4.5 h-4.5" />
+          <span>Logout Session</span>
+        </button>
+      </div>
     </aside>
   );
 };

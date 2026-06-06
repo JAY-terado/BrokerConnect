@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useBrokerConnect } from '../context/BrokerConnectContext';
-import { Mail, Building2, ShieldCheck, ArrowRight, UserPlus, CheckCircle, Smartphone, KeyRound, ChevronLeft } from 'lucide-react';
+import { Mail, Building2, ShieldCheck, ArrowRight, UserPlus, CheckCircle, Smartphone, KeyRound, ChevronLeft, Users, BarChart3 } from 'lucide-react';
 import { PinCode } from 'rizzui/pin-code';
 
 export const Login: React.FC = () => {
@@ -110,83 +110,101 @@ export const Login: React.FC = () => {
     setPinKey(prev => prev + 1);
     setLoginError('');
   };
-
   return (
-    <div className="flex min-h-screen bg-slate-50 text-slate-800 text-left font-sans">
+    <div className="flex min-h-screen flex-col lg:flex-row bg-[#F8FAFC] text-slate-800 text-left font-sans">
+      {/* Mobile Branding Header */}
+      <div className="flex lg:hidden w-full bg-[#0d284a] py-4 px-6 items-center justify-center border-b border-blue-950/80 shadow-md">
+        <img 
+          src="/logo.png" 
+          alt="Logo" 
+          className="h-8.5 w-auto object-contain" 
+        />
+      </div>
+
       {/* Left side: Premium Branding (Desktop Only) */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-700 via-indigo-800 to-blue-900 text-white p-16 flex-col justify-between relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-500 rounded-full blur-[100px] opacity-40"></div>
-
-        <div className="relative z-10 flex items-center gap-2">
-          <div className="p-2.5 bg-white/10 rounded-xl backdrop-blur-md border border-white/20">
-            <Building2 className="w-6 h-6 text-white" />
-          </div>
-          <span className="text-xl font-bold tracking-tight">BrokerConnect</span>
+      <div className="hidden lg:flex lg:w-1/2 bg-[#0A1628] text-white p-16 flex-col justify-between relative overflow-hidden border-r border-blue-950/40">
+        {/* Background noise texture + grid overlay patterns */}
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzlIj48cGF0aCBkPSJNIDYwIDAgTCAwIDAgMCA2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] z-0"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 z-0"></div>
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-sky-500/8 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4 z-0"></div>
+ 
+        <div className="relative z-20 self-start hover:opacity-90 transition-opacity">
+          <img 
+            src="/logo.png" 
+            alt="Logo" 
+            className="h-8.5 w-auto object-contain" 
+          />
         </div>
-
-        <div className="relative z-10 space-y-6">
-          <span className="px-3 py-1 bg-white/10 text-blue-100 text-xs font-semibold rounded-full border border-white/10 uppercase tracking-widest">
+ 
+        {/* Branding text directly on background */}
+        <div className="relative z-10 space-y-6 flex flex-col">
+          <span className="self-start px-3.5 py-1.5 bg-white/8 text-sky-300 border border-white/10 backdrop-blur-sm text-[10px] font-extrabold rounded-full uppercase tracking-widest">
             Channel Partner Protection
           </span>
-          <h1 className="text-4xl xl:text-5xl font-extrabold tracking-tight leading-[1.15] text-white">
-            Lead Protection & Sales Management
-          </h1>
-          <p className="text-sm text-blue-100/90 max-w-md font-medium leading-relaxed">
+          <div className="space-y-4">
+            <h1 className="text-3xl xl:text-4xl font-black tracking-tight leading-[1.2] bg-gradient-to-br from-white via-white to-blue-200 bg-clip-text text-transparent">
+              Lead Protection &amp; Sales Management
+            </h1>
+            <div className="w-16 h-[2px] bg-gradient-to-r from-sky-400 to-blue-600"></div>
+          </div>
+          <p className="text-xs text-blue-200/90 font-semibold leading-relaxed">
             Eliminating channel partner disputes through instant OTP-based customer ownership locks and transparent audit trails.
           </p>
         </div>
-
-        <div className="relative z-10 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs font-semibold">
-          <div className="flex items-center gap-3 text-blue-100">
-            <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
-            <span>Secure OTP-based lead locking inside 60 seconds</span>
+ 
+        {/* Features list below the card */}
+        <div className="relative z-10 flex flex-col gap-4">
+          <div className="flex items-center gap-4 text-xs font-semibold text-blue-250">
+            <div className="w-12 h-12 rounded-2xl bg-white/6 border border-white/10 flex items-center justify-center text-sky-400 shrink-0 shadow-xs">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div className="space-y-0.5">
+              <span className="text-sm font-bold text-white block">Secure OTP-based lead locking</span>
+              <span className="text-[10px] text-blue-300/70 font-semibold block">Locks active for 60 seconds</span>
+            </div>
           </div>
-          <div className="flex items-center gap-3 text-blue-100">
-            <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
-            <span>Automated round-robin visitor allocation</span>
+          <div className="flex items-center gap-4 text-xs font-semibold text-blue-250">
+            <div className="w-12 h-12 rounded-2xl bg-white/6 border border-white/10 flex items-center justify-center text-sky-400 shrink-0 shadow-xs">
+              <Users className="w-5 h-5" />
+            </div>
+            <div className="space-y-0.5">
+              <span className="text-sm font-bold text-white block">Automated round-robin allocation</span>
+              <span className="text-[10px] text-blue-300/70 font-semibold block">Fair &amp; intelligent lead distribution</span>
+            </div>
           </div>
-          <p className="text-[10px] text-blue-300/80 mt-4 font-bold">
+          <p className="text-[10px] text-blue-400/80 mt-4 font-bold tracking-wide">
             © 2026 BrokerConnect Technologies. All rights reserved.
           </p>
         </div>
       </div>
-
+ 
       {/* Right side: Forms Canvas */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 md:p-16">
-        <div className="w-full max-w-[420px] space-y-8 animate-in fade-in zoom-in-95 duration-200">
-
-          {/* Mobile Branding Logo */}
-          <div className="flex lg:hidden items-center gap-2 mb-4">
-            <div className="p-2 bg-blue-600 rounded-lg text-white">
-              <Building2 className="w-5 h-5" />
-            </div>
-            <span className="text-lg font-bold text-slate-900">BrokerConnect</span>
-          </div>
-
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 md:p-16 bg-[#F8FAFC]">
+        <div className="w-full max-w-[460px] bg-white border border-slate-100 shadow-[0_4px_32px_rgba(15,23,42,0.08)] rounded-3xl p-8 sm:p-10 space-y-8 animate-in fade-in zoom-in-95 duration-200">
+ 
           <div className="space-y-6">
             <div className="space-y-2">
-              <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
+              <h2 className="text-3xl font-black tracking-tight text-[#0F172A] font-['Plus_Jakarta_Sans']">
                 Welcome Back
               </h2>
-              <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
                 {otpStep ? 'Verify your identity' : 'Login to access your partner dashboard & leads'}
               </p>
             </div>
-
+ 
             {loginSuccess && (
               <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-xl text-xs font-bold flex items-center gap-2 animate-bounce">
                 <CheckCircle className="w-4 h-4 shrink-0" />
                 <span>{loginSuccess}</span>
               </div>
             )}
-
+ 
             {loginError && (
               <div className="p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-xl text-xs font-semibold">
                 {loginError}
               </div>
             )}
-
+ 
             {/* STEP 1: ENTER EMAIL OR PHONE */}
             {!otpStep ? (
               <form onSubmit={handleSendOtp} className="space-y-5">
@@ -203,28 +221,30 @@ export const Login: React.FC = () => {
                       placeholder="Enter registered email or phone number"
                       value={emailOrPhone}
                       onChange={(e) => setEmailOrPhone(e.target.value)}
-                      className="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-800 font-semibold shadow-sm"
+                      className="block w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 text-slate-800 font-semibold shadow-xs transition-shadow duration-200"
                       required
                     />
                   </div>
                 </div>
-
+ 
                 <div className="flex items-center justify-between text-xs font-semibold text-slate-600">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={rememberMe}
-                      onChange={(e) => setRememberMe(e.target.checked)}
-                      className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
-                    />
+                  <label className="flex items-center gap-2 cursor-pointer select-none">
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={rememberMe}
+                        onChange={(e) => setRememberMe(e.target.checked)}
+                        className="w-4 h-4 rounded border-slate-300 text-blue-600 cursor-pointer"
+                      />
+                    </div>
                     <span>Remember Me</span>
                   </label>
                 </div>
-
+ 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex justify-center items-center gap-2 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-450 text-white rounded-xl font-bold text-xs transition-all shadow-md shadow-blue-500/10 cursor-pointer"
+                  className="w-full flex justify-center items-center gap-2 py-3.5 bg-[#1A56DB] hover:bg-[#1648C0] disabled:bg-blue-300 text-white rounded-xl font-bold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.35)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.45)] cursor-pointer"
                 >
                   {loading ? (
                     <div className="w-4.5 h-4.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -253,7 +273,7 @@ export const Login: React.FC = () => {
                       <span>Change Email/Phone</span>
                     </button>
                   </div>
-
+ 
                   {/* RizzUI PinCode Component */}
                   <div className="py-2.5">
                     <PinCode
@@ -263,19 +283,19 @@ export const Login: React.FC = () => {
                       size="lg"
                       placeholder="o"
                       center={true}
-                      inputClassName="!w-14 !h-14 text-center text-xl font-extrabold !bg-slate-50 !border !border-slate-200 !rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:bg-white text-slate-800 transition-all duration-150 !shadow-sm !mr-2 placeholder:!text-slate-300 placeholder:!font-normal"
+                      inputClassName="!w-14 !h-14 text-center text-xl font-extrabold !bg-white !border !border-slate-200 !rounded-xl focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:bg-white text-slate-800 transition-all duration-200 !shadow-sm !mr-2 placeholder:!text-slate-300 placeholder:!font-normal"
                     />
                   </div>
                 </div>
-
+ 
                 <div className="text-xs text-slate-400 font-semibold">
                   OTP simulated sent to <strong className="text-slate-700">{emailOrPhone}</strong>. Key in <strong className="text-blue-600">1234</strong> to login.
                 </div>
-
+ 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex justify-center items-center gap-2 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-450 text-white rounded-xl font-bold text-xs transition-all shadow-md shadow-blue-500/10 cursor-pointer"
+                  className="w-full flex justify-center items-center gap-2 py-3.5 bg-[#1A56DB] hover:bg-[#1648C0] disabled:bg-blue-300 text-white rounded-xl font-bold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.35)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.45)] cursor-pointer"
                 >
                   {loading ? (
                     <div className="w-4.5 h-4.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -288,9 +308,9 @@ export const Login: React.FC = () => {
                 </button>
               </form>
             )}
-
+ 
             {/* Redirection to register */}
-            <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-semibold text-slate-500">
+            <div className="pt-4 border-t border-slate-100/80 flex justify-between items-center text-xs font-semibold text-slate-500">
               <span>New channel partner?</span>
               <Link
                 to="/register"
@@ -300,41 +320,65 @@ export const Login: React.FC = () => {
                 <span>Register as Broker</span>
               </Link>
             </div>
-
-            {/* Quick Role Selection Panel for Simulator */}
-            <div className="mt-8 pt-6 border-t border-slate-100 space-y-3">
-              <span className="text-[10px] font-bold text-slate-400 block text-center uppercase tracking-wider">
-                Quick Role Login Shortcuts
+ 
+            {/* Quick Access Grid Panel */}
+            <div className="mt-8 pt-6 border-t border-slate-100/80 space-y-3">
+              <span className="text-[10px] font-bold text-slate-400 block text-center uppercase tracking-widest">
+                Quick Access
               </span>
-              <div className="grid grid-cols-2 gap-2 text-xs font-medium">
+              <div className="grid grid-cols-2 gap-3 text-xs font-medium">
                 <button
                   onClick={() => triggerQuickShortcut('98765 43210')}
-                  className="py-2.5 px-3 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 border border-slate-200 rounded-xl text-slate-700 text-center transition cursor-pointer font-bold"
+                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm active:scale-[0.98]"
                 >
-                  Broker (Amit Patel)
+                  <div className="p-2 bg-blue-50 text-blue-600 rounded-xl shrink-0">
+                    <Users className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-extrabold text-slate-800 block">Broker</span>
+                    <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">(Amit Patel)</span>
+                  </div>
                 </button>
                 <button
                   onClick={() => triggerQuickShortcut('reception')}
-                  className="py-2.5 px-3 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 border border-slate-200 rounded-xl text-slate-700 text-center transition cursor-pointer font-bold"
+                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm active:scale-[0.98]"
                 >
-                  Receptionist Portal
+                  <div className="p-2 bg-blue-50 text-blue-600 rounded-xl shrink-0">
+                    <Building2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-extrabold text-slate-800 block">Receptionist</span>
+                    <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">Portal</span>
+                  </div>
                 </button>
                 <button
                   onClick={() => triggerQuickShortcut('sales')}
-                  className="py-2.5 px-3 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 border border-slate-200 rounded-xl text-slate-700 text-center transition cursor-pointer font-bold"
+                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm active:scale-[0.98]"
                 >
-                  Sales CRM View
+                  <div className="p-2 bg-blue-50 text-blue-600 rounded-xl shrink-0">
+                    <BarChart3 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-extrabold text-slate-800 block">Sales CRM</span>
+                    <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">View</span>
+                  </div>
                 </button>
                 <button
                   onClick={() => triggerQuickShortcut('admin')}
-                  className="py-2.5 px-3 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 border border-slate-200 rounded-xl text-slate-700 text-center transition cursor-pointer font-bold"
+                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm active:scale-[0.98]"
                 >
-                  Admin Panel (Disputes)
+                  <div className="p-2 bg-blue-50 text-blue-600 rounded-xl shrink-0">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-extrabold text-slate-800 block">Admin Panel</span>
+                    <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">(Disputes)</span>
+                  </div>
                 </button>
               </div>
             </div>
           </div>
-
+ 
         </div>
       </div>
     </div>
