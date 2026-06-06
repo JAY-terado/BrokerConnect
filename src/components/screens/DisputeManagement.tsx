@@ -24,7 +24,7 @@ export const DisputeManagement: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(14)} // Go to reports/analytics dashboard
@@ -44,7 +44,7 @@ export const DisputeManagement: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         {/* Left List Pane: All disputes (Desktop 4 columns) */}
-        <div className="lg:col-span-4 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4 flex flex-col justify-between anim-fade-up stagger-2">
           <div className="space-y-3">
             <h3 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider">Active Disputes</h3>
             <div className="space-y-2">
@@ -60,7 +60,7 @@ export const DisputeManagement: React.FC = () => {
                 >
                   <div className="flex justify-between items-start mb-1">
                     <span className="text-[10px] font-extrabold text-blue-600 uppercase tracking-wider">{disp.id}</span>
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold smooth ${
                       disp.status.includes('Resolved') ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
                       disp.status === 'Rejected' ? 'bg-red-50 text-red-700 border border-red-100' :
                       'bg-amber-50 text-amber-700 border border-amber-100'
@@ -84,7 +84,7 @@ export const DisputeManagement: React.FC = () => {
 
         {/* Right Detail Pane: Active Dispute verification sheet */}
         {activeDispute ? (
-          <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6">
+          <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6 anim-fade-up stagger-3">
             <div className="flex justify-between items-start border-b border-slate-100 pb-4">
               <div className="space-y-0.5">
                 <span className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5 block">Dispute Audit Worksheet</span>
@@ -142,19 +142,19 @@ export const DisputeManagement: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-100">
                 <button
                   onClick={() => handleResolve('brokerA')}
-                  className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center"
+                  className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center press pulse-glow"
                 >
                   Approve Broker A
                 </button>
                 <button
                   onClick={() => handleResolve('brokerB')}
-                  className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(99,102,241,0.25)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.35)] cursor-pointer text-center"
+                  className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(99,102,241,0.25)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.35)] cursor-pointer text-center press pulse-glow"
                 >
                   Approve Broker B
                 </button>
                 <button
                   onClick={() => handleResolve('reject')}
-                  className="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(244,63,94,0.25)] hover:shadow-[0_6px_20px_rgba(244,63,94,0.35)] cursor-pointer text-center"
+                  className="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(244,63,94,0.25)] hover:shadow-[0_6px_20px_rgba(244,63,94,0.35)] cursor-pointer text-center press smooth"
                 >
                   Reject Both
                 </button>

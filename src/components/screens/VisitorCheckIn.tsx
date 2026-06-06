@@ -61,7 +61,7 @@ export const VisitorCheckIn: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(6)}
@@ -84,7 +84,7 @@ export const VisitorCheckIn: React.FC = () => {
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Main Details Panel (Desktop 8 columns) */}
-        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-8">
+        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-8 anim-fade-up stagger-2">
           
           {/* Customer Greeting */}
           <div className="flex items-center gap-4 bg-slate-50/70 p-4 rounded-xl border border-slate-100">
@@ -114,7 +114,7 @@ export const VisitorCheckIn: React.FC = () => {
                     placeholder="Enter resident address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    className="block w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 min-h-[70px] resize-none text-slate-800"
+                    className="block w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-shadow duration-200 placeholder:text-slate-400 min-h-[70px] resize-none text-slate-800"
                   />
                 </div>
               </div>
@@ -130,7 +130,7 @@ export const VisitorCheckIn: React.FC = () => {
                     placeholder="Enter occupation"
                     value={occupation}
                     onChange={(e) => setOccupation(e.target.value)}
-                    className="block w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
+                    className="block w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                   />
                 </div>
               </div>
@@ -146,7 +146,7 @@ export const VisitorCheckIn: React.FC = () => {
                     placeholder="Enter company name"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
-                    className="block w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
+                    className="block w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                   />
                 </div>
               </div>
@@ -194,12 +194,12 @@ export const VisitorCheckIn: React.FC = () => {
                 placeholder="Enter family member name & relation"
                 value={familyInput}
                 onChange={(e) => setFamilyInput(e.target.value)}
-                className="flex-1 bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
+                className="flex-1 bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
               />
               <button
                 type="button"
                 onClick={handleAddFamily}
-                className="flex items-center gap-1.5 px-4 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
+                className="flex items-center gap-1.5 px-4 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer press pulse-glow"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add</span>
@@ -225,7 +225,7 @@ export const VisitorCheckIn: React.FC = () => {
         <div className="lg:col-span-4 space-y-6">
           
           {/* Document Upload Status */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-5">
+          <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-5 anim-fade-up stagger-3">
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Documents & KYC</h4>
             
             {/* PAN card */}
@@ -292,7 +292,7 @@ export const VisitorCheckIn: React.FC = () => {
           {/* Submits */}
           <button
             type="submit"
-            className="w-full py-4 bg-[#1A56DB] hover:bg-[#1648C0] text-white font-semibold rounded-xl text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center block"
+            className="w-full py-4 bg-[#1A56DB] hover:bg-[#1648C0] text-white font-semibold rounded-xl text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center block press pulse-glow"
           >
             Check-In Visitor & Allocate
           </button>

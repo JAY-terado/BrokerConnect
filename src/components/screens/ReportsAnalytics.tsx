@@ -66,7 +66,7 @@ export const ReportsAnalytics: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <div>
           <h2 className="text-lg font-bold text-[#0F172A] font-sans">Reports &amp; Analytics</h2>
           <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
@@ -81,31 +81,31 @@ export const ReportsAnalytics: React.FC = () => {
 
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between anim-fade-up stagger-1 card-hover">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Total Leads</span>
           <div className="flex items-baseline justify-center gap-1.5 mt-2">
-            <span className="text-3xl font-semibold text-slate-800">150</span>
+            <span className="text-3xl font-semibold text-slate-800 anim-number stagger-1">150</span>
             <span className="text-xs text-emerald-600 font-bold flex items-center">+12%</span>
           </div>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between anim-fade-up stagger-2 card-hover">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Total Visits</span>
           <div className="flex items-baseline justify-center gap-1.5 mt-2">
-            <span className="text-3xl font-semibold text-slate-800">100</span>
+            <span className="text-3xl font-semibold text-slate-800 anim-number stagger-2">100</span>
             <span className="text-xs text-emerald-600 font-bold flex items-center">+8%</span>
           </div>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between anim-fade-up stagger-3 card-hover">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Total Bookings</span>
           <div className="flex items-baseline justify-center gap-1.5 mt-2">
-            <span className="text-3xl font-semibold text-slate-800">12</span>
+            <span className="text-3xl font-semibold text-slate-800 anim-number stagger-3">12</span>
             <span className="text-xs text-emerald-600 font-bold flex items-center">+20%</span>
           </div>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between anim-fade-up stagger-4 card-hover">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Agreement Value</span>
           <div className="flex items-baseline justify-center gap-1.5 mt-2">
-            <span className="text-2xl font-semibold text-slate-800">₹10.20 Cr</span>
+            <span className="text-2xl font-semibold text-slate-800 anim-number stagger-4">₹10.20 Cr</span>
             <span className="text-xs text-emerald-600 font-bold flex items-center">+15%</span>
           </div>
         </div>
@@ -115,7 +115,7 @@ export const ReportsAnalytics: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Line Chart: Leads Over Time (Desktop 8 columns) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-8 flex flex-col justify-between min-h-[360px]">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-8 flex flex-col justify-between min-h-[360px] anim-fade-up stagger-2">
           <div className="space-y-1 mb-4">
             <h3 className="text-lg font-bold text-[#0F172A]">Leads Registration Trend</h3>
             <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">Daily Lead Registrations Volume</p>
@@ -142,7 +142,7 @@ export const ReportsAnalytics: React.FC = () => {
         </div>
 
         {/* Donut Chart: Bookings by Project (Desktop 4 columns) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-4 flex flex-col justify-between min-h-[360px]">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-4 flex flex-col justify-between min-h-[360px] anim-fade-up stagger-3">
           <div className="space-y-1 mb-4">
             <h3 className="text-lg font-bold text-[#0F172A]">Project Bookings</h3>
             <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">Booking ratios by location</p>
@@ -185,15 +185,15 @@ export const ReportsAnalytics: React.FC = () => {
         </div>
 
         {/* Top Brokers Leaderboard (Desktop 6 columns) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-6">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-6 anim-fade-up stagger-2">
           <h3 className="text-lg font-bold text-[#0F172A] mb-4 flex items-center gap-2">
             <Award className="w-5 h-5 text-amber-500" />
             <span>Top Brokers</span>
           </h3>
 
           <div className="space-y-3">
-            {topBrokers.map((broker) => (
-              <div key={broker.rank} className="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-200/50 rounded-xl text-xs font-semibold">
+            {topBrokers.map((broker, index) => (
+              <div key={broker.rank} style={{ animationDelay: `${index * 0.05}s` }} className="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-200/50 rounded-xl text-xs font-semibold anim-fade-up">
                 <div className="flex items-center gap-3">
                   <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${
                     broker.rank === 1 ? 'bg-amber-100 text-amber-800' : 'bg-slate-200 text-slate-700'
@@ -212,7 +212,7 @@ export const ReportsAnalytics: React.FC = () => {
         </div>
 
         {/* Funnel Ratios: Recharts BarChart (Desktop 6 columns) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-6 flex flex-col justify-between min-h-[300px]">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-6 flex flex-col justify-between min-h-[300px] anim-fade-up stagger-3">
           <h3 className="text-lg font-bold text-[#0F172A] mb-4 flex items-center gap-2">
             <BarChart4 className="w-5 h-5 text-[#1A56DB]" />
             <span>Conversion Ratios</span>

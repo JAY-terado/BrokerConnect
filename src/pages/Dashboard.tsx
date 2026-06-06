@@ -124,7 +124,7 @@ export const Dashboard: React.FC = () => {
       <div className="flex-1 flex flex-col min-w-0 min-h-screen relative pb-20 lg:pb-0">
         
         {/* Dashboard Header Bar */}
-        <header className="bg-[#0A1628] lg:bg-white border-b border-white/5 lg:border-slate-100 px-6 h-16 flex justify-between items-center shrink-0 relative z-10 select-none shadow-[0_1px_0_rgba(15,23,42,0.06)]">
+        <header className="bg-[#0A1628] lg:bg-white border-b border-white/5 lg:border-slate-100 px-6 h-16 flex justify-between items-center shrink-0 relative z-10 select-none shadow-[0_1px_0_rgba(15,23,42,0.06)] anim-fade-in">
           {/* Left side info / Logo */}
           <div className="flex items-center gap-3">
             {/* Mobile Branding Logo */}
@@ -137,7 +137,7 @@ export const Dashboard: React.FC = () => {
             </div>
 
             {/* Elegant Status Pill Badge */}
-            <div className="hidden lg:flex items-center gap-2.5 bg-slate-100 text-slate-600 border border-slate-200/80 rounded-full px-3 py-1 text-xs font-semibold shadow-xs transition-all duration-300">
+            <div key={currentRole} className="hidden lg:flex items-center gap-2.5 bg-slate-100 text-slate-600 border border-slate-200/80 rounded-full px-3 py-1 text-xs font-semibold shadow-xs transition-all duration-300 smooth">
               <span className="relative flex h-2 w-2">
                 <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${roleStyles[currentRole].dot}`}></span>
                 <span className={`relative inline-flex rounded-full h-2 w-2 ${roleStyles[currentRole].dot}`}></span>
@@ -162,7 +162,7 @@ export const Dashboard: React.FC = () => {
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-100 rounded-2xl shadow-[0_8px_32px_rgba(15,23,42,0.12)] z-50 py-1.5 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-100 rounded-2xl shadow-[0_8px_32px_rgba(15,23,42,0.12)] z-50 py-1.5 anim-scale-in">
                   <div className="px-4 py-2 border-b border-slate-50">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Switch Dashboard View</span>
                   </div>
@@ -211,11 +211,14 @@ export const Dashboard: React.FC = () => {
               className="p-2 bg-blue-900/50 hover:bg-blue-800/60 border border-blue-800/40 lg:bg-slate-50 lg:hover:bg-slate-100 lg:border-slate-200/50 transition cursor-pointer relative rounded-xl text-blue-200 lg:text-slate-400 hover:text-white lg:hover:text-slate-600"
             >
               <Bell className="w-4.5 h-4.5" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-blue-600 rounded-full"></span>
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-60"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-600"></span>
+              </span>
             </button>
 
             {/* Profile details (Desktop only) */}
-            <div className="hidden sm:flex items-center gap-2.5 border-l border-slate-100 pl-4">
+            <div className="hidden sm:flex items-center gap-2.5 border-l border-slate-100 pl-4 anim-fade-in stagger-3">
               <div className="text-right space-y-0.5">
                 <span className="text-xs font-black text-slate-800 block">
                   {currentRole === 'broker' ? 'Amit Patel' :
@@ -235,7 +238,9 @@ export const Dashboard: React.FC = () => {
 
         {/* Screen Content Body */}
         <div className="flex-1 p-6 pb-24 lg:pb-6 bg-[#F1F5F9]">
-          {renderScreen()}
+          <div key={activeScreen} className="anim-fade-up">
+            {renderScreen()}
+          </div>
         </div>
 
         {/* Mobile Bottom Navigation (shown on mobile widths) */}

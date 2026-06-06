@@ -37,7 +37,7 @@ export const BrokerManagement: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <div>
           <h2 className="text-lg font-bold text-[#0F172A]">Broker Management</h2>
           <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
@@ -46,7 +46,7 @@ export const BrokerManagement: React.FC = () => {
         </div>
         <button
           onClick={() => setShowAddForm(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer w-full sm:w-auto justify-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer w-full sm:w-auto justify-center press pulse-glow"
         >
           <Plus className="w-5 h-5" />
           <span>Add Broker</span>
@@ -54,7 +54,7 @@ export const BrokerManagement: React.FC = () => {
       </div>
 
       {/* Tabs Selector & Search */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4">
+      <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4 anim-fade-up stagger-2">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
           {/* Tabs */}
           <div className="flex border-b border-slate-100 overflow-x-auto gap-4 text-xs font-bold text-slate-400 uppercase tracking-wider pb-2 w-full md:w-auto">
@@ -94,7 +94,7 @@ export const BrokerManagement: React.FC = () => {
               placeholder="Search brokers..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-700"
+              className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-shadow duration-200 placeholder:text-slate-400 text-slate-700"
             />
           </div>
         </div>
@@ -112,13 +112,13 @@ export const BrokerManagement: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-xs">
-              {filteredBrokers.map((broker) => (
-                <tr key={broker.id} className="hover:bg-slate-50/60 transition-colors cursor-pointer even:bg-slate-50/30">
+              {filteredBrokers.map((broker, index) => (
+                <tr key={broker.id} style={{ animationDelay: `${index * 0.04}s` }} className="hover:bg-slate-50/60 transition-colors cursor-pointer even:bg-slate-50/30 anim-fade-up">
                   <td className="py-4 px-4 font-extrabold text-blue-600">{broker.id}</td>
                   <td className="py-4 px-4 text-sm font-semibold text-slate-800">{broker.name}</td>
                   <td className="py-4 px-4 text-xs text-slate-500 font-medium">{broker.mobile}</td>
                   <td className="py-4 px-4 text-center">
-                    <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                    <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold smooth ${
                       broker.status === 'Active' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
                       broker.status === 'Suspended' ? 'bg-red-50 text-red-700 border border-red-100' :
                       'bg-amber-50 text-amber-700 border border-amber-100'
@@ -169,8 +169,8 @@ export const BrokerManagement: React.FC = () => {
 
       {/* Add Broker Modal */}
       {showAddForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-          <form onSubmit={handleAddBrokerSubmit} className="bg-white p-6 sm:p-8 rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 space-y-5 animate-in fade-in zoom-in-95 duration-200 text-left">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 anim-fade-in">
+          <form onSubmit={handleAddBrokerSubmit} className="bg-white p-6 sm:p-8 rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 space-y-5 text-left anim-scale-in">
             <div className="flex justify-between items-center pb-2 border-b">
               <h3 className="text-lg font-bold text-[#0F172A] flex items-center gap-1.5">
                 <UserPlus className="w-5 h-5 text-blue-600" />
@@ -215,13 +215,13 @@ export const BrokerManagement: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowAddForm(false)}
-                className="flex-1 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all"
+                className="flex-1 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all press smooth"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
+                className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer press pulse-glow"
               >
                 Submit Broker
               </button>

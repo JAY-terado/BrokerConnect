@@ -53,7 +53,7 @@ export const BookingManagement: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <button
           onClick={() => setActiveScreen(10)}
           className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-xl transition cursor-pointer"
@@ -71,7 +71,7 @@ export const BookingManagement: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Main Details Panel (Desktop 8 columns) */}
-        <form onSubmit={handleCreateBooking} className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6">
+        <form onSubmit={handleCreateBooking} className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6 anim-fade-up stagger-2">
           
           {error && (
             <div className="p-3 bg-red-50 border border-red-200 text-red-600 rounded-xl text-xs font-semibold animate-pulse">
@@ -110,7 +110,7 @@ export const BookingManagement: React.FC = () => {
                   placeholder="e.g. Tower A"
                   value={tower}
                   onChange={(e) => setTower(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                 />
               </div>
 
@@ -121,7 +121,7 @@ export const BookingManagement: React.FC = () => {
                   placeholder="e.g. Floor 12"
                   value={floor}
                   onChange={(e) => setFloor(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                 />
               </div>
 
@@ -132,7 +132,7 @@ export const BookingManagement: React.FC = () => {
                   placeholder="e.g. 1203"
                   value={unitNo}
                   onChange={(e) => setUnitNo(e.target.value)}
-                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
+                  className="block w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                 />
               </div>
             </div>
@@ -173,13 +173,13 @@ export const BookingManagement: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveScreen(10)}
-              className="flex-1 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all text-center"
+              className="flex-1 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all text-center press smooth"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center"
+              className="flex-1 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer text-center press pulse-glow"
             >
               Submit Booking
             </button>
@@ -187,7 +187,7 @@ export const BookingManagement: React.FC = () => {
         </form>
 
         {/* Sidebar Guide Info (Desktop 4 columns) */}
-        <div className="hidden lg:block lg:col-span-4 bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-6 rounded-2xl border border-slate-800 shadow-lg space-y-4 h-fit">
+        <div className="hidden lg:block lg:col-span-4 bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-6 rounded-2xl border border-slate-800 shadow-lg space-y-4 h-fit anim-fade-up stagger-3">
           <h4 className="text-sm font-bold tracking-wider uppercase text-blue-400">Commission Trigger</h4>
           <p className="text-xs text-slate-300 leading-relaxed font-medium">
             Completing the booking form will trigger several system actions automatically:

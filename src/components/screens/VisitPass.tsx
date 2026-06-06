@@ -45,7 +45,7 @@ export const VisitPass: React.FC = () => {
     return (
       <div className="space-y-6 text-left">
         {/* Header Panel */}
-        <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] text-left">
+        <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] text-left anim-fade-up">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setActiveScreen(2)}
@@ -69,7 +69,7 @@ export const VisitPass: React.FC = () => {
           </button>
         </div>
 
-        <div className="flex flex-col items-center justify-center bg-slate-50 border border-dashed border-slate-200 rounded-2xl p-12 text-center max-w-lg mx-auto">
+        <div className="flex flex-col items-center justify-center bg-slate-50 border border-dashed border-slate-200 rounded-2xl p-12 text-center max-w-lg mx-auto anim-scale-in">
           <Ticket className="w-8 h-8 text-slate-300 mb-3" />
           <h3 className="text-lg font-bold text-[#0F172A] mb-1">No active visit passes found</h3>
           <p className="text-slate-400 text-sm font-medium mb-4">
@@ -77,7 +77,7 @@ export const VisitPass: React.FC = () => {
           </p>
           <button
             onClick={() => setActiveScreen(3)}
-            className="px-5 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
+            className="px-5 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer press pulse-glow"
           >
             Register Customer
           </button>
@@ -98,7 +98,7 @@ export const VisitPass: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] text-left">
+      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] text-left anim-fade-up">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(2)}
@@ -126,7 +126,7 @@ export const VisitPass: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 text-left items-start">
         
         {/* Pass Selector Sidebar (Left 5/4 cols) */}
-        <div className="md:col-span-5 lg:col-span-4 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4">
+        <div className="md:col-span-5 lg:col-span-4 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4 anim-fade-up stagger-2">
           <div className="space-y-1">
             <h3 className="text-lg font-bold text-[#0F172A]">Select Visit Pass</h3>
             <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
@@ -163,7 +163,7 @@ export const VisitPass: React.FC = () => {
                   </div>
                   
                   <div className="flex items-center gap-1 shrink-0">
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold smooth ${
                       lead.status === 'Booked' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' :
                       lead.status === 'Negotiation' ? 'bg-purple-50 text-purple-700 border-purple-100' :
                       lead.status === 'Checked In' ? 'bg-blue-50 text-blue-700 border-blue-100' :
@@ -180,10 +180,25 @@ export const VisitPass: React.FC = () => {
         </div>
 
         {/* Pass Detail Ticket (Right 8/7 cols) */}
-        <div className="md:col-span-7 lg:col-span-8 flex justify-center items-center p-2">
+        <div className="md:col-span-7 lg:col-span-8 flex justify-center items-center p-2 anim-fade-up stagger-3">
           {/* Ticket Layout with Premium Shadow and Glass Overlay */}
-          <div className="w-full max-w-[400px] bg-white rounded-3xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_12px_24px_rgba(15,23,42,0.08)] overflow-hidden relative animate-in fade-in zoom-in-95 duration-200">
+          <div className="w-full max-w-[400px] bg-white rounded-3xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_12px_24px_rgba(15,23,42,0.08)] overflow-hidden relative anim-scale-in stagger-1">
             
+            {/* Subtle shimmer sweep */}
+            <div 
+              className="absolute inset-0 pointer-events-none overflow-hidden rounded-[inherit]"
+              style={{ zIndex: 1 }}
+            >
+              <div 
+                className="absolute inset-0 -skew-x-12"
+                style={{
+                  background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%)',
+                  animation: 'shimmerSweep 1.2s ease 0.3s both',
+                  backgroundSize: '200% 100%',
+                }}
+              ></div>
+            </div>
+
             {/* Top Ticket Header Banner */}
             <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white space-y-2 relative">
               {/* Ticket notch cutouts */}
@@ -212,7 +227,7 @@ export const VisitPass: React.FC = () => {
             <div className="p-6 sm:p-8 space-y-6 text-center">
               
               {/* SVG QR Code Illustration */}
-              <div className="mx-auto w-40 h-40 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center p-4 shadow-inner">
+              <div className="mx-auto w-40 h-40 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center p-4 shadow-inner anim-fade-up stagger-3">
                 <svg viewBox="0 0 100 100" className="w-full h-full text-slate-800" fill="currentColor">
                   <rect x="0" y="0" width="25" height="25" />
                   <rect x="5" y="5" width="15" height="15" fill="white" />
@@ -270,14 +285,14 @@ export const VisitPass: React.FC = () => {
               <div className="space-y-3 pt-2">
                 <button
                   onClick={() => handleShare(customerName, activeLead.mobile)}
-                  className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-sm transition-all shadow-[0_4px_14px_rgba(16,185,129,0.25)] cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-sm transition-all shadow-[0_4px_14px_rgba(16,185,129,0.25)] cursor-pointer press pulse-glow"
                 >
                   <Share2 className="w-4 h-4" />
                   <span>Share on WhatsApp</span>
                 </button>
                 <button
                   onClick={handleDownload}
-                  className="w-full flex items-center justify-center gap-2 py-3 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2 py-3 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer press smooth"
                 >
                   <Download className="w-4 h-4" />
                   <span>Download Pass</span>

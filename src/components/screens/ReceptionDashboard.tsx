@@ -40,7 +40,7 @@ export const ReceptionDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <div>
           <h2 className="text-lg font-bold text-[#0F172A] font-sans">Reception Dashboard</h2>
           <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
@@ -49,7 +49,7 @@ export const ReceptionDashboard: React.FC = () => {
         </div>
         <button
           onClick={handleScanQR}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer w-full sm:w-auto justify-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer w-full sm:w-auto justify-center press pulse-glow"
         >
           <QrCode className="w-5 h-5" />
           <span>Scan QR Code</span>
@@ -58,26 +58,26 @@ export const ReceptionDashboard: React.FC = () => {
 
       {/* Stats Board */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up stagger-1 card-hover">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Today's Visits</span>
-          <span className="text-3xl font-extrabold text-[#0F172A] block mt-1">35</span>
+          <span className="text-3xl font-extrabold text-[#0F172A] block mt-1 anim-number stagger-1">35</span>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up stagger-2 card-hover">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Checked In</span>
-          <span className="text-3xl font-extrabold text-emerald-600 block mt-1">{checkedInVisitors.length + 20}</span>
+          <span className="text-3xl font-extrabold text-emerald-600 block mt-1 anim-number stagger-2">{checkedInVisitors.length + 20}</span>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up stagger-3 card-hover">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Expected</span>
-          <span className="text-3xl font-extrabold text-blue-600 block mt-1">{expectedVisitors.length + 5}</span>
+          <span className="text-3xl font-extrabold text-blue-600 block mt-1 anim-number stagger-3">{expectedVisitors.length + 5}</span>
         </div>
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up stagger-4 card-hover">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mb-1.5">Cancelled</span>
-          <span className="text-3xl font-extrabold text-rose-600 block mt-1">0</span>
+          <span className="text-3xl font-extrabold text-rose-600 block mt-1 anim-number stagger-4">0</span>
         </div>
       </div>
 
       {/* Lists Layout */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-5">
+      <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-5 anim-fade-up stagger-2">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
             <h3 className="text-base font-bold text-[#0F172A]">Expected Visitors Today</h3>
@@ -123,8 +123,8 @@ export const ReceptionDashboard: React.FC = () => {
                   </td>
                 </tr>
               ) : (
-                expectedVisitors.map((visitor) => (
-                  <tr key={visitor.id} className="hover:bg-slate-50/60 transition-colors cursor-pointer even:bg-slate-50/30">
+                expectedVisitors.map((visitor, index) => (
+                  <tr key={visitor.id} style={{ animationDelay: `${index * 0.05}s` }} className="hover:bg-slate-50/60 transition-colors cursor-pointer even:bg-slate-50/30 anim-fade-up">
                     <td className="py-4 px-4 font-extrabold text-blue-600">{visitor.visitCode}</td>
                     <td className="py-4 px-4 text-sm font-semibold text-slate-800">{visitor.name}</td>
                     <td className="py-4 px-4 text-xs text-slate-500 font-medium">{visitor.brokerName}</td>

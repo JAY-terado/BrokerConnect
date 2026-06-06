@@ -47,7 +47,7 @@ export const SalesAllocation: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(6)}
@@ -69,7 +69,7 @@ export const SalesAllocation: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Left Side: Circular Status Display */}
-        <div className="lg:col-span-6 bg-white p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col items-center justify-center space-y-6 text-center">
+        <div className="lg:col-span-6 bg-white p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col items-center justify-center space-y-6 text-center anim-fade-up stagger-2">
           
           <div className="relative">
             {/* Spinning/pulsing aura */}
@@ -99,7 +99,7 @@ export const SalesAllocation: React.FC = () => {
         </div>
 
         {/* Right Side: Round Robin Queue Order */}
-        <div className="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between space-y-6 anim-fade-up stagger-3">
           <div className="space-y-4">
             <div className="space-y-1 text-left">
               <h3 className="text-lg font-bold text-[#0F172A]">Sales Queue Lineup</h3>
@@ -112,7 +112,8 @@ export const SalesAllocation: React.FC = () => {
                 return (
                   <div
                     key={exec}
-                    className={`flex items-center justify-between p-3.5 rounded-xl border transition-all duration-300 ${
+                    style={{ animationDelay: `${idx * 0.05}s` }}
+                    className={`flex items-center justify-between p-3.5 rounded-xl border transition-all duration-300 anim-fade-up ${
                       isSelected
                         ? 'bg-blue-50/70 border-blue-100 text-blue-700 shadow-sm'
                         : 'bg-slate-50 border-slate-200/60 opacity-60'
@@ -153,7 +154,7 @@ export const SalesAllocation: React.FC = () => {
                 type="button"
                 onClick={handleReallocate}
                 disabled={isAllocating}
-                className="flex-1 flex items-center justify-center gap-1.5 py-3 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer press smooth"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 <span>Reallocate Agent</span>
@@ -163,7 +164,7 @@ export const SalesAllocation: React.FC = () => {
                 type="button"
                 onClick={handleProceed}
                 disabled={isAllocating}
-                className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer press pulse-glow"
               >
                 <CheckCircle className="w-3.5 h-3.5" />
                 <span>Proceed to Meeting</span>

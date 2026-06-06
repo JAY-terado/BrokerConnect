@@ -37,7 +37,7 @@ export const CommissionManagement: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(9)}
@@ -61,7 +61,7 @@ export const CommissionManagement: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Panel: Commission Details (Desktop 8 columns) */}
-        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6">
+        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6 anim-fade-up stagger-2">
           
           {/* Booking details summary */}
           <div className="space-y-4">
@@ -123,7 +123,7 @@ export const CommissionManagement: React.FC = () => {
               </div>
               <div className="space-y-1">
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Payout Status</span>
-                <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold smooth ${
                   activeCommission.status === 'Paid' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
                   activeCommission.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
                   'bg-amber-50 text-amber-700 border border-amber-100'
@@ -136,14 +136,14 @@ export const CommissionManagement: React.FC = () => {
         </div>
 
         {/* Payout actions sidebar (Desktop 4 columns) */}
-        <div className="lg:col-span-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6 h-fit text-center">
+        <div className="lg:col-span-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6 h-fit text-center anim-fade-up stagger-3">
           <h4 className="text-xs font-bold text-slate-400 block uppercase tracking-wider">Accounting Controls</h4>
           
           <div className="space-y-3">
             {activeCommission.status === 'Pending' && (
               <button
                 onClick={handleApprove}
-                className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer press pulse-glow"
               >
                 <Check className="w-4 h-4" />
                 <span>Approve Commission Payout</span>
@@ -153,7 +153,7 @@ export const CommissionManagement: React.FC = () => {
             {activeCommission.status === 'Approved' && (
               <button
                 onClick={handlePay}
-                className="w-full flex items-center justify-center gap-2 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(16,185,129,0.25)] hover:shadow-[0_6px_20px_rgba(16,185,129,0.35)] cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(16,185,129,0.25)] hover:shadow-[0_6px_20px_rgba(16,185,129,0.35)] cursor-pointer press pulse-glow"
               >
                 <IndianRupee className="w-4 h-4" />
                 <span>Mark as Paid (Disburse)</span>
@@ -169,7 +169,7 @@ export const CommissionManagement: React.FC = () => {
 
             <button
               onClick={() => alert('Simulation: Generating bank invoice statement...')}
-              className="w-full py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer"
+              className="w-full py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer press smooth"
             >
               View Invoice Statement
             </button>

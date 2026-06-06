@@ -63,7 +63,7 @@ export const SalesCRM: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <div>
           <h2 className="text-lg font-bold text-[#0F172A]">Sales Pipeline</h2>
           <p className="text-xs text-slate-400 font-medium uppercase tracking-wide mt-0.5">
@@ -73,11 +73,11 @@ export const SalesCRM: React.FC = () => {
       </div>
 
       {/* Pipeline Progress Stages (Responsive counts) */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 anim-fade-up stagger-1">
         {/* Stage 1 */}
         <button 
           onClick={() => setSelectedFilterStage(selectedFilterStage === 'Registered' ? 'All' : 'Registered')}
-          className={`p-4 rounded-xl border text-center transition-all ${selectedFilterStage === 'Registered' ? 'bg-[#1A56DB] border-[#1A56DB] text-white shadow-[0_4px_14px_rgba(26,86,219,0.25)]' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
+          className={`p-4 rounded-xl border text-center transition-all duration-200 press smooth ${selectedFilterStage === 'Registered' ? 'bg-[#1A56DB] border-[#1A56DB] text-white shadow-[0_4px_14px_rgba(26,86,219,0.25)]' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
         >
           <span className={`text-[10px] font-bold uppercase tracking-wider block ${selectedFilterStage === 'Registered' ? 'text-blue-100' : 'text-slate-400'}`}>Registered</span>
           <span className="text-xl font-black block mt-1">{getStageCount('Registered') || 150}</span>
@@ -86,7 +86,7 @@ export const SalesCRM: React.FC = () => {
         {/* Stage 2 */}
         <button 
           onClick={() => setSelectedFilterStage(selectedFilterStage === 'Visited' ? 'All' : 'Visited')}
-          className={`p-4 rounded-xl border text-center transition-all ${selectedFilterStage === 'Visited' ? 'bg-emerald-600 border-emerald-600 text-white shadow-md' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
+          className={`p-4 rounded-xl border text-center transition-all duration-200 press smooth ${selectedFilterStage === 'Visited' ? 'bg-emerald-600 border-emerald-600 text-white shadow-md' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
         >
           <span className={`text-[10px] font-bold uppercase tracking-wider block ${selectedFilterStage === 'Visited' ? 'text-emerald-100' : 'text-slate-400'}`}>Visited</span>
           <span className="text-xl font-black block mt-1">{getStageCount('Visited') || 100}</span>
@@ -95,7 +95,7 @@ export const SalesCRM: React.FC = () => {
         {/* Stage 3 */}
         <button 
           onClick={() => setSelectedFilterStage(selectedFilterStage === 'Follow-Up' ? 'All' : 'Follow-Up')}
-          className={`p-4 rounded-xl border text-center transition-all ${selectedFilterStage === 'Follow-Up' ? 'bg-yellow-500 border-yellow-500 text-white shadow-md' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
+          className={`p-4 rounded-xl border text-center transition-all duration-200 press smooth ${selectedFilterStage === 'Follow-Up' ? 'bg-yellow-500 border-yellow-500 text-white shadow-md' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
         >
           <span className={`text-[10px] font-bold uppercase tracking-wider block ${selectedFilterStage === 'Follow-Up' ? 'text-yellow-100' : 'text-slate-400'}`}>Follow-Up</span>
           <span className="text-xl font-black block mt-1">{getStageCount('Follow-Up') || 60}</span>
@@ -104,7 +104,7 @@ export const SalesCRM: React.FC = () => {
         {/* Stage 4 */}
         <button 
           onClick={() => setSelectedFilterStage(selectedFilterStage === 'Negotiation' ? 'All' : 'Negotiation')}
-          className={`p-4 rounded-xl border text-center transition-all ${selectedFilterStage === 'Negotiation' ? 'bg-amber-500 border-amber-500 text-white shadow-md' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
+          className={`p-4 rounded-xl border text-center transition-all duration-200 press smooth ${selectedFilterStage === 'Negotiation' ? 'bg-amber-500 border-amber-500 text-white shadow-md' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
         >
           <span className={`text-[10px] font-bold uppercase tracking-wider block ${selectedFilterStage === 'Negotiation' ? 'text-amber-100' : 'text-slate-400'}`}>Negotiation</span>
           <span className="text-xl font-black block mt-1">{getStageCount('Negotiation') || 20}</span>
@@ -113,7 +113,7 @@ export const SalesCRM: React.FC = () => {
         {/* Stage 5 */}
         <button 
           onClick={() => setSelectedFilterStage(selectedFilterStage === 'Booked' ? 'All' : 'Booked')}
-          className={`p-4 rounded-xl border text-center transition-all ${selectedFilterStage === 'Booked' ? 'bg-purple-600 border-purple-600 text-white shadow-md' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
+          className={`p-4 rounded-xl border text-center transition-all duration-200 press smooth ${selectedFilterStage === 'Booked' ? 'bg-purple-600 border-purple-600 text-white shadow-md' : 'bg-white border-slate-100/80 text-slate-800 hover:bg-slate-50'}`}
         >
           <span className={`text-[10px] font-bold uppercase tracking-wider block ${selectedFilterStage === 'Booked' ? 'text-purple-100' : 'text-slate-400'}`}>Bookings</span>
           <span className="text-xl font-black block mt-1">{getStageCount('Booked') || 12}</span>
@@ -121,7 +121,7 @@ export const SalesCRM: React.FC = () => {
       </div>
 
       {/* Recent Leads Table */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4">
+      <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-4 anim-fade-up stagger-2">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
             <h3 className="text-lg font-bold text-[#0F172A]">Pipeline Leads ({selectedFilterStage})</h3>
@@ -136,7 +136,7 @@ export const SalesCRM: React.FC = () => {
                 placeholder="Search leads..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-700"
+                className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-all text-slate-700"
               />
             </div>
             
@@ -164,11 +164,12 @@ export const SalesCRM: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-xs">
-              {filteredLeads.map((lead) => (
+              {filteredLeads.map((lead, index) => (
                 <tr 
                   key={lead.id} 
                   onClick={() => handleRowClick(lead.id)}
-                  className="hover:bg-slate-50/60 transition-colors cursor-pointer"
+                  style={{ animationDelay: `${index * 0.04}s` }}
+                  className="hover:bg-slate-50/60 transition-colors cursor-pointer anim-fade-up"
                 >
                   <td className="py-4 px-6 text-sm font-semibold text-slate-800">
                     <div className="flex items-center gap-2">
@@ -182,7 +183,7 @@ export const SalesCRM: React.FC = () => {
                   <td className="py-4 px-6 text-slate-600 font-bold">{lead.project}</td>
                   <td className="py-4 px-6 text-slate-600 font-medium">{lead.assignedExecutive || 'Unassigned'}</td>
                   <td className="py-4 px-6">
-                    <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold ${getStageBadgeColor(lead.status)}`}>
+                    <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold smooth ${getStageBadgeColor(lead.status)}`}>
                       {lead.status === 'OTP Pending' || lead.status === 'OTP Verified' ? 'Registered' :
                        lead.status === 'Checked In' ? 'Visited' : 
                        lead.status === 'Allocated' ? 'Follow-Up' : lead.status}
@@ -190,7 +191,7 @@ export const SalesCRM: React.FC = () => {
                   </td>
                   <td className="py-4 px-6 text-xs text-slate-500 font-medium">{lead.lastActivity}</td>
                   <td className="py-4 px-6 text-center">
-                    <ChevronRight className="w-4 h-4 text-slate-400 mx-auto" />
+                    <ChevronRight className="w-4 h-4 text-slate-400 mx-auto transition-transform duration-150 hover:translate-x-0.5" />
                   </td>
                 </tr>
               ))}

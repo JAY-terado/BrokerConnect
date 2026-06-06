@@ -110,7 +110,7 @@ export const Register: React.FC = () => {
         <div className="absolute bottom-0 left-0 w-[250px] h-[250px] bg-sky-500/8 rounded-full blur-2xl translate-y-1/3 z-0"></div>
 
         {/* Branding Logo */}
-        <div className="relative z-20 self-start hover:opacity-90 transition-opacity">
+        <div className="relative z-20 self-start hover:opacity-90 transition-opacity anim-fade-in">
           <img
             src="/logo.png"
             alt="Logo"
@@ -127,7 +127,7 @@ export const Register: React.FC = () => {
 
         {/* Dynamic Checklist Guide directly on background */}
         <div className="relative z-10 space-y-8 my-auto">
-          <div>
+          <div className="anim-fade-up stagger-1">
             <span className="text-[10px] text-blue-300 font-extrabold uppercase tracking-widest block mb-1">Onboarding Guide</span>
             <h2 className="text-xl font-black bg-gradient-to-br from-white to-blue-100 bg-clip-text text-transparent tracking-tight">Required Onboarding Steps</h2>
             <p className="text-xs text-blue-200/80 font-semibold mt-1.5 leading-relaxed">
@@ -135,12 +135,12 @@ export const Register: React.FC = () => {
             </p>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-6 anim-fade-up stagger-2">
             {/* Step 1 Indicator */}
             <div className={`relative flex items-start gap-4 transition-all duration-300 ${wizardStep === 1 ? 'opacity-100 scale-102' : 'opacity-55'}`}>
               <div className="absolute left-4 top-8 w-[2px] h-10 bg-blue-900/80"></div>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shrink-0 shadow-xs z-10 ${
-                wizardStep === 1 ? 'bg-[#1A56DB] text-white shadow-[0_0_0_4px_rgba(26,86,219,0.2)]' :
+                wizardStep === 1 ? 'bg-[#1A56DB] text-white shadow-[0_0_0_4px_rgba(26,86,219,0.2)] pulse-glow' :
                 wizardStep > 1 ? 'bg-emerald-500 text-white' : 'bg-white/8 text-blue-300 border border-white/10'
               }`}>
                 {wizardStep > 1 ? <CheckCircle className="w-5 h-5" /> : '01'}
@@ -157,7 +157,7 @@ export const Register: React.FC = () => {
             <div className={`relative flex items-start gap-4 transition-all duration-300 ${wizardStep === 2 ? 'opacity-100 scale-102' : 'opacity-55'}`}>
               <div className="absolute left-4 top-8 w-[2px] h-10 bg-blue-900/80"></div>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shrink-0 shadow-xs z-10 ${
-                wizardStep === 2 ? 'bg-[#1A56DB] text-white shadow-[0_0_0_4px_rgba(26,86,219,0.2)]' :
+                wizardStep === 2 ? 'bg-[#1A56DB] text-white shadow-[0_0_0_4px_rgba(26,86,219,0.2)] pulse-glow' :
                 wizardStep > 2 ? 'bg-emerald-500 text-white' : 'bg-white/8 text-blue-300 border border-white/10'
               }`}>
                 {wizardStep > 2 ? <CheckCircle className="w-5 h-5" /> : '02'}
@@ -173,7 +173,7 @@ export const Register: React.FC = () => {
             {/* Step 3 Indicator */}
             <div className={`relative flex items-start gap-4 transition-all duration-300 ${wizardStep === 3 ? 'opacity-100 scale-102' : 'opacity-55'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shrink-0 shadow-xs z-10 ${
-                wizardStep === 3 ? 'bg-[#1A56DB] text-white shadow-[0_0_0_4px_rgba(26,86,219,0.2)]' :
+                wizardStep === 3 ? 'bg-[#1A56DB] text-white shadow-[0_0_0_4px_rgba(26,86,219,0.2)] pulse-glow' :
                 wizardStep > 3 ? 'bg-emerald-500 text-white' : 'bg-white/8 text-blue-300 border border-white/10'
               }`}>
                 03
@@ -217,7 +217,7 @@ export const Register: React.FC = () => {
         </div>
 
         {/* Form Container Card */}
-        <div className="my-auto py-8 max-w-[540px] w-full mx-auto bg-white border border-slate-100/80 rounded-3xl p-8 sm:p-10 shadow-xl shadow-slate-100/40 space-y-6">
+        <div className="my-auto py-8 max-w-[540px] w-full mx-auto bg-white border border-slate-100/80 rounded-3xl p-8 sm:p-10 shadow-xl shadow-slate-100/40 space-y-6 anim-scale-in">
           <div className="space-y-1">
             <h2 className="text-3xl font-black text-slate-900 tracking-tight">Broker Registration</h2>
             <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
@@ -226,19 +226,21 @@ export const Register: React.FC = () => {
           </div>
 
           {error && (
-            <div className="p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-xl text-xs font-semibold animate-pulse">
+            <div className="p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-xl text-xs font-semibold anim-slide-right">
               {error}
             </div>
           )}
 
           {/* STEP 1 FORM */}
           {wizardStep === 1 && (
-            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-200">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">
-                Basic Profile Info
-              </h3>
+            <div key={wizardStep} className="space-y-4 anim-slide-right">
+              <div className="anim-fade-up">
+                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">
+                  Basic Profile Info
+                </h3>
+              </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-1">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Broker ID (Auto-Generated) *</label>
                 <input
                   type="text"
@@ -248,7 +250,7 @@ export const Register: React.FC = () => {
                 />
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-2">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Broker Name *</label>
                 <input
                   type="text"
@@ -260,7 +262,7 @@ export const Register: React.FC = () => {
                 />
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-3">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Company Name *</label>
                 <input
                   type="text"
@@ -272,7 +274,7 @@ export const Register: React.FC = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 anim-fade-up stagger-4">
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Mobile Number *</label>
                   <input
@@ -298,7 +300,7 @@ export const Register: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-5">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Email ID *</label>
                 <input
                   type="email"
@@ -314,12 +316,14 @@ export const Register: React.FC = () => {
 
           {/* STEP 2 FORM */}
           {wizardStep === 2 && (
-            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-200">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">
-                Government Verification
-              </h3>
+            <div key={wizardStep} className="space-y-4 anim-slide-right">
+              <div className="anim-fade-up">
+                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">
+                  Government Verification
+                </h3>
+              </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-1">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">PAN Number *</label>
                 <input
                   type="text"
@@ -331,7 +335,7 @@ export const Register: React.FC = () => {
                 />
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-2">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">GST Number</label>
                 <input
                   type="text"
@@ -342,7 +346,7 @@ export const Register: React.FC = () => {
                 />
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-3">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">RERA Registration Number *</label>
                 <input
                   type="text"
@@ -358,12 +362,14 @@ export const Register: React.FC = () => {
 
           {/* STEP 3 FORM */}
           {wizardStep === 3 && (
-            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-200">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">
-                Office Address Details
-              </h3>
+            <div key={wizardStep} className="space-y-4 anim-slide-right">
+              <div className="anim-fade-up">
+                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">
+                  Office Address Details
+                </h3>
+              </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-1">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Address Line 1 *</label>
                 <input
                   type="text"
@@ -375,7 +381,7 @@ export const Register: React.FC = () => {
                 />
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-2">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Address Line 2</label>
                 <input
                   type="text"
@@ -386,7 +392,7 @@ export const Register: React.FC = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 anim-fade-up stagger-3">
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">City *</label>
                   <CustomSelect
@@ -410,7 +416,7 @@ export const Register: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 anim-fade-up stagger-4">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Pincode *</label>
                 <input
                   type="number"
@@ -430,7 +436,7 @@ export const Register: React.FC = () => {
               <button
                 type="button"
                 onClick={handlePrevStep}
-                className="flex-1 flex items-center justify-center gap-1.5 py-3 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 text-slate-500 font-bold rounded-xl text-xs transition active:scale-[0.98] cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 text-slate-500 font-bold rounded-xl text-xs transition cursor-pointer press"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>Back</span>
@@ -438,7 +444,7 @@ export const Register: React.FC = () => {
             ) : (
               <Link
                 to="/login"
-                className="flex-1 py-3 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 text-slate-500 font-bold rounded-xl text-xs transition cursor-pointer text-center block active:scale-[0.98]"
+                className="flex-1 py-3 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 text-slate-500 font-bold rounded-xl text-xs transition cursor-pointer text-center block press"
               >
                 Cancel
               </Link>
@@ -448,7 +454,7 @@ export const Register: React.FC = () => {
               <button
                 type="button"
                 onClick={handleNextStep}
-                className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold rounded-xl text-xs transition shadow-md shadow-blue-500/10 active:scale-[0.98] cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold rounded-xl text-xs transition shadow-md shadow-blue-500/10 cursor-pointer press"
               >
                 <span>Next Step</span>
                 <ChevronRight className="w-4 h-4" />
@@ -458,7 +464,7 @@ export const Register: React.FC = () => {
                 type="button"
                 onClick={handleRegisterSubmit}
                 disabled={loading}
-                className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-blue-400 disabled:to-blue-500 text-white font-bold text-xs rounded-xl transition shadow-md shadow-blue-500/10 cursor-pointer text-center block active:scale-[0.98]"
+                className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-blue-400 disabled:to-blue-500 text-white font-bold text-xs rounded-xl transition shadow-md shadow-blue-500/10 cursor-pointer text-center block press"
               >
                 {loading ? 'Submitting...' : 'Register Broker'}
               </button>

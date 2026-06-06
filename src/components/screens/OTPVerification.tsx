@@ -84,7 +84,7 @@ export const OTPVerification: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header Panel */}
-      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex items-center gap-3 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <button
           onClick={() => setActiveScreen(3)}
           className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-xl transition cursor-pointer"
@@ -101,7 +101,7 @@ export const OTPVerification: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Verification Card (Desktop 7 columns, Mobile full) */}
-        <div className="lg:col-span-7 bg-white p-6 sm:p-10 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+        <div className="lg:col-span-7 bg-white p-6 sm:p-10 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between anim-scale-in">
           <div className="space-y-6">
             <div className="space-y-2">
               <h3 className="text-lg font-bold text-[#0F172A]">Verify OTP</h3>
@@ -122,25 +122,28 @@ export const OTPVerification: React.FC = () => {
 
               {success && (
                 <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-xl text-sm font-bold animate-bounce flex items-center justify-center gap-2">
-                  <ShieldCheck className="w-5 h-5" />
+                  <span className="anim-scale-in"><ShieldCheck className="w-5 h-5" /></span>
                   <span>OTP Verified Successfully! Redirecting...</span>
                 </div>
               )}
 
               {/* OTP Squares */}
-              <div className="flex gap-4 max-w-[280px]">
-                {otpDigits.map((digit, idx) => (
-                  <input
-                    key={idx}
-                    id={`otp-input-${idx}`}
-                    type="text"
-                    maxLength={1}
-                    value={digit}
-                    onChange={(e) => handleDigitChange(idx, e.target.value)}
-                    onKeyDown={(e) => handleKeyDown(idx, e)}
-                    className="w-14 h-14 bg-white border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 text-center font-extrabold text-xl text-slate-800 rounded-xl transition duration-200"
-                  />
-                ))}
+              <div className="relative">
+                <div className="absolute inset-0 rounded-2xl bg-blue-500/5 anim-fade-in" style={{animationDelay:'0.2s'}}></div>
+                <div className="flex gap-4 max-w-[280px] relative">
+                  {otpDigits.map((digit, idx) => (
+                    <input
+                      key={idx}
+                      id={`otp-input-${idx}`}
+                      type="text"
+                      maxLength={1}
+                      value={digit}
+                      onChange={(e) => handleDigitChange(idx, e.target.value)}
+                      onKeyDown={(e) => handleKeyDown(idx, e)}
+                      className="w-14 h-14 bg-white border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 text-center font-extrabold text-xl text-slate-800 rounded-xl transition-all duration-200 hover:border-blue-300 focus:shadow-[0_0_0_6px_rgba(26,86,219,0.10)]"
+                    />
+                  ))}
+                </div>
               </div>
 
               {/* Timer/Resend */}
@@ -164,7 +167,7 @@ export const OTPVerification: React.FC = () => {
                 <button
                   type="submit"
                   disabled={success}
-                  className="w-full max-w-[280px] py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] disabled:bg-emerald-600 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
+                  className="w-full max-w-[280px] py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] disabled:bg-emerald-600 text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.35)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.45)] cursor-pointer press pulse-glow"
                 >
                   Verify OTP
                 </button>

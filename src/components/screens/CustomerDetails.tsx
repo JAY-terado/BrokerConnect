@@ -36,7 +36,7 @@ export const CustomerDetails: React.FC = () => {
   return (
     <div className="space-y-6 text-left">
       {/* Header Panel */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] anim-fade-up">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setActiveScreen(9)}
@@ -84,7 +84,7 @@ export const CustomerDetails: React.FC = () => {
 
           <button
             onClick={() => setActiveScreen(11)} // Navigate to booking management form
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.25)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer press pulse-glow"
           >
             <Landmark className="w-4 h-4" />
             <span>Create Booking</span>
@@ -96,7 +96,7 @@ export const CustomerDetails: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Card: Customer Profile Summary */}
-        <div className="lg:col-span-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6 self-start">
+        <div className="lg:col-span-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] space-y-6 self-start anim-fade-up stagger-2">
           <div className="text-center space-y-3 pb-6 border-b border-slate-50">
             <div className="mx-auto w-16 h-16 bg-blue-50 text-blue-600 border border-blue-100 rounded-full flex items-center justify-center text-2xl font-black shadow-inner">
               {activeLead.name.charAt(0)}
@@ -104,7 +104,7 @@ export const CustomerDetails: React.FC = () => {
             
             <div className="space-y-0.5">
               <h3 className="text-lg font-bold text-[#0F172A]">{activeLead.name}</h3>
-              <span className={`inline-block border px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${
+              <span className={`inline-block border px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide smooth ${
                 activeLead.status === 'Booked' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' :
                 activeLead.status === 'Negotiation' ? 'bg-purple-50 text-purple-700 border-purple-100' :
                 ['OTP Verified', 'Checked In', 'Allocated'].includes(activeLead.status) ? 'bg-blue-50 text-blue-700 border-blue-100' :
@@ -141,7 +141,7 @@ export const CustomerDetails: React.FC = () => {
         </div>
 
         {/* Right Card: Tabs & Details Panel */}
-        <div className="lg:col-span-8 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
+        <div className="lg:col-span-8 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between anim-fade-up stagger-3">
           <div>
             {/* Tabs Selector */}
             <div className="flex border-b border-slate-100 -mx-6 px-6 overflow-x-auto gap-4 text-xs font-bold text-slate-400 uppercase tracking-wider pb-3.5">
@@ -278,11 +278,11 @@ export const CustomerDetails: React.FC = () => {
                     placeholder="Enter discussion logs..."
                     value={newNote}
                     onChange={(e) => setNewNote(e.target.value)}
-                    className="flex-1 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
+                    className="flex-1 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] transition-shadow duration-200 placeholder:text-slate-400 text-slate-800"
                   />
                   <button
                     type="submit"
-                    className="px-4 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer"
+                    className="px-4 py-2.5 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl font-medium text-sm transition-all cursor-pointer press smooth"
                   >
                     Add Log
                   </button>

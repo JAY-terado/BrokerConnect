@@ -125,10 +125,11 @@ export const Login: React.FC = () => {
       <div className="hidden lg:flex lg:w-1/2 bg-[#0A1628] text-white p-16 flex-col justify-between relative overflow-hidden border-r border-blue-950/40">
         {/* Background noise texture + grid overlay patterns */}
         <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzlIj48cGF0aCBkPSJNIDYwIDAgTCAwIDAgMCA2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] z-0"></div>
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 z-0"></div>
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-sky-500/8 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4 z-0"></div>
+        <div className="absolute top-0 right-0 w-[480px] h-[480px] bg-blue-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 z-0 anim-orb"></div>
+        <div className="absolute bottom-0 left-0 w-[280px] h-[280px] bg-sky-500/8 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4 z-0 anim-orb-slow"></div>
+        <div className="absolute top-1/2 left-1/4 w-[200px] h-[200px] bg-blue-400/5 rounded-full blur-2xl z-0 anim-orb" style={{animationDelay:'4s'}}></div>
  
-        <div className="relative z-20 self-start hover:opacity-90 transition-opacity">
+        <div className="relative z-20 self-start hover:opacity-90 transition-opacity anim-fade-in">
           <img 
             src="/logo.png" 
             alt="Logo" 
@@ -138,23 +139,23 @@ export const Login: React.FC = () => {
  
         {/* Branding text directly on background */}
         <div className="relative z-10 space-y-6 flex flex-col">
-          <span className="self-start px-3.5 py-1.5 bg-white/8 text-sky-300 border border-white/10 backdrop-blur-sm text-[10px] font-extrabold rounded-full uppercase tracking-widest">
+          <span className="self-start px-3.5 py-1.5 bg-white/8 text-sky-300 border border-white/10 backdrop-blur-sm text-[10px] font-extrabold rounded-full uppercase tracking-widest anim-fade-up stagger-1">
             Channel Partner Protection
           </span>
           <div className="space-y-4">
-            <h1 className="text-3xl xl:text-4xl font-black tracking-tight leading-[1.2] bg-gradient-to-br from-white via-white to-blue-200 bg-clip-text text-transparent">
+            <h1 className="text-3xl xl:text-4xl font-black tracking-tight leading-[1.2] bg-gradient-to-br from-white via-white to-blue-200 bg-clip-text text-transparent anim-fade-up stagger-2">
               Lead Protection &amp; Sales Management
             </h1>
-            <div className="w-16 h-[2px] bg-gradient-to-r from-sky-400 to-blue-600"></div>
+            <div className="w-16 h-[2px] bg-gradient-to-r from-sky-400 to-blue-600 anim-fade-up stagger-3"></div>
           </div>
-          <p className="text-xs text-blue-200/90 font-semibold leading-relaxed">
+          <p className="text-xs text-blue-200/90 font-semibold leading-relaxed anim-fade-up stagger-4">
             Eliminating channel partner disputes through instant OTP-based customer ownership locks and transparent audit trails.
           </p>
         </div>
  
         {/* Features list below the card */}
         <div className="relative z-10 flex flex-col gap-4">
-          <div className="flex items-center gap-4 text-xs font-semibold text-blue-250">
+          <div className="flex items-center gap-4 text-xs font-semibold text-blue-250 anim-fade-up stagger-5">
             <div className="w-12 h-12 rounded-2xl bg-white/6 border border-white/10 flex items-center justify-center text-sky-400 shrink-0 shadow-xs">
               <ShieldCheck className="w-5 h-5" />
             </div>
@@ -163,7 +164,7 @@ export const Login: React.FC = () => {
               <span className="text-[10px] text-blue-300/70 font-semibold block">Locks active for 60 seconds</span>
             </div>
           </div>
-          <div className="flex items-center gap-4 text-xs font-semibold text-blue-250">
+          <div className="flex items-center gap-4 text-xs font-semibold text-blue-250 anim-fade-up stagger-6">
             <div className="w-12 h-12 rounded-2xl bg-white/6 border border-white/10 flex items-center justify-center text-sky-400 shrink-0 shadow-xs">
               <Users className="w-5 h-5" />
             </div>
@@ -180,34 +181,34 @@ export const Login: React.FC = () => {
  
       {/* Right side: Forms Canvas */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 md:p-16 bg-[#F8FAFC]">
-        <div className="w-full max-w-[460px] bg-white border border-slate-100 shadow-[0_4px_32px_rgba(15,23,42,0.08)] rounded-3xl p-8 sm:p-10 space-y-8 animate-in fade-in zoom-in-95 duration-200">
+        <div className="w-full max-w-[460px] bg-white border border-slate-100 shadow-[0_4px_32px_rgba(15,23,42,0.08)] rounded-3xl p-8 sm:p-10 space-y-8 anim-scale-in">
  
           <div className="space-y-6">
-            <div className="space-y-2">
+            <div className="space-y-2 anim-fade-up stagger-1">
               <h2 className="text-3xl font-black tracking-tight text-[#0F172A] font-['Plus_Jakarta_Sans']">
                 Welcome Back
               </h2>
-              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block anim-fade-up stagger-2">
                 {otpStep ? 'Verify your identity' : 'Login to access your partner dashboard & leads'}
               </p>
             </div>
  
             {loginSuccess && (
-              <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-xl text-xs font-bold flex items-center gap-2 animate-bounce">
+              <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-xl text-xs font-bold flex items-center gap-2 anim-fade-up">
                 <CheckCircle className="w-4 h-4 shrink-0" />
                 <span>{loginSuccess}</span>
               </div>
             )}
  
             {loginError && (
-              <div className="p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-xl text-xs font-semibold">
+              <div className="p-3.5 bg-red-50 border border-red-200 text-red-600 rounded-xl text-xs font-semibold anim-slide-right">
                 {loginError}
               </div>
             )}
  
             {/* STEP 1: ENTER EMAIL OR PHONE */}
             {!otpStep ? (
-              <form onSubmit={handleSendOtp} className="space-y-5">
+              <form onSubmit={handleSendOtp} className="space-y-5 anim-slide-left">
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">
                     Email or Phone *
@@ -221,7 +222,7 @@ export const Login: React.FC = () => {
                       placeholder="Enter registered email or phone number"
                       value={emailOrPhone}
                       onChange={(e) => setEmailOrPhone(e.target.value)}
-                      className="block w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 text-slate-800 font-semibold shadow-xs transition-shadow duration-200"
+                      className="block w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] text-slate-800 font-semibold shadow-xs transition-all duration-200"
                       required
                     />
                   </div>
@@ -244,7 +245,7 @@ export const Login: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex justify-center items-center gap-2 py-3.5 bg-[#1A56DB] hover:bg-[#1648C0] disabled:bg-blue-300 text-white rounded-xl font-bold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.35)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.45)] cursor-pointer"
+                  className="w-full flex justify-center items-center gap-2 py-3.5 bg-[#1A56DB] hover:bg-[#1648C0] disabled:bg-blue-300 text-white rounded-xl font-bold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.35)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.45)] cursor-pointer pulse-glow press"
                 >
                   {loading ? (
                     <div className="w-4.5 h-4.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -258,7 +259,7 @@ export const Login: React.FC = () => {
               </form>
             ) : (
               /* STEP 2: VERIFY OTP CODE */
-              <form onSubmit={(e) => handleLoginSubmit(e)} className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-200">
+              <form onSubmit={(e) => handleLoginSubmit(e)} className="space-y-5 anim-slide-right">
                 <div className="space-y-2.5">
                   <div className="flex justify-between items-center">
                     <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">
@@ -295,7 +296,7 @@ export const Login: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex justify-center items-center gap-2 py-3.5 bg-[#1A56DB] hover:bg-[#1648C0] disabled:bg-blue-300 text-white rounded-xl font-bold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.35)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.45)] cursor-pointer"
+                  className="w-full flex justify-center items-center gap-2 py-3.5 bg-[#1A56DB] hover:bg-[#1648C0] disabled:bg-blue-300 text-white rounded-xl font-bold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.35)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.45)] cursor-pointer pulse-glow press"
                 >
                   {loading ? (
                     <div className="w-4.5 h-4.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -329,7 +330,7 @@ export const Login: React.FC = () => {
               <div className="grid grid-cols-2 gap-3 text-xs font-medium">
                 <button
                   onClick={() => triggerQuickShortcut('98765 43210')}
-                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm active:scale-[0.98]"
+                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm anim-fade-up stagger-1 press"
                 >
                   <div className="p-2 bg-blue-50 text-blue-600 rounded-xl shrink-0">
                     <Users className="w-4 h-4" />
@@ -341,7 +342,7 @@ export const Login: React.FC = () => {
                 </button>
                 <button
                   onClick={() => triggerQuickShortcut('reception')}
-                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm active:scale-[0.98]"
+                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm anim-fade-up stagger-2 press"
                 >
                   <div className="p-2 bg-blue-50 text-blue-600 rounded-xl shrink-0">
                     <Building2 className="w-4 h-4" />
@@ -353,7 +354,7 @@ export const Login: React.FC = () => {
                 </button>
                 <button
                   onClick={() => triggerQuickShortcut('sales')}
-                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm active:scale-[0.98]"
+                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm anim-fade-up stagger-3 press"
                 >
                   <div className="p-2 bg-blue-50 text-blue-600 rounded-xl shrink-0">
                     <BarChart3 className="w-4 h-4" />
@@ -365,7 +366,7 @@ export const Login: React.FC = () => {
                 </button>
                 <button
                   onClick={() => triggerQuickShortcut('admin')}
-                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm active:scale-[0.98]"
+                  className="flex items-center gap-3 p-3 bg-white hover:bg-slate-50 hover:border-blue-200 border border-slate-150 rounded-xl text-left transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm anim-fade-up stagger-4 press"
                 >
                   <div className="p-2 bg-blue-50 text-blue-600 rounded-xl shrink-0">
                     <ShieldCheck className="w-4 h-4" />

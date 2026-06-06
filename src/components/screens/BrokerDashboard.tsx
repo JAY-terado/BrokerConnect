@@ -93,7 +93,7 @@ export const BrokerDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner with Action */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] text-left">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] text-left anim-fade-up">
         <div>
           <h2 className="text-xl font-bold text-[#0F172A]">Broker Dashboard</h2>
           <p className="text-sm text-slate-500 font-medium mt-0.5">
@@ -102,7 +102,7 @@ export const BrokerDashboard: React.FC = () => {
         </div>
         <button
           onClick={() => setActiveScreen(3)} // Go to Register Customer Screen
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.30)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.40)] cursor-pointer w-full sm:w-auto justify-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#1A56DB] hover:bg-[#1648C0] text-white rounded-xl font-semibold text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.30)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.40)] cursor-pointer w-full sm:w-auto justify-center press pulse-glow"
         >
           <Plus className="w-5 h-5" />
           <span>Register Customer</span>
@@ -112,63 +112,63 @@ export const BrokerDashboard: React.FC = () => {
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-left">
         {/* KPI 1 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 group">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] group anim-fade-up stagger-1 card-hover">
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Total Leads</span>
-            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block">{totalLeads * 10}</span>
-            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5">
+            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block anim-number stagger-1">{totalLeads * 10}</span>
+            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5 anim-fade-up stagger-5">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+12% this month</span>
             </span>
           </div>
-          <div className="p-3 bg-blue-50 ring-1 ring-blue-100 group-hover:ring-blue-200 rounded-2xl text-blue-600 group-hover:scale-110 transition duration-300">
+          <div className="p-3 bg-blue-50 ring-1 ring-blue-100 group-hover:ring-blue-200 rounded-2xl text-blue-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
             <Users className="w-6 h-6" />
           </div>
         </div>
 
         {/* KPI 2 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 group">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] group anim-fade-up stagger-2 card-hover">
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Total Visits</span>
-            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block">{totalVisits * 10}</span>
-            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5">
+            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block anim-number stagger-2">{totalVisits * 10}</span>
+            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5 anim-fade-up stagger-5">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+8% this month</span>
             </span>
           </div>
-          <div className="p-3 bg-emerald-50 ring-1 ring-emerald-100 group-hover:ring-emerald-200 rounded-2xl text-emerald-600 group-hover:scale-110 transition duration-300">
+          <div className="p-3 bg-emerald-50 ring-1 ring-emerald-100 group-hover:ring-emerald-200 rounded-2xl text-emerald-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
             <Eye className="w-6 h-6" />
           </div>
         </div>
 
         {/* KPI 3 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 group">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] group anim-fade-up stagger-3 card-hover">
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Total Bookings</span>
-            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block">{totalBookings * 5}</span>
-            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5">
+            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block anim-number stagger-3">{totalBookings * 5}</span>
+            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5 anim-fade-up stagger-5">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+20% this month</span>
             </span>
           </div>
-          <div className="p-3 bg-indigo-50 ring-1 ring-indigo-100 group-hover:ring-indigo-200 rounded-2xl text-indigo-600 group-hover:scale-110 transition duration-300">
+          <div className="p-3 bg-indigo-50 ring-1 ring-indigo-100 group-hover:ring-indigo-200 rounded-2xl text-indigo-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
             <ArrowUpRight className="w-6 h-6" />
           </div>
         </div>
 
         {/* KPI 4 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 group">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] group anim-fade-up stagger-4 card-hover">
           <div className="space-y-1">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Commission</span>
-            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block">
+            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block anim-number stagger-4">
               {formatCurrency(totalCommissions > 0 ? totalCommissions : 245000)}
             </span>
-            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5">
+            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5 anim-fade-up stagger-5">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+15% payout cycle</span>
             </span>
           </div>
-          <div className="p-3 bg-amber-50 ring-1 ring-amber-100 group-hover:ring-amber-200 rounded-2xl text-amber-600 group-hover:scale-110 transition duration-300">
+          <div className="p-3 bg-amber-50 ring-1 ring-amber-100 group-hover:ring-amber-200 rounded-2xl text-amber-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
             <IndianRupee className="w-6 h-6" />
           </div>
         </div>
@@ -177,7 +177,7 @@ export const BrokerDashboard: React.FC = () => {
       {/* Main Content Layout: Funnel & Recent Leads */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 text-left">
         {/* Lead Funnel Chart (Desktop 5 cols, Mobile full) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 lg:col-span-5 flex flex-col justify-between min-h-[360px] text-left">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-5 flex flex-col justify-between min-h-[360px] text-left anim-fade-up stagger-2 card-hover">
           <div className="space-y-1">
             <h3 className="text-base font-bold text-[#0F172A]">Lead Funnel</h3>
             <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Conversion Pipeline Analysis</p>
@@ -187,7 +187,7 @@ export const BrokerDashboard: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center my-4">
             {/* Interactive SVG Funnel (Left) */}
             <div className="sm:col-span-5 flex justify-center items-center">
-              <svg viewBox="0 0 200 220" className="w-full max-w-[160px] h-auto select-none">
+              <svg viewBox="0 0 200 220" className="w-full max-w-[160px] h-auto select-none anim-scale-in stagger-2">
                 <defs>
                   <linearGradient id="grad-0" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="#3b82f6" />
@@ -305,7 +305,8 @@ export const BrokerDashboard: React.FC = () => {
                     key={stage.name}
                     onMouseEnter={() => setHoveredStage(stage.index)}
                     onMouseLeave={() => setHoveredStage(null)}
-                    className={`p-2 rounded-xl border border-slate-100 bg-slate-50/20 transition-all duration-200 cursor-pointer select-none ${
+                    style={{ animationDelay: `${0.15 + stage.index * 0.06}s` }}
+                    className={`p-2 rounded-xl border border-slate-100 bg-slate-50/20 transition-all duration-200 cursor-pointer select-none anim-fade-up ${
                       isHovered ? 'bg-white border-blue-200 shadow-md translate-x-1.5' : ''
                     } ${opacityClass}`}
                   >
@@ -329,8 +330,8 @@ export const BrokerDashboard: React.FC = () => {
                     {/* Progress Bar inside breakdown */}
                     <div className="w-full bg-slate-100/80 h-1 rounded-full mt-1.5 overflow-hidden">
                       <div
-                        className={`h-full rounded-full transition-all duration-500 ${stage.barColor}`}
-                        style={{ width: `${rCount > 0 ? (stage.count / rCount) * 100 : 0}%` }}
+                        className={`h-full rounded-full progress-fill [animation-fill-mode:both] ${stage.barColor}`}
+                        style={{ '--target-width': `${rCount > 0 ? (stage.count / rCount) * 100 : 0}%`, animationDelay: `${0.3 + stage.index * 0.08}s` } as React.CSSProperties}
                       ></div>
                     </div>
                   </div>
@@ -348,7 +349,7 @@ export const BrokerDashboard: React.FC = () => {
         </div>
 
         {/* Recent Customers list (Desktop 7 cols, Mobile full) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_20px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 transition-all duration-200 lg:col-span-7 flex flex-col justify-between">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] lg:col-span-7 flex flex-col justify-between anim-fade-up stagger-3 card-hover">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
             <div>
               <h3 className="text-base font-bold text-[#0F172A]">Recent Customers</h3>
@@ -365,7 +366,7 @@ export const BrokerDashboard: React.FC = () => {
                 placeholder="Search customers..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-600 font-semibold"
+                className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-600 focus:shadow-[0_0_0_4px_rgba(26,86,219,0.08)] font-semibold transition-all duration-200"
               />
             </div>
           </div>
@@ -382,8 +383,8 @@ export const BrokerDashboard: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-xs">
-                {filteredLeads.map((lead) => (
-                  <tr key={lead.id} className="hover:bg-slate-50/70 transition-colors cursor-pointer">
+                {filteredLeads.map((lead, index) => (
+                  <tr key={lead.id} style={{ animationDelay: `${index * 0.04}s` }} className="hover:bg-slate-50/70 transition-colors cursor-pointer anim-fade-up">
                     <td className="py-3.5 px-4 font-bold text-slate-800">{lead.name}</td>
                     <td className="py-3.5 px-4 text-slate-500 font-semibold">{lead.mobile}</td>
                     <td className="py-3.5 px-4 text-slate-600 font-semibold">{lead.project}</td>
