@@ -2,23 +2,7 @@ import React from 'react';
 import { useBrokerConnect } from '../context/BrokerConnectContext';
 import { Sidebar } from '../components/Sidebar';
 import { MobileNav } from '../components/MobileNav';
-
-// Screen imports
-import { BrokerDashboard } from '../components/screens/BrokerDashboard';
-import { RegisterCustomer } from '../components/screens/RegisterCustomer';
-import { OTPVerification } from '../components/screens/OTPVerification';
-import { VisitPass } from '../components/screens/VisitPass';
-import { ReceptionDashboard } from '../components/screens/ReceptionDashboard';
-import { VisitorCheckIn } from '../components/screens/VisitorCheckIn';
-import { SalesAllocation } from '../components/screens/SalesAllocation';
-import { SalesCRM } from '../components/screens/SalesCRM';
-import { CustomerDetails } from '../components/screens/CustomerDetails';
-import { BookingManagement } from '../components/screens/BookingManagement';
-import { CommissionManagement } from '../components/screens/CommissionManagement';
-import { DisputeManagement } from '../components/screens/DisputeManagement';
-import { ReportsAnalytics } from '../components/screens/ReportsAnalytics';
-import { BrokerManagement } from '../components/screens/BrokerManagement';
-import { ProjectManagement } from '../components/screens/ProjectManagement';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Bell, HelpCircle, Building2, ChevronDown, Check, LayoutDashboard, UserCheck, Layers, Shield } from 'lucide-react';
 
@@ -26,6 +10,22 @@ export const Dashboard: React.FC = () => {
   const { activeScreen, currentRole, setCurrentRole } = useBrokerConnect();
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.pathname === '/dashboard' || location.pathname === '/dashboard/' || location.pathname === '/' || location.pathname === '') {
+      if (currentRole === 'broker') {
+        navigate('/broker', { replace: true });
+      } else if (currentRole === 'receptionist') {
+        navigate('/receptionist', { replace: true });
+      } else if (currentRole === 'sales') {
+        navigate('/sales', { replace: true });
+      } else if (currentRole === 'admin') {
+        navigate('/admin', { replace: true });
+      }
+    }
+  }, [currentRole, location.pathname, navigate]);
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -89,27 +89,6 @@ export const Dashboard: React.FC = () => {
     },
   };
 
-  // Render the selected view component
-  const renderScreen = () => {
-    switch (activeScreen) {
-      case 2: return <BrokerDashboard />;
-      case 3: return <RegisterCustomer />;
-      case 4: return <OTPVerification />;
-      case 5: return <VisitPass />;
-      case 6: return <ReceptionDashboard />;
-      case 7: return <VisitorCheckIn />;
-      case 8: return <SalesAllocation />;
-      case 9: return <SalesCRM />;
-      case 10: return <CustomerDetails />;
-      case 11: return <BookingManagement />;
-      case 12: return <CommissionManagement />;
-      case 13: return <DisputeManagement />;
-      case 14: return <ReportsAnalytics />;
-      case 15: return <BrokerManagement />;
-      case 16: return <ProjectManagement />;
-      default: return <BrokerDashboard />;
-    }
-  };
 
   return (
     <div className="flex min-h-screen bg-[#F1F5F9] text-slate-800 w-full overflow-x-hidden text-left">
@@ -238,8 +217,8 @@ export const Dashboard: React.FC = () => {
 
         {/* Screen Content Body */}
         <div className="flex-1 p-6 pb-24 lg:pb-6 bg-[#F1F5F9]">
-          <div key={activeScreen} className="anim-fade-up">
-            {renderScreen()}
+          <div key={location.pathname} className="anim-fade-up">
+            <Outlet />
           </div>
         </div>
 

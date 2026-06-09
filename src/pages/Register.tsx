@@ -6,6 +6,9 @@ import {
   Smartphone, FileText, CheckCircle, Shield, Award, Mail, Info
 } from 'lucide-react';
 import { CustomSelect } from '../components/CustomSelect';
+import { PinCode } from 'rizzui/pin-code';
+import { requestEmailOtp, verifyEmailOtp, registerBroker } from './api/register';
+
 
 export const Register: React.FC = () => {
   const { addBroker } = useBrokerConnect();
@@ -13,7 +16,6 @@ export const Register: React.FC = () => {
 
   // Wizard Step State
   const [wizardStep, setWizardStep] = useState(1);
-  const [generatedBrokerId, setGeneratedBrokerId] = useState('');
 
   // Step 1: Basic Information
   const [brokerName, setBrokerName] = useState('');
@@ -21,6 +23,22 @@ export const Register: React.FC = () => {
   const [mobileNum, setMobileNum] = useState('');
   const [altMobileNum, setAltMobileNum] = useState('');
   const [emailId, setEmailId] = useState('');
+
+  const [isMobileVerified, setIsMobileVerified] = useState(false);
+  const [mobileOtpSent, setMobileOtpSent] = useState(false);
+  const [mobileOtp, setMobileOtp] = useState('');
+  const [otpVerificationError, setOtpVerificationError] = useState('');
+  const [resendTimer, setResendTimer] = useState(30);
+  const [pinKey, setPinKey] = useState(0);
+
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [emailOtpSent, setEmailOtpSent] = useState(false);
+  const [emailOtp, setEmailOtp] = useState('');
+  const [emailOtpError, setEmailOtpError] = useState('');
+  const [emailResendTimer, setEmailResendTimer] = useState(30);
+  const [emailPinKey, setEmailPinKey] = useState(0);
+  const [loadingOtp, setLoadingOtp] = useState(false);
+  const [verifyingEmailOtp, setVerifyingEmailOtp] = useState(false);
 
   // Step 2: Verification Documents
   const [panNumber, setPANNumber] = useState('');
@@ -37,12 +55,80 @@ export const Register: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Auto-generate Broker ID
-  useEffect(() => {
-    if (!generatedBrokerId) {
-      setGeneratedBrokerId(`BRK-AUTO-${Math.floor(1000 + Math.random() * 9000)}`);
+  // Auto-generate Broker ID effect removed
+
+  const handlePinChange = (val: string) => {
+    setMobileOtp(val);
+    if (val.length === 6) {
+      if (val === '123456') {
+        setIsMobileVerified(true);
+        setMobileOtpSent(false);
+        setOtpVerificationError('');
+      } else {
+        setOtpVerificationError('Invalid OTP code. Use 123456.');
+      }
+    } else {
+      setOtpVerificationError('');
     }
-  }, [generatedBrokerId]);
+  };
+
+  const handleVerifyEmailOtp = async (codeToVerify: string) => {
+    if (codeToVerify.length !== 6) {
+      setEmailOtpError('Please enter a 6-digit OTP code');
+      return;
+    }
+    setVerifyingEmailOtp(true);
+    setEmailOtpError('');
+    try {
+      const res = await verifyEmailOtp(emailId, Number(codeToVerify));
+      if (res.success) {
+        setIsEmailVerified(true);
+        setEmailOtpSent(false);
+        setEmailOtpError('');
+      } else {
+        setEmailOtpError(res.message || 'Invalid OTP code.');
+      }
+    } catch (err: any) {
+      setEmailOtpError(err.message || 'An error occurred during verification.');
+    } finally {
+      setVerifyingEmailOtp(false);
+    }
+  };
+
+  const handleEmailPinChange = (val: string) => {
+    setEmailOtp(val);
+    if (val.length === 6) {
+      handleVerifyEmailOtp(val);
+    } else {
+      setEmailOtpError('');
+    }
+  };
+
+  // Resend OTP Countdown Timer
+  useEffect(() => {
+    let interval: any;
+    if (mobileOtpSent && resendTimer > 0) {
+      interval = setInterval(() => {
+        setResendTimer(prev => prev - 1);
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [mobileOtpSent, resendTimer]);
+
+  // Resend Email OTP Countdown Timer
+  useEffect(() => {
+    let interval: any;
+    if (emailOtpSent && emailResendTimer > 0) {
+      interval = setInterval(() => {
+        setEmailResendTimer(prev => prev - 1);
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [emailOtpSent, emailResendTimer]);
 
   const handleNextStep = () => {
     setError('');
@@ -55,12 +141,20 @@ export const Register: React.FC = () => {
         setError('Primary Mobile Number must be exactly 10 digits');
         return;
       }
+      if (!isMobileVerified) {
+        setError('Please verify your primary mobile number first.');
+        return;
+      }
       if (altMobileNum && altMobileNum.length !== 10) {
         setError('Alternate Mobile Number must be exactly 10 digits');
         return;
       }
       if (!emailId.includes('@')) {
         setError('Please enter a valid email address');
+        return;
+      }
+      if (!isEmailVerified) {
+        setError('Please verify your email address first.');
         return;
       }
     } else if (wizardStep === 2) {
@@ -77,7 +171,7 @@ export const Register: React.FC = () => {
     setWizardStep(prev => Math.max(1, prev - 1));
   };
 
-  const handleRegisterSubmit = (e: React.FormEvent) => {
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!addressLine1 || !city || !state || !pincode) {
       setError('Please fill in Address Line 1, City, State, and Pincode');
@@ -87,18 +181,43 @@ export const Register: React.FC = () => {
     setLoading(true);
     setError('');
 
-    setTimeout(() => {
-      setLoading(false);
-      // Register broker in global state
-      addBroker(brokerName, mobileNum);
+    try {
+      const payload = {
+        broker_name: brokerName,
+        company_name: companyName,
+        mobile_number: mobileNum,
+        alternate_mobile: altMobileNum,
+        email: emailId,
+        pan_number: panNumber,
+        gst_number: gstNumber || undefined,
+        rera_registration_number: reraNumber,
+        address_line_1: addressLine1,
+        address_line_2: addressLine2 || undefined,
+        city: city,
+        state: state,
+        pincode: pincode
+      };
+      
+      const res = await registerBroker(payload);
+      
+      if (res.success) {
+        // Register broker in global state (mock context state sync)
+        addBroker(brokerName, mobileNum);
 
-      // Redirect to login page with success state
-      navigate('/login', {
-        state: {
-          success: `Registration submitted! Broker ID ${generatedBrokerId} is now pending admin approval.`
-        }
-      });
-    }, 1000);
+        // Redirect to login page with success state
+        navigate('/login', {
+          state: {
+            success: res.message || `Registration submitted! Your broker account is now pending admin approval.`
+          }
+        });
+      } else {
+        setError(res.message || 'Registration failed. Please check your inputs.');
+      }
+    } catch (err: any) {
+      setError(err.message || 'An error occurred during registration.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -241,16 +360,6 @@ export const Register: React.FC = () => {
               </div>
 
               <div className="space-y-1.5 anim-fade-up stagger-1">
-                <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Broker ID (Auto-Generated) *</label>
-                <input
-                  type="text"
-                  value={generatedBrokerId}
-                  readOnly
-                  className="block w-full px-4 py-3 bg-blue-50/40 border border-slate-200 rounded-xl text-xs font-extrabold text-blue-600 outline-none select-all shadow-xs"
-                />
-              </div>
-
-              <div className="space-y-1.5 anim-fade-up stagger-2">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Broker Name *</label>
                 <input
                   type="text"
@@ -262,7 +371,7 @@ export const Register: React.FC = () => {
                 />
               </div>
 
-              <div className="space-y-1.5 anim-fade-up stagger-3">
+              <div className="space-y-1.5 anim-fade-up stagger-2">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Company Name *</label>
                 <input
                   type="text"
@@ -274,42 +383,116 @@ export const Register: React.FC = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 anim-fade-up stagger-4">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Mobile Number *</label>
+              <div className="space-y-1.5 anim-fade-up stagger-3">
+                <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Mobile Number *</label>
+                <div className="relative flex gap-2">
                   <input
                     type="text"
                     maxLength={10}
+                    disabled={isMobileVerified}
                     placeholder="Primary Mobile Number"
                     value={mobileNum}
-                    onChange={(e) => setMobileNum(e.target.value.replace(/[^0-9]/g, ''))}
-                    className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-slate-800 font-semibold shadow-xs transition"
+                    onChange={(e) => {
+                      setMobileNum(e.target.value.replace(/[^0-9]/g, ''));
+                      setIsMobileVerified(false);
+                      setMobileOtpSent(false);
+                    }}
+                    className={`block w-full px-4 py-3 bg-white border rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 font-semibold shadow-xs transition ${
+                      isMobileVerified ? 'border-emerald-250 bg-emerald-50/30 text-emerald-700' : 'border-slate-200 text-slate-800'
+                    }`}
                     required
                   />
+                  {mobileNum.length === 10 && !isMobileVerified && !mobileOtpSent && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMobileOtpSent(true);
+                        setResendTimer(30);
+                        setOtpVerificationError('');
+                        setMobileOtp('');
+                        setPinKey(prev => prev + 1);
+                        alert("Simulation: SMS OTP code '123456' sent to primary mobile.");
+                      }}
+                      className="px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition shadow-xs cursor-pointer active:scale-95 shrink-0"
+                    >
+                      Verify
+                    </button>
+                  )}
+                  {isMobileVerified && (
+                    <span className="flex items-center gap-1.5 px-3 bg-emerald-50 border border-emerald-100 text-emerald-600 font-extrabold text-[10px] uppercase tracking-wider rounded-xl shrink-0">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      <span>Verified</span>
+                    </span>
+                  )}
                 </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Alternate Mobile</label>
-                  <input
-                    type="text"
-                    maxLength={10}
-                    placeholder="Alternate Mobile (Optional)"
-                    value={altMobileNum}
-                    onChange={(e) => setAltMobileNum(e.target.value.replace(/[^0-9]/g, ''))}
-                    className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-slate-800 font-semibold shadow-xs transition"
-                  />
-                </div>
+              </div>
+
+              <div className="space-y-1.5 anim-fade-up stagger-4">
+                <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Alternate Mobile</label>
+                <input
+                  type="text"
+                  maxLength={10}
+                  placeholder="Alternate Mobile (Optional)"
+                  value={altMobileNum}
+                  onChange={(e) => setAltMobileNum(e.target.value.replace(/[^0-9]/g, ''))}
+                  className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-slate-800 font-semibold shadow-xs transition"
+                />
               </div>
 
               <div className="space-y-1.5 anim-fade-up stagger-5">
                 <label className="text-[10px] font-bold text-slate-500 uppercase block tracking-wider">Email ID *</label>
-                <input
-                  type="email"
-                  placeholder="Enter business email address"
-                  value={emailId}
-                  onChange={(e) => setEmailId(e.target.value)}
-                  className="block w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-slate-800 font-semibold shadow-xs transition"
-                  required
-                />
+                <div className="relative flex gap-2">
+                  <input
+                    type="email"
+                    disabled={isEmailVerified}
+                    placeholder="Enter business email address"
+                    value={emailId}
+                    onChange={(e) => {
+                      setEmailId(e.target.value);
+                      setIsEmailVerified(false);
+                      setEmailOtpSent(false);
+                    }}
+                    className={`block w-full px-4 py-3 bg-white border rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 font-semibold shadow-xs transition ${
+                      isEmailVerified ? 'border-emerald-250 bg-emerald-50/30 text-emerald-700' : 'border-slate-200 text-slate-800'
+                    }`}
+                    required
+                  />
+                  {emailId.length > 3 && emailId.includes('@') && !isEmailVerified && !emailOtpSent && (
+                    <button
+                      type="button"
+                      disabled={loadingOtp}
+                      onClick={async () => {
+                        setLoadingOtp(true);
+                        setError('');
+                        try {
+                          const res = await requestEmailOtp(emailId);
+                          if (res.success) {
+                            setEmailOtpSent(true);
+                            setEmailResendTimer(30);
+                            setEmailOtpError('');
+                            setEmailOtp('');
+                            setEmailPinKey(prev => prev + 1);
+                          } else {
+                            setError(res.message || 'Failed to send OTP');
+                          }
+                        } catch (err: any) {
+                          setError(err.message || 'An error occurred while sending OTP');
+                        } finally {
+                          setLoadingOtp(false);
+                        }
+                      }}
+                      className="px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-xl text-xs font-bold transition shadow-xs cursor-pointer active:scale-95 shrink-0"
+                    >
+                      {loadingOtp ? 'Sending...' : 'Verify'}
+                    </button>
+                  )}
+                  {isEmailVerified && (
+                    <span className="flex items-center gap-1.5 px-3 bg-emerald-50 border border-emerald-100 text-emerald-600 font-extrabold text-[10px] uppercase tracking-wider rounded-xl shrink-0">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      <span>Verified</span>
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -477,6 +660,176 @@ export const Register: React.FC = () => {
           <span>Protected Lead Registry &middot; BrokerConnect v2.0</span>
         </div>
       </div>
+      {/* Mobile OTP Verification Modal */}
+      {mobileOtpSent && !isMobileVerified && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 anim-fade-in">
+          <div className="bg-white p-8 rounded-3xl max-w-sm w-full shadow-[0_8px_32px_rgba(15,23,42,0.12)] border border-slate-100 space-y-6 text-center anim-scale-in">
+            <div className="mx-auto w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 shadow-sm">
+              <Smartphone className="w-5 h-5 animate-pulse" />
+            </div>
+
+            <div className="space-y-2">
+              <h3 className="text-xl font-black text-slate-900 font-sans tracking-tight">Verify Mobile Number</h3>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed px-2">
+                We've sent a 6-digit code to <strong className="text-slate-800">{mobileNum}</strong>. Please enter it below to verify your device.
+              </p>
+            </div>
+
+            {/* Premium PinCode Styling */}
+            <div className="bg-slate-50/50 p-6 rounded-2xl border border-slate-100 flex flex-col items-center">
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-3.5">Verification Security PIN</span>
+              <PinCode
+                key={pinKey}
+                length={6}
+                setValue={handlePinChange as any}
+                size="lg"
+                placeholder="o"
+                center={true}
+                inputClassName="!w-10 !h-10 text-center text-md font-black !bg-white !border !border-slate-200 !rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white text-slate-800 transition shadow-xs !mr-1 last:!mr-0 placeholder:!text-slate-300 placeholder:!font-normal"
+              />
+              {otpVerificationError && (
+                <p className="text-[10px] text-red-600 font-bold mt-3.5">{otpVerificationError}</p>
+              )}
+            </div>
+
+            <div className="space-y-2.5 pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  if (mobileOtp === '123456') {
+                    setIsMobileVerified(true);
+                    setMobileOtpSent(false);
+                    setOtpVerificationError('');
+                  } else {
+                    setOtpVerificationError('Invalid OTP code. Use 123456.');
+                  }
+                }}
+                className="w-full py-3 bg-[#1A56DB] hover:bg-[#1648C0] text-white font-bold rounded-xl text-xs transition shadow-[0_4px_14px_rgba(26,86,219,0.25)] cursor-pointer press"
+              >
+                Verify Code
+              </button>
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  disabled={resendTimer > 0}
+                  onClick={() => {
+                    setResendTimer(30);
+                    setPinKey(prev => prev + 1);
+                    setMobileOtp('');
+                    setOtpVerificationError('');
+                    alert("Simulation: SMS OTP code '123456' resent to primary mobile.");
+                  }}
+                  className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition ${
+                    resendTimer > 0 
+                      ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-transparent' 
+                      : 'border border-slate-200 hover:bg-slate-50 text-slate-600 cursor-pointer press'
+                  }`}
+                >
+                  {resendTimer > 0 ? `Resend in ${resendTimer}s` : 'Resend OTP'}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setMobileOtpSent(false)}
+                  className="flex-1 py-2.5 border border-slate-200 hover:bg-slate-50 text-slate-500 font-bold rounded-xl text-xs transition cursor-pointer press"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+
+            <div className="text-[10px] text-slate-450 font-semibold leading-normal pt-1.5 border-t border-slate-50">
+              Demo bypass OTP: <strong className="text-blue-600">123456</strong>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Email OTP Verification Modal */}
+      {emailOtpSent && !isEmailVerified && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 anim-fade-in">
+          <div className="bg-white p-8 rounded-3xl max-w-sm w-full shadow-[0_8px_32px_rgba(15,23,42,0.12)] border border-slate-100 space-y-6 text-center anim-scale-in">
+            <div className="mx-auto w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 shadow-sm">
+              <Mail className="w-5 h-5 animate-pulse" />
+            </div>
+
+            <div className="space-y-2">
+              <h3 className="text-xl font-black text-slate-900 font-sans tracking-tight">Verify Email Address</h3>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed px-2">
+                We've sent a 6-digit code to <strong className="text-slate-800">{emailId}</strong>. Please enter it below to verify your email.
+              </p>
+            </div>
+
+            {/* Premium PinCode Styling */}
+            <div className="bg-slate-50/50 p-6 rounded-2xl border border-slate-100 flex flex-col items-center">
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-3.5">Verification Security PIN</span>
+              <PinCode
+                key={emailPinKey}
+                length={6}
+                setValue={handleEmailPinChange as any}
+                size="lg"
+                placeholder="o"
+                center={true}
+                inputClassName="!w-10 !h-10 text-center text-md font-black !bg-white !border !border-slate-200 !rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white text-slate-800 transition shadow-xs !mr-1 last:!mr-0 placeholder:!text-slate-300 placeholder:!font-normal"
+              />
+              {emailOtpError && (
+                <p className="text-[10px] text-red-600 font-bold mt-3.5">{emailOtpError}</p>
+              )}
+            </div>
+
+            <div className="space-y-2.5 pt-2">
+              <button
+                type="button"
+                disabled={verifyingEmailOtp}
+                onClick={() => handleVerifyEmailOtp(emailOtp)}
+                className="w-full py-3 bg-[#1A56DB] hover:bg-[#1648C0] text-white font-bold rounded-xl text-xs transition shadow-[0_4px_14px_rgba(26,86,219,0.25)] cursor-pointer press disabled:bg-blue-400"
+              >
+                {verifyingEmailOtp ? 'Verifying...' : 'Verify Code'}
+              </button>
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  disabled={emailResendTimer > 0}
+                  onClick={async () => {
+                    setEmailResendTimer(30);
+                    setEmailPinKey(prev => prev + 1);
+                    setEmailOtp('');
+                    setEmailOtpError('');
+                    try {
+                      const res = await requestEmailOtp(emailId);
+                      if (!res.success) {
+                        setEmailOtpError(res.message || 'Failed to resend OTP');
+                      }
+                    } catch (err: any) {
+                      setEmailOtpError(err.message || 'An error occurred while resending OTP');
+                    }
+                  }}
+                  className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition ${
+                    emailResendTimer > 0 
+                      ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-transparent' 
+                      : 'border border-slate-200 hover:bg-slate-50 text-slate-600 cursor-pointer press'
+                  }`}
+                >
+                  {emailResendTimer > 0 ? `Resend in ${emailResendTimer}s` : 'Resend OTP'}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setEmailOtpSent(false)}
+                  className="flex-1 py-2.5 border border-slate-200 hover:bg-slate-50 text-slate-500 font-bold rounded-xl text-xs transition cursor-pointer press"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+
+            <div className="text-[10px] text-slate-450 font-semibold leading-normal pt-1.5 border-t border-slate-50">
+              Enter the 6-digit verification code.
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

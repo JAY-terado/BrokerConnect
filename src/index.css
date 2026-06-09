@@ -227,11 +227,19 @@ body {
 ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
 
-/* Smooth focus rings */
+/* Smooth focus rings & minimal input focus */
 *:focus-visible {
-  outline: 2px solid var(--brand-blue);
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: 1px solid var(--brand-blue-light, #3b82f6);
+  outline-offset: 1px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #3b82f6 !important;
+  --tw-ring-width: 0px !important;
+  --tw-ring-offset-width: 0px !important;
+  --tw-ring-color: transparent !important;
 }
 
 /* iPhone notch / home indicator safe area */

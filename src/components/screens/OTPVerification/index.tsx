@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
 import { ArrowLeft, ShieldAlert, ShieldCheck, Smartphone, Key } from 'lucide-react';
 
 export const OTPVerification: React.FC = () => {

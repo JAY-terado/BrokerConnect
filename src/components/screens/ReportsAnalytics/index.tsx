@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
 import { Award, BarChart4, Calendar } from 'lucide-react';
 import { 
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,

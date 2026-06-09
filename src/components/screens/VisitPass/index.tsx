@@ -1,5 +1,5 @@
 import React from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
 import { ArrowLeft, Share2, Download, Clock, Calendar, ShieldCheck, MapPin, Ticket, ChevronRight } from 'lucide-react';
 
 export const VisitPass: React.FC = () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
 import { Search, Plus, UserPlus, ShieldAlert, CheckCircle, RefreshCw } from 'lucide-react';
 
 export const BrokerManagement: React.FC = () => {

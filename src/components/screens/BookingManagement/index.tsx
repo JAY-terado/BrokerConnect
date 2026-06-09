@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
 import { ArrowLeft, Landmark, CheckCircle, Percent, Building } from 'lucide-react';
 
 export const BookingManagement: React.FC = () => {

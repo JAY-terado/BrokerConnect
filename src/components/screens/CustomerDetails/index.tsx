@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
 import { ArrowLeft, Edit2, Calendar, Phone, Mail, MapPin, CheckSquare, Clock, Sliders, ChevronDown, Landmark } from 'lucide-react';
-import { CustomSelect } from '../CustomSelect';
+import { CustomSelect } from '../../CustomSelect';
 
 export const CustomerDetails: React.FC = () => {
   const { leads, updateLeadStage, setActiveScreen } = useBrokerConnect();

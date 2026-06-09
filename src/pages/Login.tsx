@@ -3,6 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useBrokerConnect } from '../context/BrokerConnectContext';
 import { Mail, Building2, ShieldCheck, ArrowRight, UserPlus, CheckCircle, Smartphone, KeyRound, ChevronLeft, Users, BarChart3 } from 'lucide-react';
 import { PinCode } from 'rizzui/pin-code';
+import Cookies from 'js-cookie';
 
 export const Login: React.FC = () => {
   const { setCurrentRole, setActiveScreen } = useBrokerConnect();
@@ -44,19 +45,19 @@ export const Login: React.FC = () => {
     setTimeout(() => {
       setLoading(false);
       setOtpStep(true);
-      alert(`Simulation: SMS/Email OTP code '1234' sent to ${emailOrPhone}`);
+      alert(`Simulation: SMS/Email OTP code '123456' sent to ${emailOrPhone}`);
     }, 600);
   };
 
   const handleLoginSubmit = (e?: React.FormEvent, codeOverride?: string) => {
     if (e) e.preventDefault();
     const finalCode = codeOverride || pin;
-    if (!finalCode || finalCode.length < 4) {
-      setLoginError('Please enter the 4-digit OTP code');
+    if (!finalCode || finalCode.length < 6) {
+      setLoginError('Please enter the 6-digit OTP code');
       return;
     }
-    if (finalCode !== '1234') {
-      setLoginError('Invalid OTP code. Please enter 1234 to verify.');
+    if (finalCode !== '123456') {
+      setLoginError('Invalid OTP code. Please enter 123456 to verify.');
       return;
     }
 
@@ -65,31 +66,39 @@ export const Login: React.FC = () => {
 
     setTimeout(() => {
       setLoading(false);
+      
+      // Set the token and profile completed cookies
+      Cookies.set('token', 'mock-jwt-token-xyz', { expires: 1 });
+      Cookies.set('is_profile_completed', '1', { expires: 1 });
+      
       const userLower = emailOrPhone.toLowerCase();
       if (userLower.includes('admin')) {
+        Cookies.set('userRole', 'admin', { expires: 1 });
         setCurrentRole('admin');
-        setActiveScreen(14);
+        navigate('/admin');
       } else if (userLower.includes('reception') || userLower.includes('desk')) {
+        Cookies.set('userRole', 'receptionist', { expires: 1 });
         setCurrentRole('receptionist');
-        setActiveScreen(6);
+        navigate('/receptionist');
       } else if (userLower.includes('sales') || userLower.includes('exec')) {
+        Cookies.set('userRole', 'sales', { expires: 1 });
         setCurrentRole('sales');
-        setActiveScreen(9);
+        navigate('/sales');
       } else {
+        Cookies.set('userRole', 'broker', { expires: 1 });
         setCurrentRole('broker');
-        setActiveScreen(2);
+        navigate('/broker');
       }
-      navigate('/dashboard');
     }, 800);
   };
 
   const handlePinChange = (val: string) => {
     setPin(val);
-    if (val.length === 4) {
-      if (val === '1234') {
+    if (val.length === 6) {
+      if (val === '123456') {
         handleLoginSubmit(undefined, val);
       } else {
-        setLoginError('Invalid OTP code. Please enter 1234 to verify.');
+        setLoginError('Invalid OTP code. Please enter 123456 to verify.');
       }
     } else {
       setLoginError('');
@@ -279,18 +288,18 @@ export const Login: React.FC = () => {
                   <div className="py-2.5">
                     <PinCode
                       key={pinKey}
-                      length={4}
+                      length={6}
                       setValue={handlePinChange as any}
                       size="lg"
                       placeholder="o"
                       center={true}
-                      inputClassName="!w-14 !h-14 text-center text-xl font-extrabold !bg-white !border !border-slate-200 !rounded-xl focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:bg-white text-slate-800 transition-all duration-200 !shadow-sm !mr-2 placeholder:!text-slate-300 placeholder:!font-normal"
+                      inputClassName="!w-10 !h-10 text-center text-lg font-extrabold !bg-white !border !border-slate-200 !rounded-xl focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 focus:bg-white text-slate-800 transition-all duration-200 !shadow-sm !mr-1 placeholder:!text-slate-300 placeholder:!font-normal"
                     />
                   </div>
                 </div>
  
                 <div className="text-xs text-slate-400 font-semibold">
-                  OTP simulated sent to <strong className="text-slate-700">{emailOrPhone}</strong>. Key in <strong className="text-blue-600">1234</strong> to login.
+                  OTP simulated sent to <strong className="text-slate-700">{emailOrPhone}</strong>. Key in <strong className="text-blue-600">123456</strong> to login.
                 </div>
  
                 <button

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Types
 export interface Broker {
@@ -305,6 +306,43 @@ const initialDisputes: Dispute[] = [
 
 const salesExecutives = ['Executive A', 'Executive B', 'Executive C', 'Executive D'];
 
+const screenToPath: Record<number, string> = {
+  2: '/broker',
+  3: '/broker/register-customer',
+  4: '/broker/otp-verification',
+  5: '/broker/visit-pass',
+  6: '/receptionist',
+  7: '/receptionist/check-in',
+  8: '/receptionist/allocation',
+  9: '/sales',
+  10: '/sales/customer-details',
+  11: '/sales/bookings',
+  12: '/broker/commission',
+  13: '/admin/disputes',
+  14: '/admin',
+  15: '/admin/brokers',
+  16: '/admin/projects',
+};
+
+const pathToScreen: Record<string, { screen: number; role: 'broker' | 'receptionist' | 'sales' | 'admin' }> = {
+  '/broker': { screen: 2, role: 'broker' },
+  '/broker/register-customer': { screen: 3, role: 'broker' },
+  '/broker/otp-verification': { screen: 4, role: 'broker' },
+  '/broker/visit-pass': { screen: 5, role: 'broker' },
+  '/receptionist': { screen: 6, role: 'receptionist' },
+  '/receptionist/check-in': { screen: 7, role: 'receptionist' },
+  '/receptionist/allocation': { screen: 8, role: 'receptionist' },
+  '/sales': { screen: 9, role: 'sales' },
+  '/sales/customer-details': { screen: 10, role: 'sales' },
+  '/sales/bookings': { screen: 11, role: 'sales' },
+  '/broker/commission': { screen: 12, role: 'broker' },
+  '/sales/commission': { screen: 12, role: 'sales' },
+  '/admin/disputes': { screen: 13, role: 'admin' },
+  '/admin': { screen: 14, role: 'admin' },
+  '/admin/brokers': { screen: 15, role: 'admin' },
+  '/admin/projects': { screen: 16, role: 'admin' },
+};
+
 export const BrokerConnectProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [brokers, setBrokers] = useState<Broker[]>(initialBrokers);
   const [projects, setProjects] = useState<Project[]>(initialProjects);
@@ -313,23 +351,58 @@ export const BrokerConnectProvider: React.FC<{ children: React.ReactNode }> = ({
   const [commissions, setCommissions] = useState<Commission[]>(initialCommissions);
   const [disputes, setDisputes] = useState<Dispute[]>(initialDisputes);
   
-  const [currentRole, setCurrentRole] = useState<'broker' | 'receptionist' | 'sales' | 'admin'>('broker');
-  const [activeScreen, setActiveScreen] = useState<number>(2); // Starts on Broker Dashboard
+  const [currentRole, setCurrentRoleState] = useState<'broker' | 'receptionist' | 'sales' | 'admin'>('broker');
+  const [activeScreen, setActiveScreenState] = useState<number>(2); // Starts on Broker Dashboard
   const [deviceMode, setDeviceMode] = useState<'desktop' | 'mobile' | 'responsive'>('responsive');
   const [roundRobinIndex, setRoundRobinIndex] = useState<number>(1); // Current pointer: Executive B
 
-  // Sync role and screens naturally
-  useEffect(() => {
-    if (currentRole === 'broker') {
-      setActiveScreen(2); // Broker Dashboard
-    } else if (currentRole === 'receptionist') {
-      setActiveScreen(6); // Reception Dashboard
-    } else if (currentRole === 'sales') {
-      setActiveScreen(9); // Sales Pipeline
-    } else if (currentRole === 'admin') {
-      setActiveScreen(14); // Reports & Analytics
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const setActiveScreen = (screen: number) => {
+    if (screen === 12) {
+      if (currentRole === 'sales') {
+        navigate('/sales/commission');
+      } else {
+        navigate('/broker/commission');
+      }
+      return;
     }
-  }, [currentRole]);
+    const path = screenToPath[screen];
+    if (path) {
+      navigate(path);
+    }
+  };
+
+  const setCurrentRole = (role: 'broker' | 'receptionist' | 'sales' | 'admin') => {
+    setCurrentRoleState(role);
+    if (role === 'broker') {
+      navigate('/broker');
+    } else if (role === 'receptionist') {
+      navigate('/receptionist');
+    } else if (role === 'sales') {
+      navigate('/sales');
+    } else if (role === 'admin') {
+      navigate('/admin');
+    }
+  };
+
+  // Sync pathname to activeScreen and currentRole
+  useEffect(() => {
+    const match = pathToScreen[location.pathname];
+    if (match) {
+      if (activeScreen !== match.screen) {
+        setActiveScreenState(match.screen);
+      }
+      if (location.pathname === '/broker/commission' || location.pathname === '/sales/commission') {
+        if (currentRole !== 'broker' && currentRole !== 'sales') {
+          setCurrentRoleState(match.role);
+        }
+      } else if (currentRole !== match.role) {
+        setCurrentRoleState(match.role);
+      }
+    }
+  }, [location.pathname, activeScreen, currentRole]);
 
   // Actions
   const registerLead = (leadData: Omit<Lead, 'id' | 'otp' | 'visitCode' | 'registeredOn' | 'ownershipValidTill' | 'status'>) => {
@@ -382,6 +455,7 @@ export const BrokerConnectProvider: React.FC<{ children: React.ReactNode }> = ({
     };
 
     setLeads(prev => [newLead, ...prev]);
+
     return { leadId: newId, otp: randomOtp, disputeRaised };
   };
 

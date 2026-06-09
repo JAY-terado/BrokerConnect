@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
-import type { Dispute } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
+import type { Dispute } from '../../../context/BrokerConnectContext';
 import { ArrowLeft, ShieldAlert, CheckCircle, XCircle, HelpCircle, FileText } from 'lucide-react';
 
 export const DisputeManagement: React.FC = () => {

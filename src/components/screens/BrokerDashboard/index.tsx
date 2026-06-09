@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
 import { Users, Eye, TrendingUp, IndianRupee, Plus, ArrowUpRight, Search, ChevronRight } from 'lucide-react';
 
 export const BrokerDashboard: React.FC = () => {

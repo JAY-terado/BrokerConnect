@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
 import { Search, ChevronRight, User, Filter, SlidersHorizontal, Layers, CheckCircle2 } from 'lucide-react';
 
 export const SalesCRM: React.FC = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useBrokerConnect } from '../../context/BrokerConnectContext';
+import { useBrokerConnect } from '../../../context/BrokerConnectContext';
 import { Search, Plus, Building2, MapPin, Grid, Layers } from 'lucide-react';
-import { CustomSelect } from '../CustomSelect';
+import { CustomSelect } from '../../CustomSelect';
 
 export const ProjectManagement: React.FC = () => {
   const { projects, addProject, setActiveScreen } = useBrokerConnect();
