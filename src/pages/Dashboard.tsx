@@ -3,6 +3,7 @@ import { useBrokerConnect } from '../context/BrokerConnectContext';
 import { Sidebar } from '../components/Sidebar';
 import { MobileNav } from '../components/MobileNav';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import { Bell, HelpCircle, Building2, ChevronDown, Check, LayoutDashboard, UserCheck, Layers, Shield } from 'lucide-react';
 
@@ -200,9 +201,11 @@ export const Dashboard: React.FC = () => {
             <div className="hidden sm:flex items-center gap-2.5 border-l border-slate-100 pl-4 anim-fade-in stagger-3">
               <div className="text-right space-y-0.5">
                 <span className="text-xs font-black text-slate-800 block">
-                  {currentRole === 'broker' ? 'Amit Patel' :
-                   currentRole === 'receptionist' ? 'Front Desk Staff' :
-                   currentRole === 'sales' ? 'Executive B' : 'Admin System'}
+                  {Cookies.get('full_name') || (
+                    currentRole === 'broker' ? 'Amit Patel' :
+                    currentRole === 'receptionist' ? 'Front Desk Staff' :
+                    currentRole === 'sales' ? 'Executive B' : 'Admin System'
+                  )}
                 </span>
                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
                   {currentRole} Account
@@ -216,8 +219,8 @@ export const Dashboard: React.FC = () => {
         </header>
 
         {/* Screen Content Body */}
-        <div className="flex-1 p-6 pb-24 lg:pb-6 bg-[#F1F5F9]">
-          <div key={location.pathname} className="anim-fade-up">
+        <div className="flex-1 flex flex-col p-6 pb-24 lg:pb-6 bg-[#F1F5F9]">
+          <div key={location.pathname} className="flex-1 flex flex-col anim-fade-up">
             <Outlet />
           </div>
         </div>

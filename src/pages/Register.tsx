@@ -201,8 +201,21 @@ export const Register: React.FC = () => {
       const res = await registerBroker(payload);
       
       if (res.success) {
-        // Register broker in global state (mock context state sync)
-        addBroker(brokerName, mobileNum);
+        addBroker({
+          name: brokerName,
+          mobile: mobileNum,
+          companyName: companyName,
+          email: emailId,
+          altMobile: altMobileNum || undefined,
+          addressLine1,
+          addressLine2: addressLine2 || undefined,
+          city,
+          state,
+          pincode,
+          reraNumber,
+          panNumber,
+          gstNumber: gstNumber || undefined
+        });
 
         // Redirect to login page with success state
         navigate('/login', {

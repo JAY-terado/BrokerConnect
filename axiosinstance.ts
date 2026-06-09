@@ -13,6 +13,9 @@ const redirectToLogin = () => {
   if (typeof window !== "undefined") {
     Cookies.remove("token");
     Cookies.remove("userToken");
+    // Cookies.remove("userRole");
+    // Cookies.remove("full_name");
+    // Cookies.remove("is_profile_completed");
     secureStorage.removeItem("type");
     window.location.replace("/login");
   }

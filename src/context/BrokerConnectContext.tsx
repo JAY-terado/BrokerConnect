@@ -7,6 +7,23 @@ export interface Broker {
   name: string;
   mobile: string;
   status: 'Active' | 'Pending Approval' | 'Suspended';
+  companyName?: string;
+  brokerType?: string;
+  altMobile?: string;
+  email?: string;
+  gender?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  areaLocality?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  pincode?: string;
+  reraNumber?: string;
+  reraExpiry?: string;
+  panNumber?: string;
+  gstNumber?: string;
+  yearsExperience?: string;
 }
 
 export interface Project {
@@ -14,7 +31,25 @@ export interface Project {
   location: string;
   towers: number;
   units: number;
-  status: 'Active' | 'Upcoming';
+  status: 'Upcoming' | 'Active' | 'Sold Out' | 'Completed' | 'On Hold';
+  project_type?: 'Residential' | 'Commercial' | 'Mixed Use' | 'Plotting' | 'Retail';
+  launch_date?: string;
+  possession_date?: string;
+  country?: string;
+  state?: string;
+  city?: string;
+  area_locality?: string;
+  landmark?: string;
+  full_address?: string;
+  pincode?: string;
+  rera_registration_number?: string;
+  rera_registration_date?: string;
+  rera_expiry_date?: string;
+  facilities?: string[];
+  unit_configs?: {
+    unit_type: string;
+    budgets: string[];
+  }[];
 }
 
 export interface Lead {
@@ -115,10 +150,11 @@ interface BrokerConnectContextType {
   approveCommission: (commissionId: string) => void;
   payCommission: (commissionId: string) => void;
   resolveDispute: (disputeId: string, decision: 'brokerA' | 'brokerB' | 'reject') => void;
-  addBroker: (name: string, mobile: string) => void;
+  addBroker: (brokerData: Omit<Broker, 'id' | 'status'>) => void;
   approveBroker: (brokerId: string) => void;
   toggleBrokerStatus: (brokerId: string) => void;
   addProject: (project: Project) => void;
+  setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
   
   // Simulation Helpers
   resetSimulation: () => void;
@@ -127,11 +163,11 @@ interface BrokerConnectContextType {
 const BrokerConnectContext = createContext<BrokerConnectContextType | undefined>(undefined);
 
 const initialBrokers: Broker[] = [
-  { id: 'BRK-001', name: 'Amit Patel', mobile: '98765 43210', status: 'Active' },
-  { id: 'BRK-002', name: 'Kiran Desai', mobile: '91234 56789', status: 'Active' },
-  { id: 'BRK-003', name: 'Neha Gupta', mobile: '90887 76655', status: 'Pending Approval' },
-  { id: 'BRK-004', name: 'Rohit Sharma', mobile: '88998 87766', status: 'Suspended' },
-  { id: 'BRK-005', name: 'Vikram Singh', mobile: '88776 65544', status: 'Active' },
+  { id: 'BRK-001', name: 'Amit Patel', mobile: '98765 43210', status: 'Active', companyName: 'Patel Realty' },
+  { id: 'BRK-002', name: 'Kiran Desai', mobile: '91234 56789', status: 'Active', companyName: 'Desai Properties' },
+  { id: 'BRK-003', name: 'Neha Gupta', mobile: '90887 76655', status: 'Pending Approval', companyName: 'Gupta Estates' },
+  { id: 'BRK-004', name: 'Rohit Sharma', mobile: '88998 87766', status: 'Suspended', companyName: 'Sharma & Co.' },
+  { id: 'BRK-005', name: 'Vikram Singh', mobile: '88776 65544', status: 'Active', companyName: 'Singh Infra' },
 ];
 
 const initialProjects: Project[] = [
@@ -322,6 +358,7 @@ const screenToPath: Record<number, string> = {
   14: '/admin',
   15: '/admin/brokers',
   16: '/admin/projects',
+  17: '/admin/customization',
 };
 
 const pathToScreen: Record<string, { screen: number; role: 'broker' | 'receptionist' | 'sales' | 'admin' }> = {
@@ -341,6 +378,7 @@ const pathToScreen: Record<string, { screen: number; role: 'broker' | 'reception
   '/admin': { screen: 14, role: 'admin' },
   '/admin/brokers': { screen: 15, role: 'admin' },
   '/admin/projects': { screen: 16, role: 'admin' },
+  '/admin/customization': { screen: 17, role: 'admin' },
 };
 
 export const BrokerConnectProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -613,12 +651,11 @@ export const BrokerConnectProvider: React.FC<{ children: React.ReactNode }> = ({
     }));
   };
 
-  const addBroker = (name: string, mobile: string) => {
+  const addBroker = (brokerData: Omit<Broker, 'id' | 'status'>) => {
     const newBrokerId = `BRK-00${brokers.length + 1}`;
     setBrokers(prev => [...prev, {
+      ...brokerData,
       id: newBrokerId,
-      name,
-      mobile,
       status: 'Pending Approval',
     }]);
   };
@@ -682,6 +719,7 @@ export const BrokerConnectProvider: React.FC<{ children: React.ReactNode }> = ({
       approveBroker,
       toggleBrokerStatus,
       addProject,
+      setProjects,
       resetSimulation,
     }}>
       {children}

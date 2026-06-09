@@ -20,6 +20,7 @@ import { DisputeManagement } from './components/screens/DisputeManagement';
 import { ReportsAnalytics } from './components/screens/ReportsAnalytics';
 import { BrokerManagement } from './components/screens/BrokerManagement';
 import { ProjectManagement } from './components/screens/ProjectManagement';
+import { Customization } from './components/screens/Customization';
 
 // Middleware imports
 
@@ -57,6 +58,7 @@ function App() {
             <Route path="/admin/disputes" element={<DisputeManagement />} />
             <Route path="/admin/brokers" element={<BrokerManagement />} />
             <Route path="/admin/projects" element={<ProjectManagement />} />
+            <Route path="/admin/customization" element={<Customization />} />
           </Route>
           
           {/* Default Redirect to Login */}

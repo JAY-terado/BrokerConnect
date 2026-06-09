@@ -112,8 +112,8 @@ export const BrokerDashboard: React.FC = () => {
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-left">
         {/* KPI 1 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] group anim-fade-up stagger-1 card-hover">
-          <div className="space-y-1">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex justify-between items-start group anim-fade-up stagger-1 card-hover overflow-hidden">
+          <div className="space-y-1 min-w-0">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Total Leads</span>
             <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block anim-number stagger-1">{totalLeads * 10}</span>
             <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5 anim-fade-up stagger-5">
@@ -121,14 +121,14 @@ export const BrokerDashboard: React.FC = () => {
               <span>+12% this month</span>
             </span>
           </div>
-          <div className="p-3 bg-blue-50 ring-1 ring-blue-100 group-hover:ring-blue-200 rounded-2xl text-blue-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+          <div className="p-3 bg-blue-50 ring-1 ring-blue-100 group-hover:ring-blue-200 rounded-2xl text-blue-600 transition-all duration-300 group-hover:scale-110 shrink-0 ml-2">
             <Users className="w-6 h-6" />
           </div>
         </div>
 
         {/* KPI 2 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] group anim-fade-up stagger-2 card-hover">
-          <div className="space-y-1">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex justify-between items-start group anim-fade-up stagger-2 card-hover overflow-hidden">
+          <div className="space-y-1 min-w-0">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Total Visits</span>
             <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block anim-number stagger-2">{totalVisits * 10}</span>
             <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5 anim-fade-up stagger-5">
@@ -136,14 +136,14 @@ export const BrokerDashboard: React.FC = () => {
               <span>+8% this month</span>
             </span>
           </div>
-          <div className="p-3 bg-emerald-50 ring-1 ring-emerald-100 group-hover:ring-emerald-200 rounded-2xl text-emerald-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+          <div className="p-3 bg-emerald-50 ring-1 ring-emerald-100 group-hover:ring-emerald-200 rounded-2xl text-emerald-600 transition-all duration-300 group-hover:scale-110 shrink-0 ml-2">
             <Eye className="w-6 h-6" />
           </div>
         </div>
 
         {/* KPI 3 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] group anim-fade-up stagger-3 card-hover">
-          <div className="space-y-1">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex justify-between items-start group anim-fade-up stagger-3 card-hover overflow-hidden">
+          <div className="space-y-1 min-w-0">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Total Bookings</span>
             <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block anim-number stagger-3">{totalBookings * 5}</span>
             <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5 anim-fade-up stagger-5">
@@ -151,16 +151,16 @@ export const BrokerDashboard: React.FC = () => {
               <span>+20% this month</span>
             </span>
           </div>
-          <div className="p-3 bg-indigo-50 ring-1 ring-indigo-100 group-hover:ring-indigo-200 rounded-2xl text-indigo-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+          <div className="p-3 bg-indigo-50 ring-1 ring-indigo-100 group-hover:ring-indigo-200 rounded-2xl text-indigo-600 transition-all duration-300 group-hover:scale-110 shrink-0 ml-2">
             <ArrowUpRight className="w-6 h-6" />
           </div>
         </div>
 
         {/* KPI 4 */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] group anim-fade-up stagger-4 card-hover">
-          <div className="space-y-1">
+        <div className="bg-white p-5 rounded-2xl border border-slate-100/80 shadow-[0_1px_3px_rgba(15,23,42,0.06),0_4px_16px_rgba(15,23,42,0.04)] flex justify-between items-start group anim-fade-up stagger-4 card-hover overflow-hidden">
+          <div className="space-y-1 min-w-0">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Commission</span>
-            <span className="text-3xl font-black text-[#0F172A] tabular-nums tracking-tight block anim-number stagger-4">
+            <span className="text-2xl font-black text-[#0F172A] tabular-nums tracking-tight block anim-number stagger-4">
               {formatCurrency(totalCommissions > 0 ? totalCommissions : 245000)}
             </span>
             <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold ring-1 ring-emerald-100 mt-1.5 anim-fade-up stagger-5">
@@ -168,7 +168,7 @@ export const BrokerDashboard: React.FC = () => {
               <span>+15% payout cycle</span>
             </span>
           </div>
-          <div className="p-3 bg-amber-50 ring-1 ring-amber-100 group-hover:ring-amber-200 rounded-2xl text-amber-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+          <div className="p-3 bg-amber-50 ring-1 ring-amber-100 group-hover:ring-amber-200 rounded-2xl text-amber-600 transition-all duration-300 group-hover:scale-110 shrink-0 ml-2">
             <IndianRupee className="w-6 h-6" />
           </div>
         </div>

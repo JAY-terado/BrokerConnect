@@ -1,9 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useBrokerConnect } from '../context/BrokerConnectContext';
+import Cookies from 'js-cookie';
 import { 
   LayoutDashboard, Users, Eye, Landmark, IndianRupee, 
-  AlertTriangle, BarChart3, Building2, UserCheck, ShieldCheck, LogOut 
+  AlertTriangle, BarChart3, Building2, UserCheck, ShieldCheck, LogOut, SlidersHorizontal 
 } from 'lucide-react';
 
 interface SidebarItem {
@@ -42,6 +43,7 @@ export const Sidebar: React.FC = () => {
     { name: 'Disputes Audit', screenId: 13, icon: AlertTriangle },
     { name: 'Manage Brokers', screenId: 15, icon: Users },
     { name: 'Manage Projects', screenId: 16, icon: Building2 },
+    { name: 'Customization', screenId: 17, icon: SlidersHorizontal },
   ];
 
   const getActiveItems = () => {
@@ -114,6 +116,10 @@ export const Sidebar: React.FC = () => {
         <div className="border-t border-white/6 mx-1 mb-2"></div>
         <button
           onClick={() => {
+            Cookies.remove('token');
+            Cookies.remove('userRole');
+            Cookies.remove('full_name');
+            Cookies.remove('is_profile_completed');
             setActiveScreen(2); // Reset to default screen for next login
             navigate('/login');
           }}

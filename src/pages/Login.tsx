@@ -4,6 +4,7 @@ import { useBrokerConnect } from '../context/BrokerConnectContext';
 import { Mail, Building2, ShieldCheck, ArrowRight, UserPlus, CheckCircle, Smartphone, KeyRound, ChevronLeft, Users, BarChart3 } from 'lucide-react';
 import { PinCode } from 'rizzui/pin-code';
 import Cookies from 'js-cookie';
+import { requestLoginOtp, verifyLoginOtp } from './api/login';
 
 export const Login: React.FC = () => {
   const { setCurrentRole, setActiveScreen } = useBrokerConnect();
@@ -33,7 +34,7 @@ export const Login: React.FC = () => {
     }
   }, [otpStep, pinKey]);
 
-  const handleSendOtp = (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailOrPhone) {
       setLoginError('Please enter your Email or Phone');
@@ -42,64 +43,78 @@ export const Login: React.FC = () => {
     setLoginError('');
     setLoading(true);
 
-    setTimeout(() => {
+    try {
+      const res = await requestLoginOtp(emailOrPhone);
+      if (res.success) {
+        setOtpStep(true);
+        setLoginSuccess(res.message || 'OTP sent successfully');
+      } else {
+        setLoginError(res.message || 'Failed to send OTP. Please check your credentials.');
+      }
+    } catch (err: any) {
+      setLoginError(err.message || 'An error occurred while sending OTP.');
+    } finally {
       setLoading(false);
-      setOtpStep(true);
-      alert(`Simulation: SMS/Email OTP code '123456' sent to ${emailOrPhone}`);
-    }, 600);
+    }
   };
 
-  const handleLoginSubmit = (e?: React.FormEvent, codeOverride?: string) => {
+  const handleLoginSubmit = async (e?: React.FormEvent, codeOverride?: string) => {
     if (e) e.preventDefault();
     const finalCode = codeOverride || pin;
     if (!finalCode || finalCode.length < 6) {
       setLoginError('Please enter the 6-digit OTP code');
       return;
     }
-    if (finalCode !== '123456') {
-      setLoginError('Invalid OTP code. Please enter 123456 to verify.');
-      return;
-    }
 
     setLoading(true);
     setLoginError('');
 
-    setTimeout(() => {
-      setLoading(false);
-      
-      // Set the token and profile completed cookies
-      Cookies.set('token', 'mock-jwt-token-xyz', { expires: 1 });
-      Cookies.set('is_profile_completed', '1', { expires: 1 });
-      
-      const userLower = emailOrPhone.toLowerCase();
-      if (userLower.includes('admin')) {
-        Cookies.set('userRole', 'admin', { expires: 1 });
-        setCurrentRole('admin');
-        navigate('/admin');
-      } else if (userLower.includes('reception') || userLower.includes('desk')) {
-        Cookies.set('userRole', 'receptionist', { expires: 1 });
-        setCurrentRole('receptionist');
-        navigate('/receptionist');
-      } else if (userLower.includes('sales') || userLower.includes('exec')) {
-        Cookies.set('userRole', 'sales', { expires: 1 });
-        setCurrentRole('sales');
-        navigate('/sales');
+    try {
+      const res = await verifyLoginOtp(emailOrPhone, Number(finalCode));
+      if (res.success) {
+        // Set the token cookie from backend if provided, fallback to mock token
+        const userToken = res.token || 'mock-jwt-token-xyz';
+        Cookies.set('token', userToken, { expires: 1 });
+        Cookies.set('is_profile_completed', '1', { expires: 1 });
+
+        // Store user's full name in a cookie if present
+        if (res.user?.full_name) {
+          Cookies.set('full_name', res.user.full_name, { expires: 1 });
+        } else {
+          Cookies.set('full_name', 'Amit Patel', { expires: 1 });
+        }
+
+        // Set the user role context and cookie based on the backend role response
+        // Default roles map: "BROKER" -> "broker", "RECEPTIONIST" -> "receptionist", "SALES" -> "sales", "ADMIN" -> "admin"
+        const backendRole = res.user?.role?.toLowerCase() || 'broker';
+        
+        let assignedRole: 'broker' | 'receptionist' | 'sales' | 'admin' = 'broker';
+        if (backendRole.includes('admin')) assignedRole = 'admin';
+        else if (backendRole.includes('receptionist') || backendRole.includes('reception')) assignedRole = 'receptionist';
+        else if (backendRole.includes('sales')) assignedRole = 'sales';
+
+        Cookies.set('userRole', assignedRole, { expires: 1 });
+        setCurrentRole(assignedRole);
+        
+        // Redirect to their respective dashboards
+        if (assignedRole === 'admin') navigate('/admin');
+        else if (assignedRole === 'receptionist') navigate('/receptionist');
+        else if (assignedRole === 'sales') navigate('/sales');
+        else navigate('/broker');
       } else {
-        Cookies.set('userRole', 'broker', { expires: 1 });
-        setCurrentRole('broker');
-        navigate('/broker');
+        setLoginError(res.message || 'Invalid OTP code.');
       }
-    }, 800);
+    } catch (err: any) {
+      setLoginError(err.message || 'An error occurred during verification.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handlePinChange = (val: string) => {
     setPin(val);
     if (val.length === 6) {
-      if (val === '123456') {
-        handleLoginSubmit(undefined, val);
-      } else {
-        setLoginError('Invalid OTP code. Please enter 123456 to verify.');
-      }
+      handleLoginSubmit(undefined, val);
     } else {
       setLoginError('');
     }

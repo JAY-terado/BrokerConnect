@@ -272,42 +272,50 @@ export const RegisterCustomer: React.FC = () => {
 
       {/* Verification Simulation Popup */}
       {simulationAlert?.show && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 anim-fade-in">
-          <div className="bg-white p-8 rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 space-y-6 text-center anim-scale-in">
-            <div className="mx-auto w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
-              <Phone className="w-6 h-6 animate-bounce" />
-            </div>
-
-            <div className="space-y-2">
-              <h3 className="text-xl font-bold text-slate-900">OTP Code Generated</h3>
-              <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                We've simulated sending an SMS to the customer's phone number <strong className="text-slate-800">{mobile}</strong>.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/60 space-y-1">
-              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Customer SMS Verification Pin</span>
-              <span className="text-3xl font-extrabold text-blue-600 tracking-widest">{simulationAlert.otp}</span>
-            </div>
-
-            {simulationAlert.dispute && (
-              <div className="bg-amber-50 p-3.5 border border-amber-200 rounded-xl flex gap-3 text-left">
-                <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                <div className="space-y-0.5">
-                  <span className="text-xs font-bold text-amber-800 block">Lead Conflict Detected!</span>
-                  <span className="text-[10px] text-amber-700 font-medium leading-relaxed block">
-                    This phone number is already active under another broker. A dispute has been filed automatically for Admin audit.
-                  </span>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A1628]/75 backdrop-blur-md p-4 anim-fade-in">
+          <div className="bg-white rounded-3xl w-full max-w-md shadow-[0_32px_80px_rgba(10,22,40,0.35)] overflow-hidden anim-scale-in">
+            
+            {/* Gradient Header */}
+            <div className="bg-gradient-to-br from-[#0A1628] via-[#1A3A6B] to-[#1A56DB] px-6 py-6 relative overflow-hidden text-center">
+              <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 50% 0%, #60a5fa 0%, transparent 60%)' }} />
+              <div className="relative">
+                <div className="mx-auto w-12 h-12 bg-white/15 border border-white/25 rounded-2xl flex items-center justify-center mb-3">
+                  <Phone className="w-6 h-6 text-white animate-bounce" />
                 </div>
+                <h3 className="text-lg font-bold text-white">OTP Code Generated</h3>
+                <p className="text-[11px] text-blue-200/80 font-medium mt-1">
+                  Simulated SMS sent to <strong className="text-white">{mobile}</strong>
+                </p>
               </div>
-            )}
+            </div>
 
-            <button
-              onClick={handleProceedToOtp}
-              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm transition shadow-md shadow-blue-500/10 cursor-pointer"
-            >
-              Enter OTP Code
-            </button>
+            {/* Body */}
+            <div className="px-6 py-6 space-y-4 text-center">
+              {/* OTP Code Display */}
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 p-5 rounded-2xl">
+                <span className="text-[10px] text-blue-500 font-bold uppercase tracking-widest block mb-2">Customer SMS Verification Pin</span>
+                <span className="text-4xl font-black text-[#1A56DB] tracking-[0.3em]">{simulationAlert.otp}</span>
+              </div>
+
+              {simulationAlert.dispute && (
+                <div className="bg-amber-50 p-4 border border-amber-200 rounded-2xl flex gap-3 text-left">
+                  <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                  <div className="space-y-0.5">
+                    <span className="text-xs font-bold text-amber-800 block">Lead Conflict Detected!</span>
+                    <span className="text-[10px] text-amber-700 font-medium leading-relaxed block">
+                      This phone number is already active under another broker. A dispute has been filed automatically for Admin audit.
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              <button
+                onClick={handleProceedToOtp}
+                className="w-full py-3 bg-[#1A56DB] hover:bg-[#1648C0] text-white font-bold rounded-xl text-sm transition-all shadow-[0_4px_14px_rgba(26,86,219,0.35)] hover:shadow-[0_6px_20px_rgba(26,86,219,0.45)] cursor-pointer"
+              >
+                Enter OTP Code →
+              </button>
+            </div>
           </div>
         </div>
       )}
